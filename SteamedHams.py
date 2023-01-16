@@ -22,16 +22,17 @@ class Room:
         return f"{self.name}: {self.desc}"
 
 class Item:
-    def __init__(self, name, desc, canTake):
+    def __init__(self, name, desc, canTake, useAction="Default"):
         self.name = name
         self.desc = desc
         self.canTake = canTake
+        self.useAction = useAction
     def __str__(self):
         return f"{self.name}: {self.desc}"
 
 class Container(Item):
-    def __init__(self, name, desc, canTake):
-        super().__init__(name,desc, canTake)
+    def __init__(self, name, desc, canTake, useAction="Default"):
+        super().__init__(name,desc, canTake, useAction)
         
         self.contents = []
 
@@ -41,6 +42,7 @@ class Container(Item):
 score = 0
 CurrentRoomID = 0
 Inventory = []
+isOvenOn = True
 
 #Items
 defaultItem = Item("Default Item", "An incredibly default item, you bask in the glow of its defaultness!", True)
@@ -48,6 +50,10 @@ seriousItem = Item("Serious Item", "An incredibly serious item, you feel the aur
 seriousTable = Container("Serious Table", "The most serious table you have ever seen!", False)
 seriousTable.contents.append(seriousItem)
 diningRoomTable = Container("Dining Room Table", "A small circular dining room table with two chairs and a white table cloth.", False)
+couch = Item("Couch", "An olive green couch with a dent in the cushion indicating someone spends a lot of time sitting here", False)
+oven = Container("Oven", "A cheap white oven with a 4 burner stove and a broken timer. It is currently on.", False, "oven")
+burntRoast = Item("Burnt Roast", "An expensive roast that someone ruined by burning it.",True)
+oven.contents.append(burntRoast)
 #Rooms
 defaultRoom = Room("Default Room", "A strikingly default room with a real sense of defaultness about it",0,)
 defaultRoom.contents.append(defaultItem)
@@ -57,10 +63,15 @@ seriousRoom.contents.append(seriousTable)
 diningRoom = Room("Dining Room", "A small dining room with pastel blue walls, whover lives here has no sense of interior decorating.",2)
 diningRoom.contents.append(diningRoomTable)
 kitchen = Room("Kitchen", "A small square kitchen with a window overlooking a nearby fast food resturant. Its obvious whover lives here is not a very good cook.",3)
+kitchen.contents.append(oven)
+livingRoom = Room("Living Room", "A cozy living room with pastel purple walls", 4)
+livingRoom.contents.append(couch)
 #Room connections
 defaultRoom.northRoom = seriousRoom
 seriousRoom.southRoom = defaultRoom
 diningRoom.northRoom = kitchen
+diningRoom.eastRoom = livingRoom
+livingRoom.westRoom = diningRoom
 kitchen.southRoom = diningRoom
 #Need to define this after rooms or it doesnt work (wait or does it?)
 currentRoom = diningRoom
@@ -179,6 +190,20 @@ def TextParser(text, room):
                     if room.westRoom is not None:
                         currentRoom = room.westRoom
                     else: print("You cannot go west here.")
+            case "use":
+                usehint = True
+                for i in room.contents:
+                    if i.name.lower() == noun:
+                        Use(i.useAction)
+                        usehint = False
+                        break
+                for i in Inventory:
+                    if i.name.lower() == noun:
+                        Use(i.useAction)
+                        usehint = False
+                        break
+                if usehint == True:
+                    print("Could not find " + noun + " try Use : Item.")
             case "hint":
                 Hint()
             case "help":
@@ -199,6 +224,21 @@ def Main(promt):
     print("Score: " + str(score) + " " + promt)
     TextParser(input(">"), currentRoom)
     Main(currentRoom.name)
+
+def Use(x):
+    global isOvenOn
+    match x:
+        case "oven":
+            isOvenOn = not isOvenOn
+            if isOvenOn == False:
+                oven.desc = "A cheap white oven with a 4 burner stove and a broken timer. It is currently off."
+                print("Turned oven off.")
+            else: 
+                oven.desc = "A cheap white oven with a 4 burner stove and a broken timer. It is currently on."
+                print("Turned oven on!")
+            
+        case _:
+            print("You cant use this.")
 
 def ScoreHandler(x):
     global score
