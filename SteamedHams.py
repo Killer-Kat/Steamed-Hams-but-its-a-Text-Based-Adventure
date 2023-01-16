@@ -43,6 +43,7 @@ score = 0
 CurrentRoomID = 0
 Inventory = []
 isOvenOn = True
+isWindowOpen = False
 
 #Items
 defaultItem = Item("Default Item", "An incredibly default item, you bask in the glow of its defaultness!", True)
@@ -54,18 +55,22 @@ couch = Item("Couch", "An olive green couch with a dent in the cushion indicatin
 oven = Container("Oven", "A cheap white oven with a 4 burner stove and a broken timer. It is currently on.", False, "oven")
 burntRoast = Item("Burnt Roast", "An expensive roast that someone ruined by burning it.",True)
 oven.contents.append(burntRoast)
+window = Item("Window", "A large closed window that overlooks the Krustyburger, if you were into fitness this would be a good place to strech your calves.", False, "window")
 #Rooms
 defaultRoom = Room("Default Room", "A strikingly default room with a real sense of defaultness about it",0,)
 defaultRoom.contents.append(defaultItem)
 seriousRoom = Room("Serious Room", "An incredibly serious room, the most serious room you have ever seen",1)
 seriousRoom.contents.append(seriousTable)
 
+
 diningRoom = Room("Dining Room", "A small dining room with pastel blue walls, whover lives here has no sense of interior decorating.",2)
 diningRoom.contents.append(diningRoomTable)
-kitchen = Room("Kitchen", "A small square kitchen with a window overlooking a nearby fast food resturant. Its obvious whover lives here is not a very good cook.",3)
+kitchen = Room("Kitchen", "A small square teal colored kitchen with a window overlooking a nearby fast food resturant. Its obvious whover lives here is not a very good cook.",3)
 kitchen.contents.append(oven)
+kitchen.contents.append(window)
 livingRoom = Room("Living Room", "A cozy living room with pastel purple walls", 4)
 livingRoom.contents.append(couch)
+krustyBurger = Room("Krusty Burger", "A Krusty Burger resturant, it smells vaguely similar to the school kitchen that time you had to order grade F meat.",5)
 #Room connections
 defaultRoom.northRoom = seriousRoom
 seriousRoom.southRoom = defaultRoom
@@ -73,6 +78,7 @@ diningRoom.northRoom = kitchen
 diningRoom.eastRoom = livingRoom
 livingRoom.westRoom = diningRoom
 kitchen.southRoom = diningRoom
+krustyBurger.southRoom = kitchen
 #Need to define this after rooms or it doesnt work (wait or does it?)
 currentRoom = diningRoom
 
@@ -227,6 +233,7 @@ def Main(promt):
 
 def Use(x):
     global isOvenOn
+    global isWindowOpen
     match x:
         case "oven":
             isOvenOn = not isOvenOn
@@ -236,7 +243,18 @@ def Use(x):
             else: 
                 oven.desc = "A cheap white oven with a 4 burner stove and a broken timer. It is currently on."
                 print("Turned oven on!")
-            
+        case "window":
+            isWindowOpen = not isWindowOpen
+            if isWindowOpen == True:
+                print("You open the window.")
+                kitchen.northRoom = krustyBurger
+                window.desc = "A large open window that overlooks the Krustyburger, if you were into fitness this would be a good place to strech your calves."
+
+            else: 
+                print("You close the window.")
+                kitchen.northRoom = None
+                window.desc = "A large closed window that overlooks the Krustyburger, if you were into fitness this would be a good place to strech your calves."
+
         case _:
             print("You cant use this.")
 
