@@ -78,6 +78,8 @@ bucket = Container("Bucket", "A metal champagne bucket, it was a gift from mothe
 bucket.contents.append(wine)
 diningRoomTable.contents.append(bucket)
 wineGlasses = Item("Wine Glasses", "Glass Glasses for wine, how fancy! put them on the table if you want to serve wine.", True)
+ribwich = Item("Ribwich", 'A rib themed sandwich, the box proudly proclaims "Now without lettuce!" you question if its a good idea to eat this.', True)
+comboMeal = Item("Combo Meal", "A Krusty Burger combo meal #4. It's 4 hamburgers and 2 large fries.", True)
 #People
 chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
 jeremy = Person("Jeremy Freedman", "Krusty Burger employee with the name tag Jeremy. A tired looking teen with a pimple coverd face and a high pitched voice",2)
@@ -93,6 +95,7 @@ diningRoom.contents.append(chalmers)
 kitchen = Room("Kitchen", "A small square teal colored kitchen with a window overlooking a nearby fast food resturant. Its obvious whover lives here is not a very good cook.",3)
 kitchen.contents.append(oven)
 kitchen.contents.append(window)
+kitchen.contents.append(wineGlasses)
 livingRoom = Room("Living Room", "A cozy living room with pastel purple walls", 4)
 livingRoom.contents.append(couch)
 porch = Room("Front Porch", "A small front porch with a banister steps, there are two large windows through which you can see your living room and dining room",6)
@@ -349,7 +352,7 @@ def Talk(x):
             print(chalmers.name +": Alright, let me know when you're ready.")
         else: print("What was that? I didnt quite hear you, let me know when you're ready to serve lunch."); PersonalityHandler("odd",1)
     elif x == 2:
-        print("Jermy: Hi wellcome to Krusty Burger, what can I get you?")
+        print("Jermy: Hi wellcome to Krusty Burger home of the Rib Witch, now with extra verisimilitude! what can I get you?")
         print("1. The #4 family combo meal")
         print("2. I'll have 2 number 9s, a number 9 large, a number 6 with extra dip, a number 7, 2 number 45s one with cheese, and a large soda.")
         print("3. One Ribwich please!")
@@ -357,10 +360,20 @@ def Talk(x):
         a = input(">")
         if a == str(1):
             print("Ok sir here you go!")
+            ScoreHandler(2)
+            Inventory.append(comboMeal)
+            jeremy.dialougeID = 3
         elif a == str(2):
-            print("Uh, I didnt get all that so heres a number 4")
+            print("Uh, I didnt get all that and our soda machine is broken, so here's 2 number 9s and a number 7")
+            ScoreHandler(2)
+            Inventory.append(comboMeal)
+            Inventory.append(ribwich)
+            jeremy.dialougeID = 3
         elif a == str(3):
-            print("MmmHmm *hands you a Ribwich")
+            print("MmmHmm *hands you a Ribwich*")
+            ScoreHandler(1)
+            Inventory.append(ribwich)
+            jeremy.dialougeID = 3
         elif a == str(4):
             print("Uh ok sir, well i'll be here if you change your mind again.")
     else: print("They cant talk now.")
@@ -512,6 +525,31 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
             elif i.name.lower() == "wine glasses":
                 print(chalmers.name + ":Ah I see you brought out the wine glasses, let me open the vintage. its a 1982 Sauvignon Blanc I picked up in New York while visting family.")
                 PersonalityHandler("polite",2)
+            elif i.name.lower() == "ribwich":
+                ScoreHandler(1)
+                print(chalmers.name +": Seymore is that a Ribwich from Krusty Burger?")
+                print("1. Yes, I thought you might like it")
+                print("2. No, It's a home made Rib Sandwich, old family recipe")
+                print("3. I have no idea what you're talking about *Quickly eat Ribwich*")
+                b = input(">")
+                if b == str(1):
+                    print(chalmers.name +": Oh well, thanks I guess?")
+                    ScoreHandler(1)
+                    PersonalityHandler("odd",3)
+                    PersonalityHandler("polite",1)
+                elif b == str(2):
+                    print(chalmers.name +": What are you talking about? Its still in the box, I can clearly see it's from Krusty Burger!")
+                    ScoreHandler(-3)
+                    PersonalityHandler("odd",3)
+                    PersonalityHandler("polite",-4)
+                elif b == str(3):
+                    print(chalmers.name +": Did you just..? What? Nevermind.")
+                    ScoreHandler(-1)
+                    PersonalityHandler("odd",5)
+                    PersonalityHandler("polite",-1)
+
+
+
 
         print(chalmers.name + ": Well I should be going")
         HAMS(4)
