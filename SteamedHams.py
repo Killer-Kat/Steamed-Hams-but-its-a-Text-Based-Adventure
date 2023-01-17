@@ -49,10 +49,16 @@ class Person:
     
 #Global vars
 score = 0
-CurrentRoomID = 0
+CurrentRoomID = 2
 Inventory = []
+oddPoints = 0
+politePoints = 0
+rudePoints = 0
 ovenKitchenFireCountdown = 7
+kitchenFireSpreadCountdown = 5
 isKitchenOnFire = False
+isHouseOnFire = False
+isChalmersWaitingOutsideForFire = False
 isOvenOn = True
 isWindowOpen = False
 
@@ -88,6 +94,7 @@ kitchen.contents.append(oven)
 kitchen.contents.append(window)
 livingRoom = Room("Living Room", "A cozy living room with pastel purple walls", 4)
 livingRoom.contents.append(couch)
+porch = Room("Front Porch", "A small front porch with a banister steps, there are two large windows through which you can see your living room and dining room",6)
 krustyBurger = Room("Krusty Burger", "A Krusty Burger resturant, it smells vaguely similar to the school kitchen that time you had to order grade F meat.",5)
 krustyBurger.contents.append(jeremy)
 #Room connections
@@ -95,9 +102,11 @@ defaultRoom.northRoom = seriousRoom
 seriousRoom.southRoom = defaultRoom
 diningRoom.northRoom = kitchen
 diningRoom.eastRoom = livingRoom
+diningRoom.southRoom = porch
 livingRoom.westRoom = diningRoom
 kitchen.southRoom = diningRoom
 krustyBurger.southRoom = kitchen
+porch.northRoom = diningRoom
 #Need to define this after rooms or it doesnt work (wait or does it?)
 currentRoom = diningRoom
 
@@ -252,10 +261,15 @@ def TextParser(text, room):
   
 def Main(promt):
     global ovenKitchenFireCountdown
+    global kitchenFireSpreadCountdown
     if isOvenOn == True:
         ovenKitchenFireCountdown -= 1
         if ovenKitchenFireCountdown == 0:
             HAMS(2)
+    if isKitchenOnFire == True:
+        kitchenFireSpreadCountdown -= 1
+        if kitchenFireSpreadCountdown == 0:
+            HAMS(3)
     print("Score: " + str(score) + " " + promt)
     TextParser(input(">"), currentRoom)
     Main(currentRoom.name)
@@ -264,6 +278,7 @@ def Use(x):
     global isOvenOn
     global isWindowOpen
     global isKitchenOnFire
+    global isHouseOnFire
     match x:
         case "person":
             print("Its not nice to try and use people. Maybe try Talk : Person")
@@ -272,6 +287,8 @@ def Use(x):
             if isOvenOn == False:
                 oven.desc = "A cheap white oven with a 4 burner stove and a broken timer. It is currently off."
                 print("Turned oven off.")
+                if isKitchenOnFire == True:
+                    print("Its a little late for that to help much considering you kitchen is currently on fire. But at least you remembered to turn it off! ")
             else: 
                 oven.desc = "A cheap white oven with a 4 burner stove and a broken timer. It is currently on."
                 print("Turned oven on!")
@@ -292,6 +309,10 @@ def Use(x):
                 isKitchenOnFire = False
                 ScoreHandler(4)
                 print("You dump the bucket out and extinguish the fire!")
+                if isHouseOnFire == True:
+                    print("It's too bad the rest of your house is on fire, because it relights the kitchen fire! If only you had done something sooner!")
+                    ScoreHandler(-2)
+                    isKitchenOnFire = True
             else: print("You have no use for a bucket right now.")
         case _:
             print("You cant use this.")
@@ -299,9 +320,23 @@ def Use(x):
 def ScoreHandler(x):
     global score
     score = score + x
+def PersonalityHandler(type, x):
+    global oddPoints
+    global politePoints
+    global rudePoints
+    if type == "odd":
+        oddPoints += x
+    elif type == "polite":
+        politePoints += x
+    elif type == "rude":
+        rudePoints += x
 
 def HAMS(x): #H.A.M.S Hastly Asembled Management Script
     global isKitchenOnFire
+    global isHouseOnFire
+    global currentRoom
+    global CurrentRoomID
+    global isChalmersWaitingOutsideForFire
     #Intro scene
     if x == 1:
         print("*DING DONG* You open the front door, its your boss Superintendent Chalmers. You have invited him over for a lunch to try and impress him after your latest blunder.")
@@ -313,14 +348,19 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
         a = input("Choose an option: ")
         if a == str(1):
             print("Chalmbers: Mmyeah")
+            PersonalityHandler("odd",1)
+            PersonalityHandler("polite",1)
             ScoreHandler(1)
         elif a == str(2):
             print("Chalmers: I wish you hadnt asked, she got fired again after she got caught smoking in the breakroom.")
+            PersonalityHandler("rude",2)
             ScoreHandler(-2)
         elif a == str(3):
             print("Super Nintendo Chalmers: What? Ah nevermind.")
+            PersonalityHandler("odd",3)
             ScoreHandler(-1)
             chalmers.name = "Super Nintendo Chalmers"
+            chalmers.desc = 'Your boss, the Super Nintendo you had better be sure to impress him after your clearly just forget his name...'
         elif a == str(4):
             print("Chalmers: SEYMOREEEEEE!")
             input("Congradulations you have reached the speedrun ending. Press enter to quit.")
@@ -331,7 +371,70 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
         ScoreHandler(-10)
         if CurrentRoomID == 3:
             print("Suddenly the fire in your oven spreads to the rest of your kitchen. You really should have turned that off!")
+        elif CurrentRoomID == 2:
+            print("Smoke starts to pour from your kitchen doorframe, you excuse yourself and quickly pop into the kitchen to find that its currently on fire! You pop back into the dining room and hear: ")
+            print(chalmers.name + ": Good Lord what is happening in there!")
+            print("1. Aurora Borealis")
+            print("2. A fire has broken out, you head outside and I'll get help!")
+            print("3. Nothing, everything is fine")
+            print("4. What where?")
+            a = input("Choose an option: ")
+            if a == str(1):
+                ScoreHandler(1)
+                PersonalityHandler("odd",2)
+                print(chalmers.name + ": Aurora Borealis!? At this time of year? At this time of day? In this part of the country? Localized entirely within your kitchen?")
+                b = input(chalmers.name + ": May I see it? >").lower()
+                if b == "yes" or b == "y":
+                    currentRoom = kitchen
+                    CurrentRoomID = 3
+                    diningRoom.contents.remove(chalmers)
+                    print(chalmers.name + ": What the hell Seymore, this isnt the Aurora Borealis your kitchen is on fire! I'm getting the hell out of here!")
+                    ScoreHandler(-10)
+                    PersonalityHandler("polite",1)
+                    
+                elif b == "no" or b == "n":
+                    ScoreHandler(2)
+                    PersonalityHandler("odd",2)
+                    diningRoom.contents.remove(chalmers)
+                    #add chalmers leaving here
+                else: 
+                    print("What? I asked a simple yes or no question, I'm out of here!")
+                    PersonalityHandler("odd",3)
+                    diningRoom.contents.remove(chalmers)
+                    ScoreHandler(-1)
+
+            elif a == str(2) :
+                ScoreHandler(3)
+                PersonalityHandler("polite",2)
+                print(chalmers.name + ": Good thinking Seymore, I would call for help but I think Shauna took my cellphone again!")
+                diningRoom.contents.remove(chalmers)
+                porch.contents.append(chalmers)
+                isChalmersWaitingOutsideForFire = True
+            elif a == str(3) : 
+                ScoreHandler(1)
+                PersonalityHandler("odd",1)
+                PersonalityHandler("polite",1)
+                print(chalmers.name + ": Really? Well I should be going.")   
+                diningRoom.contents.remove(chalmers)
+                #add chalmers leaving here
+            elif a == str(4) :
+                ScoreHandler(-2)
+                PersonalityHandler("odd",2)
+                PersonalityHandler("rude",2)
+                print(chalmers.name +": Your kitchen you dolt, it looks like its on fire! I'm getting out of here!")
+                diningRoom.contents.remove(chalmers)
+                porch.contents.append(chalmers)
+                isChalmersWaitingOutsideForFire = True
+
+
+        
         kitchen.desc = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!"
+    elif x == 3: #House on fire
+        isHouseOnFire = True
+        print("Mother: Seymore the house is on fire!")
+    elif x == 4: #Chalmers goodbye
+        pass
+
 def Hint():
     hintsList = ["Try going weast.", "XYZZY", "You cant get ye flask!", "You can get a hint by using the Hint verb!", "It's an open source game, just look at the code!", "Try calling our support hotline at 1-800-555-KILLERKAT", "Control alt delete", "Ask again later", "Have you listened to my podcast The CyberKat Cafe? Check out our website cyberkatcafe.com", "That's not a bug, it's a feature!"]
     print(random.choice(hintsList))
