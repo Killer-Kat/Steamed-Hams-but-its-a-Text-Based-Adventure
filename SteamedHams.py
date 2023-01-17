@@ -337,11 +337,11 @@ def Talk(x):
         print(chalmers.name +": Ah Seymore are you ready to serve lunch?")
         a = input(">").lower()
         if a == "yes" or a == "y":
-            b = input("Serve what? >").lower
+            b = input("Serve what? >").lower() #I forget the () here and spent 10 minutes trying to debug it
             for i in Inventory:
-             if i.name.lower() == b:
-                diningRoomTable.contents.append(i)
-                Inventory.remove(i)
+                if i.name.lower() == b:
+                    diningRoomTable.contents.append(i)
+                    Inventory.remove(i)
             chalmers.dialougeID = 1
             HAMS(5)
         elif a == "no" or a == "n":
@@ -468,7 +468,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
         elif politePoints <= 0 and oddPoints < 6:
             print(chalmers.name +": Well Seymore I must say you are a rude jerk!")
             ScoreHandler(-4)
-        else: print(chalmers.name +": Well Seymore I must say you are an boring drag.")
+        else: print(chalmers.name +": Well Seymore I must say you are a boring drag.")
     elif x == 5: #Serving lunch
         for i in diningRoomTable.contents:
             if i.name.lower() == "burnt roast":
@@ -478,7 +478,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
                 print("1. I burnt it by mistake")
                 print("2. I'ts not burnt, its just well done!")
                 print("3. It was mothers fault, she made it!")
-                print("This is just how I like it.")
+                print("4. This is just how I like it.")
                 a = input(">")
                 if a == 1:
                     print(chalmers.name + ": I see, well thats a shame")
