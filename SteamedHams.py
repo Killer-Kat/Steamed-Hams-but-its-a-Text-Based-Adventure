@@ -67,8 +67,13 @@ oven = Container("Oven", "A cheap white oven with a 4 burner stove and a broken 
 burntRoast = Item("Burnt Roast", "An expensive roast that someone ruined by burning it.",True)
 oven.contents.append(burntRoast)
 window = Item("Window", "A large closed window that overlooks the Krustyburger, if you were into fitness this would be a good place to strech your calves.", False, "window")
+wine = Item("Wine", "A bottle of 1982 Sauvignon Blanc, this would pair well with seafood.", True)
+bucket = Container("Bucket", "A metal champagne bucket, it was a gift from mother.", True, "bucket")
+bucket.contents.append(wine)
+diningRoomTable.contents.append(bucket)
 #People
 chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
+jeremy = Person("Jeremy Freedman", "Krusty Burger employee with the name tag Jeremy. A tired looking teen with a pimple coverd face and a high pitched voice",2)
 #Rooms
 defaultRoom = Room("Default Room", "A strikingly default room with a real sense of defaultness about it",0,)
 defaultRoom.contents.append(defaultItem)
@@ -84,6 +89,7 @@ kitchen.contents.append(window)
 livingRoom = Room("Living Room", "A cozy living room with pastel purple walls", 4)
 livingRoom.contents.append(couch)
 krustyBurger = Room("Krusty Burger", "A Krusty Burger resturant, it smells vaguely similar to the school kitchen that time you had to order grade F meat.",5)
+krustyBurger.contents.append(jeremy)
 #Room connections
 defaultRoom.northRoom = seriousRoom
 seriousRoom.southRoom = defaultRoom
@@ -108,14 +114,14 @@ def TextParser(text, room):
                 if noun.lower() == "around": ### what? it shoud load the room by default and also if you specify it.
                     print("You see " + room.desc + " and : ")
                     if len(room.contents) == 0:
-                        print("Nothing")
+                        print(" Nothing")
                     else:
                         for i in room.contents:
                             print(i.name)
                             if isinstance(i, Container):
                                 print("It contains:")
                                 if len(i.contents) == 0:
-                                    print("Nothing")
+                                    print(" Nothing")
                                 else:
                                     for c in i.contents:
                                         print(" " + c.name)
@@ -140,7 +146,7 @@ def TextParser(text, room):
                             if isinstance(i, Container):
                                 print("It contains:")
                                 if len(i.contents) == 0:
-                                    print("Nothing")
+                                    print(" Nothing")
                                 else:
                                     for c in i.contents:
                                         print(" " + c.name)
@@ -257,6 +263,7 @@ def Main(promt):
 def Use(x):
     global isOvenOn
     global isWindowOpen
+    global isKitchenOnFire
     match x:
         case "person":
             print("Its not nice to try and use people. Maybe try Talk : Person")
@@ -279,7 +286,13 @@ def Use(x):
                 print("You close the window.")
                 kitchen.northRoom = None
                 window.desc = "A large closed window that overlooks the Krustyburger, if you were into fitness this would be a good place to strech your calves."
-
+        case "bucket":
+            if CurrentRoomID == 3 and isKitchenOnFire == True:
+                bucket.contents.clear()
+                isKitchenOnFire = False
+                ScoreHandler(4)
+                print("You dump the bucket out and extinguish the fire!")
+            else: print("You have no use for a bucket right now.")
         case _:
             print("You cant use this.")
 
@@ -311,9 +324,11 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
         elif a == str(4):
             print("Chalmers: SEYMOREEEEEE!")
             input("Congradulations you have reached the speedrun ending. Press enter to quit.")
-            quit # did not work in testing. why?    
+            quit # did not work in testing. why?
+        else: print("Not a valid choice, input a number from 1-4"); HAMS(1)
     elif x == 2: #Kitchen on fire
         isKitchenOnFire = True
+        ScoreHandler(-10)
         if CurrentRoomID == 3:
             print("Suddenly the fire in your oven spreads to the rest of your kitchen. You really should have turned that off!")
         kitchen.desc = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!"
