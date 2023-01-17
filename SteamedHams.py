@@ -37,11 +37,12 @@ class Container(Item):
         self.contents = []
 
 class Person:
-    def __init__(self, name, desc, dialogueID, useAction="person"):
+    def __init__(self, name, desc, dialogueID, canTake=False, useAction="person"):
         self.name = name
         self.desc = desc
         self.dialougeID = dialogueID
         self.useAction = useAction
+        self.canTake = canTake
 
 
 
@@ -50,6 +51,8 @@ class Person:
 score = 0
 CurrentRoomID = 0
 Inventory = []
+ovenKitchenFireCountdown = 7
+isKitchenOnFire = False
 isOvenOn = True
 isWindowOpen = False
 
@@ -64,13 +67,13 @@ oven = Container("Oven", "A cheap white oven with a 4 burner stove and a broken 
 burntRoast = Item("Burnt Roast", "An expensive roast that someone ruined by burning it.",True)
 oven.contents.append(burntRoast)
 window = Item("Window", "A large closed window that overlooks the Krustyburger, if you were into fitness this would be a good place to strech your calves.", False, "window")
+#People
+chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
 #Rooms
 defaultRoom = Room("Default Room", "A strikingly default room with a real sense of defaultness about it",0,)
 defaultRoom.contents.append(defaultItem)
 seriousRoom = Room("Serious Room", "An incredibly serious room, the most serious room you have ever seen",1)
 seriousRoom.contents.append(seriousTable)
-#People
-chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
 
 diningRoom = Room("Dining Room", "A small dining room with pastel blue walls, whover lives here has no sense of interior decorating.",2)
 diningRoom.contents.append(diningRoomTable)
@@ -94,6 +97,7 @@ currentRoom = diningRoom
 
 def TextParser(text, room):
     global currentRoom
+    global CurrentRoomID
     try:
         split1 = text.split(":")
         verb = split1[0].strip().lower()
@@ -192,19 +196,23 @@ def TextParser(text, room):
                 if noun == "north" or noun == "n":
                     if room.northRoom is not None:
                          currentRoom = room.northRoom
+                         CurrentRoomID = room.northRoom.roomID
                     else: print("You cannot go north here.")
                     
                 elif noun == "east" or noun == "e":
                     if room.eastRoom is not None:
                         currentRoom = room.eastRoom
+                        CurrentRoomID = room.eastRoom.roomID
                     else: print("You cannot go east here.")
                 elif noun == "south" or noun == "s":
                     if room.southRoom is not None:
                         currentRoom = room.southRoom
+                        CurrentRoomID = room.southRoom.roomID
                     else: print("You cannot go south here.")
                 elif noun == "west" or noun == "w":
                     if room.westRoom is not None:
                         currentRoom = room.westRoom
+                        CurrentRoomID = room.westRoom.roomID
                     else: print("You cannot go west here.")
             case "use":
                 usehint = True
@@ -237,6 +245,11 @@ def TextParser(text, room):
     
   
 def Main(promt):
+    global ovenKitchenFireCountdown
+    if isOvenOn == True:
+        ovenKitchenFireCountdown -= 1
+        if ovenKitchenFireCountdown == 0:
+            HAMS(2)
     print("Score: " + str(score) + " " + promt)
     TextParser(input(">"), currentRoom)
     Main(currentRoom.name)
@@ -274,30 +287,36 @@ def ScoreHandler(x):
     global score
     score = score + x
 
-def HAMS(): #H.A.M.S Hastly Asembled Management Script
+def HAMS(x): #H.A.M.S Hastly Asembled Management Script
+    global isKitchenOnFire
     #Intro scene
-    print("*DING DONG* You open the front door, its your boss Superintendent Chalmers. You have invited him over for a lunch to try and impress him after your latest blunder.")
-    print("Chalmers: Well Seymore I made it, despite your directions.")
-    print("1. Ah Superintendent Chalmers wellcome, I hope you're prepaired for an unforgetable luncheon!")
-    print("2. Ah Chalmers my old friend just in time, how is Shauna doing?")
-    print("3. Hi Super Nintendo Chalmers")
-    print("4. Please leave. *Shuts door*")
-    a = input("Choose an option: ")
-    if a == str(1):
-        print("Chalmbers: Mmyeah")
-        ScoreHandler(1)
-    elif a == str(2):
-        print("I wish you hadnt asked, she got fired again after she got caught smoking in the breakroom.")
-        ScoreHandler(-2)
-    elif a == str(3):
-        print("What? Ah nevermind.")
-        ScoreHandler(-1)
-        chalmers.name = "Super Nintendo Chalmers"
-    elif a == str(4):
-        print("SEYMOREEEEEE!")
-        input("Congradulations you have reached the speedrun ending. Press enter to quit.")
-        quit # did not work in testing. why?    
-
+    if x == 1:
+        print("*DING DONG* You open the front door, its your boss Superintendent Chalmers. You have invited him over for a lunch to try and impress him after your latest blunder.")
+        print("Chalmers: Well Seymore I made it, despite your directions.")
+        print("1. Ah Superintendent Chalmers wellcome, I hope you're prepaired for an unforgetable luncheon!")
+        print("2. Ah Chalmers my old friend just in time, how is Shauna doing?")
+        print("3. Hi Super Nintendo Chalmers")
+        print("4. Please leave. *Shuts door*")
+        a = input("Choose an option: ")
+        if a == str(1):
+            print("Chalmbers: Mmyeah")
+            ScoreHandler(1)
+        elif a == str(2):
+            print("Chalmers: I wish you hadnt asked, she got fired again after she got caught smoking in the breakroom.")
+            ScoreHandler(-2)
+        elif a == str(3):
+            print("Super Nintendo Chalmers: What? Ah nevermind.")
+            ScoreHandler(-1)
+            chalmers.name = "Super Nintendo Chalmers"
+        elif a == str(4):
+            print("Chalmers: SEYMOREEEEEE!")
+            input("Congradulations you have reached the speedrun ending. Press enter to quit.")
+            quit # did not work in testing. why?    
+    elif x == 2: #Kitchen on fire
+        isKitchenOnFire = True
+        if CurrentRoomID == 3:
+            print("Suddenly the fire in your oven spreads to the rest of your kitchen. You really should have turned that off!")
+        kitchen.desc = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!"
 def Hint():
     hintsList = ["Try going weast.", "XYZZY", "You cant get ye flask!", "You can get a hint by using the Hint verb!", "It's an open source game, just look at the code!", "Try calling our support hotline at 1-800-555-KILLERKAT", "Control alt delete", "Ask again later", "Have you listened to my podcast The CyberKat Cafe? Check out our website cyberkatcafe.com", "That's not a bug, it's a feature!"]
     print(random.choice(hintsList))
@@ -307,7 +326,8 @@ def Help():
     print("Take, use Take and then the name of an item to pick up that item, for items in containers you need to use Loot : Container Name")
     print("Drop, what do you think it does? use Drop : Item Name to drop an item in the current room.")
     print("Fill, used to put items inside of containers. use Fill : Container Name")
+    print("Use, can be used on some items to interact with them. try Use : Item")
     print("There might be some other verbs, but I'll give you a Hint and say they might not be as useful as you would hope.")
-HAMS()
+HAMS(1)
 Main("Wellcome! To give commands use the format VERB: NOUN, the : is required. Try Help : Please for a list of commands")
 
