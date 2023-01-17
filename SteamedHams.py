@@ -2,7 +2,7 @@
 #Surprisingly no one has done this before as far as I can tell
 #Check out my podcast The CyberKat Cafe! We are avalible on all the best streaming platforms, for more info see cyberkatcafe.com
 #Made by Killer Kat on github, January 2023
-import random #lul so random XD 
+import random
 
 class Room:
     def __init__(self, name, desc, roomID, northRoom=None, eastRoom=None, southRoom=None, westRoom=None):
@@ -36,6 +36,14 @@ class Container(Item):
         
         self.contents = []
 
+class Person:
+    def __init__(self, name, desc, dialogueID, useAction="person"):
+        self.name = name
+        self.desc = desc
+        self.dialougeID = dialogueID
+        self.useAction = useAction
+
+
 
     
 #Global vars
@@ -61,10 +69,12 @@ defaultRoom = Room("Default Room", "A strikingly default room with a real sense 
 defaultRoom.contents.append(defaultItem)
 seriousRoom = Room("Serious Room", "An incredibly serious room, the most serious room you have ever seen",1)
 seriousRoom.contents.append(seriousTable)
-
+#People
+chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
 
 diningRoom = Room("Dining Room", "A small dining room with pastel blue walls, whover lives here has no sense of interior decorating.",2)
 diningRoom.contents.append(diningRoomTable)
+diningRoom.contents.append(chalmers)
 kitchen = Room("Kitchen", "A small square teal colored kitchen with a window overlooking a nearby fast food resturant. Its obvious whover lives here is not a very good cook.",3)
 kitchen.contents.append(oven)
 kitchen.contents.append(window)
@@ -235,6 +245,8 @@ def Use(x):
     global isOvenOn
     global isWindowOpen
     match x:
+        case "person":
+            print("Its not nice to try and use people. Maybe try Talk : Person")
         case "oven":
             isOvenOn = not isOvenOn
             if isOvenOn == False:
@@ -262,6 +274,30 @@ def ScoreHandler(x):
     global score
     score = score + x
 
+def HAMS(): #H.A.M.S Hastly Asembled Management Script
+    #Intro scene
+    print("*DING DONG* You open the front door, its your boss Superintendent Chalmers. You have invited him over for a lunch to try and impress him after your latest blunder.")
+    print("Chalmers: Well Seymore I made it, despite your directions.")
+    print("1. Ah Superintendent Chalmers wellcome, I hope you're prepaired for an unforgetable luncheon!")
+    print("2. Ah Chalmers my old friend just in time, how is Shauna doing?")
+    print("3. Hi Super Nintendo Chalmers")
+    print("4. Please leave. *Shuts door*")
+    a = input("Choose an option: ")
+    if a == str(1):
+        print("Chalmbers: Mmyeah")
+        ScoreHandler(1)
+    elif a == str(2):
+        print("I wish you hadnt asked, she got fired again after she got caught smoking in the breakroom.")
+        ScoreHandler(-2)
+    elif a == str(3):
+        print("What? Ah nevermind.")
+        ScoreHandler(-1)
+        chalmers.name = "Super Nintendo Chalmers"
+    elif a == str(4):
+        print("SEYMOREEEEEE!")
+        input("Congradulations you have reached the speedrun ending. Press enter to quit.")
+        quit # did not work in testing. why?    
+
 def Hint():
     hintsList = ["Try going weast.", "XYZZY", "You cant get ye flask!", "You can get a hint by using the Hint verb!", "It's an open source game, just look at the code!", "Try calling our support hotline at 1-800-555-KILLERKAT", "Control alt delete", "Ask again later", "Have you listened to my podcast The CyberKat Cafe? Check out our website cyberkatcafe.com", "That's not a bug, it's a feature!"]
     print(random.choice(hintsList))
@@ -272,6 +308,6 @@ def Help():
     print("Drop, what do you think it does? use Drop : Item Name to drop an item in the current room.")
     print("Fill, used to put items inside of containers. use Fill : Container Name")
     print("There might be some other verbs, but I'll give you a Hint and say they might not be as useful as you would hope.")
-
+HAMS()
 Main("Wellcome! To give commands use the format VERB: NOUN, the : is required. Try Help : Please for a list of commands")
 
