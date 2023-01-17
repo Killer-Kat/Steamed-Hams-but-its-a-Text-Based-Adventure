@@ -243,6 +243,10 @@ def TextParser(text, room):
                         break
                 if usehint == True:
                     print("Could not find " + noun + " try Use : Item.")
+            case "talk":
+                for i in room.contents:
+                    if i.name.lower() == noun and isinstance(i,Person):
+                        Talk(i.dialougeID)
             case "hint":
                 Hint()
             case "help":
@@ -328,8 +332,22 @@ def PersonalityHandler(type, x):
         oddPoints += x
     elif type == "polite":
         politePoints += x
-    elif type == "rude":
-        rudePoints += x
+def Talk(x):
+    if x == 0:
+        print(chalmers.name +": Ah Seymore are you ready to serve lunch?")
+        a = input(">").lower()
+        if a == "yes" or a == "y":
+            b = input("Serve what? >").lower
+            for i in Inventory:
+             if i.name.lower() == b:
+                diningRoomTable.contents.append(i)
+                Inventory.remove(i)
+            chalmers.dialougeID = 1
+            HAMS(5)
+        elif a == "no" or a == "n":
+            print(chalmers.name +": Alright, let me know when you're ready.")
+        else: print("What was that? I didnt quite hear you, let me know when you're ready to serve lunch."); PersonalityHandler("odd",1)
+    else: print("They cant talk now.")
 
 def HAMS(x): #H.A.M.S Hastly Asembled Management Script
     global isKitchenOnFire
@@ -353,7 +371,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
             ScoreHandler(1)
         elif a == str(2):
             print("Chalmers: I wish you hadnt asked, she got fired again after she got caught smoking in the breakroom.")
-            PersonalityHandler("rude",2)
+            PersonalityHandler("polite",-2)
             ScoreHandler(-2)
         elif a == str(3):
             print("Super Nintendo Chalmers: What? Ah nevermind.")
@@ -396,7 +414,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
                     ScoreHandler(2)
                     PersonalityHandler("odd",2)
                     diningRoom.contents.remove(chalmers)
-                    #add chalmers leaving here
+                    HAMS(4)
                 else: 
                     print("What? I asked a simple yes or no question, I'm out of here!")
                     PersonalityHandler("odd",3)
@@ -416,11 +434,11 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
                 PersonalityHandler("polite",1)
                 print(chalmers.name + ": Really? Well I should be going.")   
                 diningRoom.contents.remove(chalmers)
-                #add chalmers leaving here
+                HAMS(4)
             elif a == str(4) :
                 ScoreHandler(-2)
                 PersonalityHandler("odd",2)
-                PersonalityHandler("rude",2)
+                PersonalityHandler("polite",-2)
                 print(chalmers.name +": Your kitchen you dolt, it looks like its on fire! I'm getting out of here!")
                 diningRoom.contents.remove(chalmers)
                 porch.contents.append(chalmers)
@@ -433,7 +451,53 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
         isHouseOnFire = True
         print("Mother: Seymore the house is on fire!")
     elif x == 4: #Chalmers goodbye
-        pass
+        currentRoom = porch
+        CurrentRoomID = 6
+        if politePoints <= 6 and oddPoints > 6:
+            print(chalmers.name +": Well Seymore I must say you are an odd fellow.")
+            ScoreHandler(1)
+        elif politePoints > 6 and oddPoints > 6:
+            print(chalmers.name +": Well Seymore I must say you are an odd yet polite fellow.")
+            ScoreHandler(3)
+        elif politePoints <= 0 and oddPoints > 6:
+            print(chalmers.name +": Well Seymore I must say you are a rude and odd man.")
+            ScoreHandler(-5)
+        elif politePoints > 6 and oddPoints < 6:
+            print(chalmers.name +": Well Seymore I must say you are a polite fellow.")
+            ScoreHandler(4)
+        elif politePoints <= 0 and oddPoints < 6:
+            print(chalmers.name +": Well Seymore I must say you are a rude jerk!")
+            ScoreHandler(-4)
+        else: print(chalmers.name +": Well Seymore I must say you are an boring drag.")
+    elif x == 5: #Serving lunch
+        for i in diningRoomTable.contents:
+            if i.name.lower() == "burnt roast":
+                PersonalityHandler("odd",5)
+                PersonalityHandler("polite",-5)
+                print(chalmers.name + ": Seymore this roast is burnt. What happend?")
+                print("1. I burnt it by mistake")
+                print("2. I'ts not burnt, its just well done!")
+                print("3. It was mothers fault, she made it!")
+                print("This is just how I like it.")
+                a = input(">")
+                if a == 1:
+                    print(chalmers.name + ": I see, well thats a shame")
+                    PersonalityHandler("polite",1)
+                elif a == 2:
+                    print(chalmers.name + ": If you say so...")
+                    PersonalityHandler("polite"-1)
+                    PersonalityHandler("odd",1)
+                elif a == 3:
+                    print(chalmers.name + ": I thought you were making lunch today Seymore?")
+                    PersonalityHandler("polite",-5)
+                elif a == 4:
+                    print(chalmers.name + ": Really? Well you certainly have strange tastes.")
+                    PersonalityHandler("odd",5)
+
+        print(chalmers.name + ": Well I should be going")
+        HAMS(4)
+
+
 
 def Hint():
     hintsList = ["Try going weast.", "XYZZY", "You cant get ye flask!", "You can get a hint by using the Hint verb!", "It's an open source game, just look at the code!", "Try calling our support hotline at 1-800-555-KILLERKAT", "Control alt delete", "Ask again later", "Have you listened to my podcast The CyberKat Cafe? Check out our website cyberkatcafe.com", "That's not a bug, it's a feature!"]
