@@ -79,7 +79,8 @@ bucket.contents.append(wine)
 diningRoomTable.contents.append(bucket)
 wineGlasses = Item("Wine Glasses", "Glass Glasses for wine, how fancy! put them on the table if you want to serve wine.", True)
 ribwich = Item("Ribwich", 'A rib themed sandwich, the box proudly proclaims "Now without lettuce!" you question if its a good idea to eat this.', True)
-comboMeal = Item("Combo Meal", "A Krusty Burger combo meal #4. It's 4 hamburgers and 2 large fries.", True)
+comboMeal = Item("Combo Meal", "A Krusty Burger combo meal #4. It's 4 hamburgers and 2 large fries.", True, "combomeal")
+steamedHams = Item("Steamed Hams", "Steamed Hams just like they make them in Albany, it's really just fast food on a fancy platter but you're trying your best.", True)
 #People
 chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
 jeremy = Person("Jeremy Freedman", "Krusty Burger employee with the name tag Jeremy. A tired looking teen with a pimple coverd face and a high pitched voice",2)
@@ -322,6 +323,13 @@ def Use(x):
                     ScoreHandler(-2)
                     isKitchenOnFire = True
             else: print("You have no use for a bucket right now.")
+        case "combomeal":
+            if CurrentRoomID == 3:
+                print("You put the meal on a serving platter.")
+                Inventory.remove(comboMeal)
+                Inventory.append(steamedHams)
+            else: print("If you were in the kitchen you could put this on a nice serving platter.")
+
         case _:
             print("You cant use this.")
 
