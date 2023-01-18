@@ -56,6 +56,7 @@ politePoints = 0
 rudePoints = 0
 ovenKitchenFireCountdown = 10
 kitchenFireSpreadCountdown = 5
+burningHouseDeathCountdown = 5
 isKitchenOnFire = False
 isHouseOnFire = False
 isChalmersWaitingOutsideForFire = False
@@ -83,6 +84,9 @@ wineGlasses = Item("Wine Glasses", "Glass Glasses for wine, how fancy! put them 
 ribwich = Item("Ribwich", 'A rib themed sandwich, the box proudly proclaims "Now without lettuce!" you question if its a good idea to eat this.', True)
 comboMeal = Item("Combo Meal", "A takeout container with the Krusty Burger combo meal #4. It's 4 hamburgers and 2 large fries. You should really think about putting this on a nice serving tray before having lunch.", True, "combomeal")
 steamedHams = Item("Steamed Hams", "Steamed Hams just like they make them in Albany, it's really just fast food on a fancy platter but you're trying your best.", True)
+phone = Item("Phone", "A white wall mounted landline phone, you can Use this to make calls.", False, "phone")
+apron = Item("Apron", "A white lace lined cooking apron.")
+Inventory.append(apron)
 #People
 chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
 jeremy = Person("Jeremy Freedman", "Krusty Burger employee with the name tag Jeremy. A tired looking teen with a pimple coverd face and a high pitched voice",2)
@@ -101,9 +105,11 @@ kitchen.contents.append(window)
 kitchen.contents.append(wineGlasses)
 livingRoom = Room("Living Room", "A cozy living room with pastel purple walls", 4)
 livingRoom.contents.append(couch)
+livingRoom.contents.append(phone)
 porch = Room("Front Porch", "A small front porch with a banister steps, there are two large windows through which you can see your living room and dining room",6)
 krustyBurger = Room("Krusty Burger", "A Krusty Burger resturant, it smells vaguely similar to the school kitchen that time you had to order grade F meat.",5)
 krustyBurger.contents.append(jeremy)
+backRooms = Room("Back Rooms","A stale yellow office building, damp carpet squishes beneath your feet. The ever-present hum of florescent lights makes you feel a deep unease.",-1)
 #Room connections
 defaultRoom.northRoom = seriousRoom
 seriousRoom.southRoom = defaultRoom
@@ -114,6 +120,11 @@ livingRoom.westRoom = diningRoom
 kitchen.southRoom = diningRoom
 krustyBurger.southRoom = kitchen
 porch.northRoom = diningRoom
+backRooms.northRoom = backRooms
+backRooms.southRoom = backRooms
+backRooms.eastRoom = backRooms
+backRooms.westRoom = backRooms
+defaultRoom.westRoom = backRooms
 #Need to define this after rooms or it doesnt work (wait or does it?)
 currentRoom = diningRoom
 
@@ -237,6 +248,10 @@ def TextParser(text, room):
                         currentRoom = room.westRoom
                         CurrentRoomID = room.westRoom.roomID
                     else: print("You cannot go west here.")
+                elif noun == "weast":
+                    print("You noclip through reality")
+                    currentRoom = defaultRoom
+                    CurrentRoomID = 0
             case "use":
                 usehint = True
                 for i in room.contents:
@@ -274,18 +289,24 @@ def TextParser(text, room):
 def Main(promt):
     global ovenKitchenFireCountdown
     global kitchenFireSpreadCountdown
+    global burningHouseDeathCountdown
     global chalmersKitchenCheckDone
     if isOvenOn == True:
         ovenKitchenFireCountdown -= 1
-        if(ovenKitchenFireCountdown) <= 6 and chalmersKitchenCheckDone == False:
-            chalmersKitchenCheckDone = True
-            HAMS(6)
+        if CurrentRoomID == 3:
+            if(ovenKitchenFireCountdown) <= 6 and chalmersKitchenCheckDone == False:
+                chalmersKitchenCheckDone = True
+                HAMS(6)
         if ovenKitchenFireCountdown == 0:
             HAMS(2)
     if isKitchenOnFire == True:
         kitchenFireSpreadCountdown -= 1
         if kitchenFireSpreadCountdown == 0:
             HAMS(3)
+    if isHouseOnFire == True:
+        burningHouseDeathCountdown -= 1
+        if burningHouseDeathCountdown == 0:
+            HAMS(7)
     print("Score: " + str(score) + " " + promt)
     TextParser(input(">"), currentRoom)
     Main(currentRoom.name)
@@ -336,6 +357,17 @@ def Use(x):
                 Inventory.remove(comboMeal)
                 Inventory.append(steamedHams)
             else: print("If you were in the kitchen you could put this on a nice serving platter.")
+        case "phone":
+            print("1. call Fire Department.")
+            print("2. call 1-800-555-KILLERKAT")
+            a = input(">")
+            if a == str(1):
+                if isHouseOnFire or isKitchenOnFire:
+                    print("PLACE HOLDER")
+                else: print("Calling the fire department without a fire is a serious crime you know.")
+            elif a == str(2):
+                print('Cyberkat Cafe, Killer Kat speaking. Oh you are stuck in a text based adventure game? Have you tried using "Hint : Please", maybe it will help you. *click*')
+            else: print("Hello? I think you have a wrong number. *click*")
 
         case _:
             print("You cant use this.")
@@ -346,7 +378,6 @@ def ScoreHandler(x):
 def PersonalityHandler(type, x):
     global oddPoints
     global politePoints
-    global rudePoints
     if type == "odd":
         oddPoints += x
     elif type == "polite":
@@ -401,6 +432,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
     global isChalmersWaitingOutsideForFire
     global isSteamedHams
     global ovenKitchenFireCountdown
+    global chalmersKitchenCheckDone
     #Intro scene
     if x == 1:
         print("*DING DONG* You open the front door, its your boss Superintendent Chalmers. You have invited him over for a lunch to try and impress him after your latest blunder.")
@@ -495,6 +527,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
         kitchen.desc = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!"
     elif x == 3: #House on fire
         isHouseOnFire = True
+        chalmersKitchenCheckDone = True #So chalmers wont walk into the kitchen while the house burns down.
         print("Mother: Seymore the house is on fire!")
     elif x == 4: #Chalmers goodbye
         currentRoom = porch
@@ -517,6 +550,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
         else: print(chalmers.name +": Well Seymore I must say you are a boring drag.")
         if isSteamedHams == True:
             print(chalmers.name +": But you steam a good ham.")
+        EndGame()
     elif x == 5: #Serving lunch
         for i in diningRoomTable.contents:
             if i.name.lower() == "burnt roast":
@@ -609,6 +643,58 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
                         ScoreHandler(1)
                         PersonalityHandler("odd",1)
                         print(chalmers.name +': You call hamburgers "steamed hams"?')
+                        print('1. Yes, its a regional dialect.')
+                        print("2. Yes, its jarhead slang I picked up durring my time in Vietnam.")
+                        print("3. No, I call them steamed clams.")
+                        e = input(">")
+                        if e == str(1):
+                            ScoreHandler(1)
+                            PersonalityHandler("odd",1)
+                            print(chalmers.name +': Uh-huh. Eh, what region?')
+                            print("1. Upstate New York.")
+                            print("2. Springfield.")
+                            print("3. Ohio River Valley.")
+                            print("4. The Moon.")
+                            f = input(">")
+                            if f == str(1):
+                                print(chalmers.name +": Really?  Well I'm from Utica and I've never heard anyone use the phrase steamed hams.")
+                                ScoreHandler(-1)
+                                print("1. Oh, not in Utica, no. It's an Albany expression.")
+                                print("2. Well maybe you should have listened harder stupid.")
+                                print("3. Uhh... Lets change the conversation.")
+                                g = input(">")
+                                if g == str(1):
+                                    ScoreHandler(2)
+                                    print(chalmers.name +": I see.")
+                                elif g == str(2):
+                                    ScoreHandler(-2)
+                                    PersonalityHandler("polite",-2)
+                                    print(chalmers.name +": What the hell Seymour, you know I have half a mind to fire you!")
+                                elif g == str(3):
+                                    ScoreHandler(-1)
+                                    print(chalmers.name +": Uh, I guess.")
+
+                            elif f == str(2):
+                                print(chalmers.name +": Seymour what are you on about? We both live in Springfield and I've never heard anyone use the phrase steamed hams.")
+                                ScoreHandler(-2)
+                                PersonalityHandler("polite"-2)
+                                PersonalityHandler("odd",2)
+                            elif f == str(3):
+                                ScoreHandler(2)
+                                print(chalmers.name +": Ah I see.")
+                            elif f == str(4):
+                                ScoreHandler(-4)
+                                PersonalityHandler("odd",4)
+                                print(chalmers.name +": What? Seymour are you feeling ok? Perhaps you should lay down.")
+                        elif e == str(2):
+                            ScoreHandler(2)
+                            PersonalityHandler("odd",1)
+                            print(chalmers.name +": Mmm, explains why I've never heard anyone use the phrase before.")
+                        elif e == str(3):
+                            print(chalmers.name +": You... What, but I? Nevermind.")
+                            ScoreHandler(-1)
+                            PersonalityHandler("odd",3)
+                            
                     elif d == str(2):
                         ScoreHandler(-1)
                         print(chalmers.name +': You burnt them with steam? That takes talent.')
@@ -620,6 +706,35 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
                         ScoreHandler(-4)
                         PersonalityHandler("polite"-4)
                         print(chalmers.name +": What? How dare you!")
+                print(chalmers.name +": You know, these hamburgers are quite similar to the ones they have at Krusty Burger.")
+                print("1. Hohoho, no! Patented Skinner Burgers. Old family recipe!")
+                print("2. They are from Krusty Burger.")
+                print("3. Yes, I make them like this because I love Krusty Burgers.")
+                h = input(">")
+                if h == str(1) and isSteamedHams == True:
+                    ScoreHandler(1)
+                    PersonalityHandler("odd",1)
+                    print(chalmers.name +": For steamed hams?")
+                    print("1. Yes.")
+                    print("2. No.")
+                    i = input(">")
+                    if i == str(1):
+                        ScoreHandler(1)
+                        print(chalmers.name +": Yes, and you call them steamed hams, despite the fact they are obviously grilled?")
+                        print("Seymour: Y- Uh.. you know, the... One thing I should... excuse me for one second.")
+                        print(chalmers.name +": Of course.")
+                    else: print(chalmers.name +": But you just said... Nevermind."); ScoreHandler(-2)
+                elif h == str(1):
+                    print(chalmers.name +": Well maybe you and Krusty share ancestors then.")
+                elif h == str(2):
+                    ScoreHandler(-1)
+                    PersonalityHandler("polite",-1)
+                    print(chalmers.name +": You said you were making lunch today. I should have know better than to expect anything from you Seymour.")
+                elif h == str(3):
+                    ScoreHandler(2)
+                    PersonalityHandler("odd",1)
+                    print(chalmers.name +": That's strange but I will admit, I do like a good Krusty Burger every now and then.")
+
                       
 
         print(chalmers.name + ": Well I should be going")
@@ -659,13 +774,21 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
             PersonalityHandler("polite",-2)
             print(chalmers.name +": I what... Well I hope you didnt cook lunch in there then.")
             print("Chalmers frowns and returns to the dining room.")
-
+    elif x == 7: #House burns down
+        print("Your house has burnt down killing everyone inside.")
+        print("You are dead.")
+        EndGame()
 
 
 
 def Hint():
     hintsList = ["Try going weast.", "XYZZY", "You cant get ye flask!", "You can get a hint by using the Hint verb!", "It's an open source game, just look at the code!", "Try calling our support hotline at 1-800-555-KILLERKAT", "Control alt delete", "Ask again later", "Have you listened to my podcast The CyberKat Cafe? Check out our website cyberkatcafe.com", "That's not a bug, it's a feature!"]
     print(random.choice(hintsList))
+
+def EndGame():
+    print("Game over you scored: " + str(score) + " points.")
+    print("Your personality was " + str(oddPoints) + " Odd and " + str(politePoints) + " Polite.")
+    print("Game by Killer Kat, if you liked this check out my other projects at cyberkatcafe.com")
 def Help():
     print("Look, use Look : Around to examine your surroundings or Look : Something to look at something in more detail, to see your inventory use Look : Inventory")
     print("Go, use Go and then one of the 4 cardinal directions to move in that direction. Provided there is something in that direction to move towards.")
@@ -673,6 +796,7 @@ def Help():
     print("Drop, what do you think it does? use Drop : Item Name to drop an item in the current room.")
     print("Fill, used to put items inside of containers. use Fill : Container Name")
     print("Use, can be used on some items to interact with them. try Use : Item")
+    print("Talk, use it to talk to people, be sure to use their full name. Talk : Person")
     print("There might be some other verbs, but I'll give you a Hint and say they might not be as useful as you would hope.")
 HAMS(1)
 Main("Wellcome! To give commands use the format VERB: NOUN, the : is required. Try Help : Please for a list of commands")
