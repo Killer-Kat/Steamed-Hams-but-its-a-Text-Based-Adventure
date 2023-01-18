@@ -54,13 +54,15 @@ Inventory = []
 oddPoints = 0
 politePoints = 0
 rudePoints = 0
-ovenKitchenFireCountdown = 7
+ovenKitchenFireCountdown = 8
 kitchenFireSpreadCountdown = 5
 isKitchenOnFire = False
 isHouseOnFire = False
 isChalmersWaitingOutsideForFire = False
+chalmersKitchenCheckDone = False
 isOvenOn = True
 isWindowOpen = False
+isSteamedHams = False
 
 #Items
 defaultItem = Item("Default Item", "An incredibly default item, you bask in the glow of its defaultness!", True)
@@ -79,7 +81,7 @@ bucket.contents.append(wine)
 diningRoomTable.contents.append(bucket)
 wineGlasses = Item("Wine Glasses", "Glass Glasses for wine, how fancy! put them on the table if you want to serve wine.", True)
 ribwich = Item("Ribwich", 'A rib themed sandwich, the box proudly proclaims "Now without lettuce!" you question if its a good idea to eat this.', True)
-comboMeal = Item("Combo Meal", "A Krusty Burger combo meal #4. It's 4 hamburgers and 2 large fries.", True, "combomeal")
+comboMeal = Item("Combo Meal", "A takeout container with the Krusty Burger combo meal #4. It's 4 hamburgers and 2 large fries. You should really think about putting this on a nice serving tray before having lunch.", True, "combomeal")
 steamedHams = Item("Steamed Hams", "Steamed Hams just like they make them in Albany, it's really just fast food on a fancy platter but you're trying your best.", True)
 #People
 chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
@@ -209,8 +211,9 @@ def TextParser(text, room):
                                 i.contents.append(y)
                                 Inventory.remove(y)
                                 print("You put the " + x + " in the " + noun)
-                            else: print("You dont have a " + x)
-                            break
+                            else:
+                                 print("You dont have a " + x)
+                            
                     else: print("Container not found, try Fill : Container Name")
             case "go": 
                 if noun == "north" or noun == "n":
@@ -271,8 +274,12 @@ def TextParser(text, room):
 def Main(promt):
     global ovenKitchenFireCountdown
     global kitchenFireSpreadCountdown
+    global chalmersKitchenCheckDone
     if isOvenOn == True:
         ovenKitchenFireCountdown -= 1
+        if(ovenKitchenFireCountdown) <= 4 and chalmersKitchenCheckDone == False:
+            chalmersKitchenCheckDone = True
+            HAMS(6)
         if ovenKitchenFireCountdown == 0:
             HAMS(2)
     if isKitchenOnFire == True:
@@ -360,7 +367,7 @@ def Talk(x):
             print(chalmers.name +": Alright, let me know when you're ready.")
         else: print("What was that? I didnt quite hear you, let me know when you're ready to serve lunch."); PersonalityHandler("odd",1)
     elif x == 2:
-        print("Jermy: Hi wellcome to Krusty Burger home of the Rib Witch, now with extra verisimilitude! what can I get you?")
+        print("Jermy: Hi wellcome to Krusty Burger home of the Rib Wich, now with extra verisimilitude! what can I get you?")
         print("1. The #4 family combo meal")
         print("2. I'll have 2 number 9s, a number 9 large, a number 6 with extra dip, a number 7, 2 number 45s one with cheese, and a large soda.")
         print("3. One Ribwich please!")
@@ -392,6 +399,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
     global currentRoom
     global CurrentRoomID
     global isChalmersWaitingOutsideForFire
+    global isSteamedHams
     #Intro scene
     if x == 1:
         print("*DING DONG* You open the front door, its your boss Superintendent Chalmers. You have invited him over for a lunch to try and impress him after your latest blunder.")
@@ -555,12 +563,75 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
                     ScoreHandler(-1)
                     PersonalityHandler("odd",5)
                     PersonalityHandler("polite",-1)
-
-
-
-
+            elif i.name.lower() == "combo meal":
+                PersonalityHandler("odd",2)
+                PersonalityHandler("polite",-2)
+                ScoreHandler(1)
+                print(chalmers.name + ": Seymore this is a bag of Krusty Burger, I thought you were cooking dinner?")
+                print("1. I burnt my roast so I got a replacement.")
+                print("2. What? No I made all this myself.")
+                print("3. I thought you liked Krusty Burger?")
+                print("4. Oh you must have misheard me, I said I was buying something tasty not frying something tasty.")
+                c = input(">")
+                if c == str(1):
+                    ScoreHandler(1)
+                    PersonalityHandler("odd",1)
+                    PersonalityHandler("polite",1)
+                    print(chalmers.name +": Ah I see, but are you sure you couldnt have made something else?")
+                elif c == str(2):
+                    ScoreHandler(-3)
+                    PersonalityHandler("odd",1)
+                    PersonalityHandler("polite",-2)
+                    print(chalmers.name +": Seymour, this food is all still in the Krusty Burger packaging, you're clearly lying to me.")
+                elif c == str(3):
+                    ScoreHandler(1)
+                    PersonalityHandler("odd",2)
+                    print(chalmers.name +": I do, but I thought you were cooking us lunch?")
+                elif c == str(4):
+                    ScoreHandler(1)
+                    PersonalityHandler("odd",1)
+                    PersonalityHandler("polite",1)
+                    print(chalmers.name +": Ah of course, my mistake.")
+            elif i.name.lower() == "steamed hams":
+                ScoreHandler(4)
+                print("Seymour: Superintendent I hope you're ready for some mouth watering hamburgers!")
         print(chalmers.name + ": Well I should be going")
         HAMS(4)
+    elif x == 6: #Chalmers checks the kitchen
+        print("Chalmers enters the room")
+        if isWindowOpen == True:
+            print("Superintendent! I was just... uh, just stretching my calves on the windowsill. Isometric exercise! Care to join me?")
+        print(chalmers.name +": Why is there smoke coming out of your oven Seymour?")
+        print("1. Thats not smoke, its steam! Steam from the steamed clams we're having. Mmm steamed clams!")
+        print("2. My oven timer is broken and I burnt my roast.")
+        print("3. It's smoke from the smoked ham we're having!")
+        print("4. Uh, I was just smoking a cigarette in here and I use the oven as an ash tray.")
+        a = input(">")
+        if a == str(1):
+            ScoreHandler(2)
+            isSteamedHams = True
+            print("Chalmers frowns and returns to the dining room.")
+        elif a == str(2):
+            ScoreHandler(1)
+            PersonalityHandler("polite",1)
+            print(chalmers.name +": I hope you have something else you can make for lunch then.")
+            print("Chalmers frowns and returns to the dining room.")
+        elif a == str(3):
+            ScoreHandler(2)
+            print(chalmers.name +": Well I do like smoked ham, I'll take my seat then.")
+            print("Chalmers returns to the dining room.")
+        elif a == str(4):
+            ScoreHandler(-2)
+            PersonalityHandler("odd",4)
+            PersonalityHandler("polite",-2)
+            print(chalmers.name +": I what... Well I hope you didnt cook lunch in there then.")
+            print("Chalmers frowns and returns to the dining room.")
+
+
+
+
+
+        
 
 
 
