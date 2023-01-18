@@ -85,7 +85,7 @@ ribwich = Item("Ribwich", 'A rib themed sandwich, the box proudly proclaims "Now
 comboMeal = Item("Combo Meal", "A takeout container with the Krusty Burger combo meal #4. It's 4 hamburgers and 2 large fries. You should really think about putting this on a nice serving tray before having lunch.", True, "combomeal")
 steamedHams = Item("Steamed Hams", "Steamed Hams just like they make them in Albany, it's really just fast food on a fancy platter but you're trying your best.", True)
 phone = Item("Phone", "A white wall mounted landline phone, you can Use this to make calls.", False, "phone")
-apron = Item("Apron", "A white lace lined cooking apron.")
+apron = Item("Apron", "A white lace lined cooking apron.", True)
 Inventory.append(apron)
 #People
 chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
@@ -227,6 +227,10 @@ def TextParser(text, room):
                             
                     else: print("Container not found, try Fill : Container Name")
             case "go": 
+                curse = random.randrange(0,500,1)
+                if curse == 13:
+                    noun = "weast"
+                
                 if noun == "north" or noun == "n":
                     if room.northRoom is not None:
                          currentRoom = room.northRoom
@@ -487,6 +491,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
                     print(chalmers.name + ": What the hell Seymore, this isnt the Aurora Borealis your kitchen is on fire! I'm getting the hell out of here!")
                     ScoreHandler(-10)
                     PersonalityHandler("polite",1)
+                    EndGame()
                     
                 elif b == "no" or b == "n":
                     ScoreHandler(2)
