@@ -54,7 +54,7 @@ Inventory = []
 oddPoints = 0
 politePoints = 0
 rudePoints = 0
-ovenKitchenFireCountdown = 8
+ovenKitchenFireCountdown = 10
 kitchenFireSpreadCountdown = 5
 isKitchenOnFire = False
 isHouseOnFire = False
@@ -277,7 +277,7 @@ def Main(promt):
     global chalmersKitchenCheckDone
     if isOvenOn == True:
         ovenKitchenFireCountdown -= 1
-        if(ovenKitchenFireCountdown) <= 4 and chalmersKitchenCheckDone == False:
+        if(ovenKitchenFireCountdown) <= 6 and chalmersKitchenCheckDone == False:
             chalmersKitchenCheckDone = True
             HAMS(6)
         if ovenKitchenFireCountdown == 0:
@@ -400,6 +400,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
     global CurrentRoomID
     global isChalmersWaitingOutsideForFire
     global isSteamedHams
+    global ovenKitchenFireCountdown
     #Intro scene
     if x == 1:
         print("*DING DONG* You open the front door, its your boss Superintendent Chalmers. You have invited him over for a lunch to try and impress him after your latest blunder.")
@@ -514,6 +515,8 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
             print(chalmers.name +": Well Seymore I must say you are a rude jerk!")
             ScoreHandler(-4)
         else: print(chalmers.name +": Well Seymore I must say you are a boring drag.")
+        if isSteamedHams == True:
+            print(chalmers.name +": But you steam a good ham.")
     elif x == 5: #Serving lunch
         for i in diningRoomTable.contents:
             if i.name.lower() == "burnt roast":
@@ -595,12 +598,42 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
             elif i.name.lower() == "steamed hams":
                 ScoreHandler(4)
                 print("Seymour: Superintendent I hope you're ready for some mouth watering hamburgers!")
+                if isSteamedHams == True:
+                    print(chalmers.name +": I thought we were having steamed clams?")
+                    print('1. Oh no, I said "steamed hams". Thats what I call hamburgers.')
+                    print("2. I burnt the clams so I bought some hamburgers instead.")
+                    print("3. We are, thats what I call hamburgers.")
+                    print("4. You must have misheard me, maybe get a hearing aid old man.")
+                    d = input(">")
+                    if d == str(1):
+                        ScoreHandler(1)
+                        PersonalityHandler("odd",1)
+                        print(chalmers.name +': You call hamburgers "steamed hams"?')
+                    elif d == str(2):
+                        ScoreHandler(-1)
+                        print(chalmers.name +': You burnt them with steam? That takes talent.')
+                    elif d == str(3):
+                        ScoreHandler(-1)
+                        PersonalityHandler("odd",4)
+                        print(chalmers.name +': You call hamburgers "steamed clams"? Thats very strange.')
+                    elif d == str(4):
+                        ScoreHandler(-4)
+                        PersonalityHandler("polite"-4)
+                        print(chalmers.name +": What? How dare you!")
+                      
+
         print(chalmers.name + ": Well I should be going")
-        HAMS(4)
+        if isOvenOn == True:
+            isHouseOnFire = True
+            ovenKitchenFireCountdown = -1
+            HAMS(2)
+        else: HAMS(4)
+
     elif x == 6: #Chalmers checks the kitchen
         print("Chalmers enters the room")
         if isWindowOpen == True:
             print("Superintendent! I was just... uh, just stretching my calves on the windowsill. Isometric exercise! Care to join me?")
+            PersonalityHandler("odd",2)
         print(chalmers.name +": Why is there smoke coming out of your oven Seymour?")
         print("1. Thats not smoke, its steam! Steam from the steamed clams we're having. Mmm steamed clams!")
         print("2. My oven timer is broken and I burnt my roast.")
@@ -627,11 +660,6 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
             print(chalmers.name +": I what... Well I hope you didnt cook lunch in there then.")
             print("Chalmers frowns and returns to the dining room.")
 
-
-
-
-
-        
 
 
 
