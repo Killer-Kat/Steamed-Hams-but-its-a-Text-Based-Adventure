@@ -54,7 +54,7 @@ Inventory = []
 oddPoints = 0
 politePoints = 0
 rudePoints = 0
-ovenKitchenFireCountdown = 10
+ovenKitchenFireCountdown = 11
 kitchenFireSpreadCountdown = 5
 burningHouseDeathCountdown = 5
 isKitchenOnFire = False
@@ -135,7 +135,7 @@ def TextParser(text, room):
         split1 = text.split(":")
         verb = split1[0].strip().lower()
         noun = split1[1].strip().lower()
-        #print(verb, noun) #for debug, del this line later
+        
         match verb:
             case "look":
                 if noun.lower() == "around": ### what? it shoud load the room by default and also if you specify it.
