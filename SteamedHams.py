@@ -107,6 +107,7 @@ livingRoom = Room("Living Room", "A cozy living room with pastel purple walls", 
 livingRoom.contents.append(couch)
 livingRoom.contents.append(phone)
 porch = Room("Front Porch", "A small front porch with a banister steps, there are two large windows through which you can see your living room and dining room",6)
+lawn = Room("Lawn", "Your lawn, the grass is well cut and the air is fresh as can be! Which is not particulary fresh considering the grease in the air from the Krusty Burger next door.",7)
 krustyBurger = Room("Krusty Burger", "A Krusty Burger resturant, it smells vaguely similar to the school kitchen that time you had to order grade F meat.",5)
 krustyBurger.contents.append(jeremy)
 backRooms = Room("Back Rooms","A stale yellow office building, damp carpet squishes beneath your feet. The ever-present hum of florescent lights makes you feel a deep unease.",-1)
@@ -119,12 +120,16 @@ diningRoom.southRoom = porch
 livingRoom.westRoom = diningRoom
 kitchen.southRoom = diningRoom
 krustyBurger.southRoom = kitchen
+krustyBurger.eastRoom = lawn
 porch.northRoom = diningRoom
+porch.southRoom = lawn
 backRooms.northRoom = backRooms
 backRooms.southRoom = backRooms
 backRooms.eastRoom = backRooms
 backRooms.westRoom = backRooms
 defaultRoom.westRoom = backRooms
+lawn.northRoom = krustyBurger
+lawn.southRoom = porch
 #Need to define this after rooms or it doesnt work (wait or does it?)
 currentRoom = diningRoom
 
@@ -354,6 +359,7 @@ def Use(x):
                     print("It's too bad the rest of your house is on fire, because it relights the kitchen fire! If only you had done something sooner!")
                     ScoreHandler(-2)
                     isKitchenOnFire = True
+                else : kitchen.desc = "A small burnt formerly teal colored kitchen, almost everything in the room is scorched or has burnt away."
             else: print("You have no use for a bucket right now.")
         case "combomeal":
             if CurrentRoomID == 3:
@@ -367,8 +373,12 @@ def Use(x):
             a = input(">")
             if a == str(1):
                 if isHouseOnFire or isKitchenOnFire:
-                    print("PLACE HOLDER")
-                else: print("Calling the fire department without a fire is a serious crime you know.")
+                    print("Carl Carlson: Springfield Volunteer Fire Department Carl Speaking, oh Seymour how are ya?")
+                    print("Carl Carlson: A fire at your place, We'll be there right away!")
+                    HAMS(8)
+                else: 
+                    print("Calling the fire department without a fire is a serious crime you know.")
+                    ScoreHandler(-1)
             elif a == str(2):
                 print('Cyberkat Cafe, Killer Kat speaking. Oh you are stuck in a text based adventure game? Have you tried using "Hint : Please", maybe it will help you. *click*')
             else: print("Hello? I think you have a wrong number. *click*")
@@ -783,6 +793,13 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
         print("Your house has burnt down killing everyone inside.")
         print("You are dead.")
         EndGame()
+    elif x == 8: #Fire Department puts out fire.
+        isKitchenOnFire = False
+        isHouseOnFire = False
+        kitchen.desc = "A small burnt formerly teal colored kitchen, almost everything in the room is scorched or has burnt away."
+        ScoreHandler(2)
+        print("The Springfield Volunteer Fire Department shows up and extinguishes the infurno that is your house.")
+        print("You really should have known better than to start a house fire considering you are a member of the Fire Department.")
 
 
 
