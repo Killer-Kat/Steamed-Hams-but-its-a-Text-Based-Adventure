@@ -516,8 +516,10 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
             chalmers.desc = 'Your boss, the Super Nintendo you had better be sure to impress him after your clearly just forget his name...'
         elif a == str(4):
             print("Chalmers: SEYMOREEEEEE!")
-            input("Congradulations you have reached the speedrun ending. Press enter to quit.")
-            quit # did not work in testing. why?
+            print("Congradulations you have reached the speedrun ending.")
+            ScoreHandler(-2)
+            PersonalityHandler("polite", -10)
+            EndGame()
         else: print("Not a valid choice, input a number from 1-4"); HAMS(1)
     elif x == 2: #Kitchen on fire
         isKitchenOnFire = True
@@ -854,6 +856,7 @@ def EndGame():
     print("Game over you scored: " + str(score) + " points.")
     print("Your personality was " + str(oddPoints) + " Odd and " + str(politePoints) + " Polite.")
     print("Game by Killer Kat, if you liked this check out my other projects at cyberkatcafe.com")
+    quit()
 def Help():
     print("Look, use Look : Around to examine your surroundings or Look : Something to look at something in more detail, to see your inventory use Look : Inventory")
     print("Go, use Go and then one of the 4 cardinal directions to move in that direction. Provided there is something in that direction to move towards.")
