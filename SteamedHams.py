@@ -64,6 +64,9 @@ chalmersKitchenCheckDone = False
 isOvenOn = True
 isWindowOpen = False
 isSteamedHams = False
+isTVon = False
+TVsecretCounter = 0
+isTVfixed = False
 
 #Items
 defaultItem = Item("Default Item", "An incredibly default item, you bask in the glow of its defaultness!", True)
@@ -87,6 +90,8 @@ steamedHams = Item("Steamed Hams", "Steamed Hams just like they make them in Alb
 phone = Item("Phone", "A white wall mounted landline phone, you can Use this to make calls.", False, "phone")
 apron = Item("Apron", "A white lace lined cooking apron.", True)
 Inventory.append(apron)
+tv = Item("TV","A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...",False, "tv")
+hanger = Item("Hanger", "A metal coat hanger, the kind you get for free at the dry cleaners. On your salary its the only kind you can afford.", True, "hanger")
 #People
 chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
 jeremy = Person("Jeremy Freedman", "Krusty Burger employee with the name tag Jeremy. A tired looking teen with a pimple coverd face and a high pitched voice",2)
@@ -106,8 +111,10 @@ kitchen.contents.append(wineGlasses)
 livingRoom = Room("Living Room", "A cozy living room with pastel purple walls", 4)
 livingRoom.contents.append(couch)
 livingRoom.contents.append(phone)
+livingRoom.contents.append(tv)
 porch = Room("Front Porch", "A small front porch with a banister steps, there are two large windows through which you can see your living room and dining room",6)
 lawn = Room("Lawn", "Your lawn, the grass is well cut and the air is fresh as can be! Which is not particulary fresh considering the grease in the air from the Krusty Burger next door.",7)
+lawn.contents.append(hanger)
 krustyBurger = Room("Krusty Burger", "A Krusty Burger resturant, it smells vaguely similar to the school kitchen that time you had to order grade F meat.",5)
 krustyBurger.contents.append(jeremy)
 backRooms = Room("Back Rooms","A stale yellow office building, damp carpet squishes beneath your feet. The ever-present hum of florescent lights makes you feel a deep unease.",-1)
@@ -325,6 +332,9 @@ def Use(x):
     global isWindowOpen
     global isKitchenOnFire
     global isHouseOnFire
+    global isTVon
+    global TVsecretCounter
+    global isTVfixed
     match x:
         case "person":
             print("Its not nice to try and use people. Maybe try Talk : Person")
@@ -382,6 +392,39 @@ def Use(x):
             elif a == str(2):
                 print('Cyberkat Cafe, Killer Kat speaking. Oh you are stuck in a text based adventure game? Have you tried using "Hint : Please", maybe it will help you. *click*')
             else: print("Hello? I think you have a wrong number. *click*")
+
+        case "tv":
+            isTVon = not isTVon
+            if isTVon == True and isTVfixed == False:
+                tv.desc = "A small square purple colored CRT TV, it's missing an antenna. It's currently just showing static yet something about it seems rather odd..."
+                print("The TV crackles to life, but its just showing static.")
+                if isTVfixed == True:
+                    TVsecretCounter += 1
+            elif isTVon == False and isTVfixed == False: 
+                tv.desc = "A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd..."
+                print("The TV shuts off with a flash, leaving nothing but a black screen.")
+            elif isTVon == True and isTVfixed == True:
+                tv.desc = "A small square purple colored CRT TV, you replaced it's antenna. It's currently just showing static yet something about it seems rather odd it almost resembles some kind of head."
+                print("The TV crackles to life, but its just showing static despite the antenna.")
+                if isTVfixed == True:
+                    TVsecretCounter += 1
+            elif isTVon == False and isTVfixed == True:
+                tv.desc = "A small square purple colored CRT TV, you replaced it's antenna. It's currently off yet something about it seems rather odd it almost resembles some kind of head."
+                print("The TV shuts off with a flash, leaving nothing but a black screen.")
+    
+            if TVsecretCounter == 5:
+                print("Suddely the TV starts playing a strange video.")
+                print("Odd voice: Sometimes you're just steaming some hams when you stumble across something in the most unexpected of places, so today we're looking at the 5 most unexplained secrets in the Steamed Hams text based adventure.")
+                print("Odd voice: Number 1. The Backrooms some players reported that when moving between rooms of the house sometimes they were randomly teleported to the backrooms, a mysterious copy pasta thats been making the rounds online.")
+                print("Odd voice: Thanks to my friend the hacker EL BARTO for digging through the game files and finding that the player can be teleported here yourself by simply going weast.")
+                print("Odd voice: Number 2. The Odd Hea *BZZT* Suddenly the TV goes back to static")
+        case "hanger":
+            if CurrentRoomID == 4:
+                Inventory.remove(hanger)
+                isTVfixed = True
+                print("You use the coat hanger to make a new TV antenna.")
+            else: print("You dont use the hanger, an odd thought pops into your head that you might need it for something else.")
+
 
         case _:
             print("You cant use this.")
