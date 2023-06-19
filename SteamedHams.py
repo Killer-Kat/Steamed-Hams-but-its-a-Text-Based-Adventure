@@ -622,6 +622,9 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
             print(chalmers.name + ": But I'm dissapointed I didn't get to eat anything.")
         EndGame()
     elif x == 5: #Serving lunch
+        if len(diningRoomTable.contents) >= 5:
+            print(chalmers.name + ": Wow Seymore you have certainly put together a large meal.")
+            ScoreHandler(1)
         for i in diningRoomTable.contents:
             if i.name.lower() == "burnt roast":
                 didChalmersEat = True
@@ -638,7 +641,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
                     PersonalityHandler("polite",1)
                 elif a == str(2):
                     print(chalmers.name + ": If you say so...")
-                    PersonalityHandler("polite"-1)
+                    PersonalityHandler("polite",-1)
                     PersonalityHandler("odd",1)
                 elif a == str(3):
                     print(chalmers.name + ": I thought you were making lunch today Seymore?")
@@ -653,6 +656,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
                 print(chalmers.name + ":Seymore, what the hell is this? Some kind of pickled fish? It smells worse than that all Skunk petting zoo you arranged last april!")
                 PersonalityHandler("polite",-1)
                 PersonalityHandler("odd",3)
+                ScoreHandler(-2)
             elif i.name.lower() == "ribwich":
                 ScoreHandler(1)
                 print(chalmers.name +": Seymore is that a Ribwich from Krusty Burger?")
