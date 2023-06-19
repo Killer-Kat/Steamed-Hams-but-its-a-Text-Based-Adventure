@@ -92,6 +92,7 @@ apron = Item("Apron", "A white lace lined cooking apron.", True)
 Inventory.append(apron)
 tv = Item("TV","A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...",False, "tv")
 hanger = Item("Hanger", "A metal coat hanger, the kind you get for free at the dry cleaners. On your salary its the only kind you can afford.", True, "hanger")
+SmokeAlarm = Item("Smoke Alarm","A faded white smoke alarm, As you examine the smoke alarm in the kitchen, you cant help but notice the conspicuous absence of batteries. Its almost as if someone deliberately decided to leave them out, perhaps as part of an avant-garde artistic statement on the futility of modern safety measures. Or perhaps someone forgot to buy batteries.",False)
 #People
 chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
 jeremy = Person("Jeremy Freedman", "Krusty Burger employee with the name tag Jeremy. A tired looking teen with a pimple coverd face and a high pitched voice",2)
@@ -108,6 +109,7 @@ kitchen = Room("Kitchen", "A small square teal colored kitchen with a window ove
 kitchen.contents.append(oven)
 kitchen.contents.append(window)
 kitchen.contents.append(wineGlasses)
+kitchen.contents.append(SmokeAlarm)
 livingRoom = Room("Living Room", "A cozy living room with pastel purple walls", 4)
 livingRoom.contents.append(couch)
 livingRoom.contents.append(phone)
@@ -414,8 +416,8 @@ def Use(x):
     
             if TVsecretCounter == 5:
                 print("Suddely the TV starts playing a strange video.")
-                print("Odd voice: Sometimes you're just steaming some hams when you stumble across something in the most unexpected of places, so today we're looking at the 5 most unexplained secrets in the Steamed Hams text based adventure.")
-                print("Odd voice: Number 1. The Backrooms some players reported that when moving between rooms of the house sometimes they were randomly teleported to the backrooms, a mysterious copy pasta thats been making the rounds online.")
+                print("Odd voice: Sometimes you're just steaming some hams when you stumble across something in the most unexpected of places, so today we're looking at the 5 most unexplained secrets in the Steamed Hams Text Based Adventure.")
+                print("Odd voice: Number 1. The Backrooms some players reported that when moving between rooms of the house sometimes they were randomly teleported to the backrooms, a mysterious creepy pasta thats been making the rounds online.")
                 print("Odd voice: Thanks to my friend the hacker EL BARTO for digging through the game files and finding that the player can be teleported here yourself by simply going weast.")
                 print("Odd voice: Number 2. The Odd Hea *BZZT* Suddenly the TV goes back to static")
         case "hanger":
