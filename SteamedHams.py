@@ -67,6 +67,7 @@ isSteamedHams = False
 isTVon = False
 TVsecretCounter = 0
 isTVfixed = False
+didChalmersEat = False
 
 #Items
 defaultItem = Item("Default Item", "An incredibly default item, you bask in the glow of its defaultness!", True)
@@ -92,7 +93,10 @@ apron = Item("Apron", "A white lace lined cooking apron.", True)
 Inventory.append(apron)
 tv = Item("TV","A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...",False, "tv")
 hanger = Item("Hanger", "A metal coat hanger, the kind you get for free at the dry cleaners. On your salary its the only kind you can afford.", True, "hanger")
-SmokeAlarm = Item("Smoke Alarm","A faded white smoke alarm, As you examine the smoke alarm in the kitchen, you cant help but notice the conspicuous absence of batteries. Its almost as if someone deliberately decided to leave them out, perhaps as part of an avant-garde artistic statement on the futility of modern safety measures. Or perhaps someone forgot to buy batteries.",False)
+smokeAlarm = Item("Smoke Alarm","A faded white smoke alarm, As you examine the smoke alarm in the kitchen, you cant help but notice the conspicuous absence of batteries. Its almost as if someone deliberately decided to leave them out, perhaps as part of an avant-garde artistic statement on the futility of modern safety measures. Or perhaps someone forgot to buy batteries.",False)
+fridge = Container("Fridge","An off white consumer grade refrigerator, There are several photographs of you as a child stuck to the front. You've really grown a lot since then, since you look like a completely different person.",False)
+pickledHerring = Item("Pickled Herring", "You open the lid and pungent smell fills the air, and the unappetizing sight of the gelatinous fish floating in brine leaves much to be desired.", True)
+fridge.contents.append(pickledHerring)
 #People
 chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
 jeremy = Person("Jeremy Freedman", "Krusty Burger employee with the name tag Jeremy. A tired looking teen with a pimple coverd face and a high pitched voice",2)
@@ -109,7 +113,8 @@ kitchen = Room("Kitchen", "A small square teal colored kitchen with a window ove
 kitchen.contents.append(oven)
 kitchen.contents.append(window)
 kitchen.contents.append(wineGlasses)
-kitchen.contents.append(SmokeAlarm)
+kitchen.contents.append(smokeAlarm)
+kitchen.contents.append(fridge)
 livingRoom = Room("Living Room", "A cozy living room with pastel purple walls", 4)
 livingRoom.contents.append(couch)
 livingRoom.contents.append(phone)
@@ -492,6 +497,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
     global isSteamedHams
     global ovenKitchenFireCountdown
     global chalmersKitchenCheckDone
+    global didChalmersEat
     #Intro scene
     if x == 1:
         print("*DING DONG* You open the front door, its your boss Superintendent Chalmers. You have invited him over for a lunch to try and impress him after your latest blunder.")
@@ -612,10 +618,13 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
         else: print(chalmers.name +": Well Seymore I must say you are a boring drag.")
         if isSteamedHams == True:
             print(chalmers.name +": But you steam a good ham.")
+        elif didChalmersEat == False:
+            print(chalmers.name + ": But I'm dissapointed I didn't get to eat anything.")
         EndGame()
     elif x == 5: #Serving lunch
         for i in diningRoomTable.contents:
             if i.name.lower() == "burnt roast":
+                didChalmersEat = True
                 PersonalityHandler("odd",5)
                 PersonalityHandler("polite",-5)
                 print(chalmers.name + ": Seymore this roast is burnt. What happend?")
@@ -640,6 +649,10 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
             elif i.name.lower() == "wine glasses":
                 print(chalmers.name + ":Ah I see you brought out the wine glasses, let me open the vintage. its a 1982 Sauvignon Blanc I picked up in New York while visting family.")
                 PersonalityHandler("polite",2)
+            elif i.name.lower() == "pickled herring":
+                print(chalmers.name + ":Seymore, what the hell is this? Some kind of pickled fish? It smells worse than that all Skunk petting zoo you arranged last april!")
+                PersonalityHandler("polite",-1)
+                PersonalityHandler("odd",3)
             elif i.name.lower() == "ribwich":
                 ScoreHandler(1)
                 print(chalmers.name +": Seymore is that a Ribwich from Krusty Burger?")
@@ -652,17 +665,20 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
                     ScoreHandler(1)
                     PersonalityHandler("odd",3)
                     PersonalityHandler("polite",1)
+                    didChalmersEat = True
                 elif b == str(2):
                     print(chalmers.name +": What are you talking about? Its still in the box, I can clearly see it's from Krusty Burger!")
                     ScoreHandler(-3)
                     PersonalityHandler("odd",3)
                     PersonalityHandler("polite",-4)
+                    didChalmersEat = True
                 elif b == str(3):
                     print(chalmers.name +": Did you just..? What? Nevermind.")
                     ScoreHandler(-1)
                     PersonalityHandler("odd",5)
                     PersonalityHandler("polite",-1)
             elif i.name.lower() == "combo meal":
+                didChalmersEat = True
                 PersonalityHandler("odd",2)
                 PersonalityHandler("polite",-2)
                 ScoreHandler(1)
@@ -692,6 +708,7 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
                     PersonalityHandler("polite",1)
                     print(chalmers.name +": Ah of course, my mistake.")
             elif i.name.lower() == "steamed hams":
+                didChalmersEat = True
                 ScoreHandler(4)
                 print("Seymour: Superintendent I hope you're ready for some mouth watering hamburgers!")
                 if isSteamedHams == True:
