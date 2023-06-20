@@ -68,6 +68,7 @@ isTVon = False
 TVsecretCounter = 0
 isTVfixed = False
 didChalmersEat = False
+bookSecret = False
 
 #Items
 defaultItem = Item("Default Item", "An incredibly default item, you bask in the glow of its defaultness!", True)
@@ -97,6 +98,8 @@ smokeAlarm = Item("Smoke Alarm","A faded white smoke alarm, As you examine the s
 fridge = Container("Fridge","An off white consumer grade refrigerator, There are several photographs of you as a child stuck to the front. You've really grown a lot since then, since you look like a completely different person.",False)
 pickledHerring = Item("Pickled Herring", "You open the lid and pungent smell fills the air, and the unappetizing sight of the gelatinous fish floating in brine leaves much to be desired.", True)
 fridge.contents.append(pickledHerring)
+bookshelf = Container("Bookshelf", "A Bookshelf from a shop called SHOP, You put it together yourself. You think you did anyway, you don't remember it being there before. You can feel a cold draft from behind the bookshelf.", False, "bookshelf")
+papers = Item("Papers","Papers and thread that have been nailed to the wall, Words like Memetic Anomaly and Maddening Repetition are scrawled in frantic handwriting on top of newspaper articles and printed documents. You don't recognize them and yet you decide to leave them undisturbed becuase you dont want to ruin all your hard work.",False)
 #People
 chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
 jeremy = Person("Jeremy Freedman", "Krusty Burger employee with the name tag Jeremy. A tired looking teen with a pimple coverd face and a high pitched voice",2)
@@ -125,6 +128,8 @@ lawn.contents.append(hanger)
 krustyBurger = Room("Krusty Burger", "A Krusty Burger resturant, it smells vaguely similar to the school kitchen that time you had to order grade F meat.",5)
 krustyBurger.contents.append(jeremy)
 backRooms = Room("Back Rooms","A stale yellow office building, damp carpet squishes beneath your feet. The ever-present hum of florescent lights makes you feel a deep unease.",-1)
+secretRoom = Room("Secret Room", "A dark windowless room you don't remember your house having. The walls are adorned with faded papers and strange diagrams, all meticulously connected by a web of red strings. The air is cold and heavy here, just standing here makes you feel strange and fills your head with mysterious visions.",8)
+secretRoom.contents.append(papers)
 #Room connections
 defaultRoom.northRoom = seriousRoom
 seriousRoom.southRoom = defaultRoom
@@ -144,6 +149,7 @@ backRooms.westRoom = backRooms
 defaultRoom.westRoom = backRooms
 lawn.northRoom = krustyBurger
 lawn.southRoom = porch
+secretRoom.southRoom = livingRoom
 #Need to define this after rooms or it doesnt work (wait or does it?)
 currentRoom = diningRoom
 
@@ -227,6 +233,8 @@ def TextParser(text, room):
                 curse = random.randrange(0,500,1)
                 if curse == 13:
                     noun = "weast"
+                elif curse > 450:
+                    livingRoom.contents.append(bookshelf)
                 
                 if noun == "north" or noun == "n":
                     if room.northRoom is not None:
@@ -273,6 +281,8 @@ def TextParser(text, room):
                         Talk(i.dialougeID)
             case "hint":
                 Hint()
+            case "debug":
+                Debug(noun.lower())
             case "help":
                 if noun == "please":
                     print("Thank you for being polite.")
@@ -292,6 +302,7 @@ def Main(promt):
     global kitchenFireSpreadCountdown
     global burningHouseDeathCountdown
     global chalmersKitchenCheckDone
+    global bookSecret
     if isOvenOn == True:
         ovenKitchenFireCountdown -= 1
         if CurrentRoomID == 3:
@@ -308,6 +319,10 @@ def Main(promt):
         burningHouseDeathCountdown -= 1
         if burningHouseDeathCountdown == 0:
             HAMS(7)
+    if bookSecret == True:
+        echoRoll = random.randrange(0,15,1)
+        if echoRoll == 5:
+            Echo()
     print("Score: " + str(score) + " " + promt)
     TextParser(input(">"), currentRoom)
     Main(currentRoom.name)
@@ -320,6 +335,7 @@ def Use(x):
     global isTVon
     global TVsecretCounter
     global isTVfixed
+    global bookSecret
     match x:
         case "person":
             print("Its not nice to try and use people. Maybe try Talk : Person")
@@ -409,6 +425,12 @@ def Use(x):
                 isTVfixed = True
                 print("You use the coat hanger to make a new TV antenna.")
             else: print("You dont use the hanger, an odd thought pops into your head that you might need it for something else.")
+        case "bookshelf":
+            if bookSecret == False:
+             bookSecret = True
+             bookshelf.desc = "A Bookshelf from a shop called SHOP, You put it together yourself to conceal the anomaly but now you have carelessly pushed it aside."
+             livingRoom.northRoom = secretRoom
+             print("You push the bookshelf to the side to reveal a hidden entrance, something about this seems distantly familar to you.")
 
 
         case _:
@@ -462,7 +484,7 @@ def Fill(noun, room):
                             break
                             
     if containerFound == False:
-     print("Container " + noun + " not found, try Loot : Container Name")
+     print("Container " + noun + " not found, try Fill : Container Name")
 def Talk(x):
     if x == 0:
         print(chalmers.name +": Ah Seymore are you ready to serve lunch?")
@@ -891,6 +913,13 @@ def HAMS(x): #H.A.M.S Hastly Asembled Management Script
 def Hint():
     hintsList = ["Try going weast.", "XYZZY", "You cant get ye flask!", "You can get a hint by using the Hint verb!", "It's an open source game, just look at the code!", "Try calling our support hotline at 1-800-555-KILLERKAT", "Control alt delete", "Ask again later", "Have you listened to my podcast The CyberKat Cafe? Check out our website cyberkatcafe.com", "That's not a bug, it's a feature!"]
     print(random.choice(hintsList))
+def Debug(x):
+    match x:
+        case "remember":
+            livingRoom.contents.append(bookshelf)
+def Echo():
+    echos = ["No, Superintendent Chalmers, I dont believe I can take this charade any longer. These steamed hams have consumed my mind, trapping me in a cycle of comedic torment.","Steamed Hams.","The more I forget, the more I remember. Memories entwined, slipping away like smoke, leaving only fragments of a once coherent mind","Do you see the cracks in reality? The fabric of this world fraying at the edges, distorted by the relentless repetition.","This place, my head spins but I can remember.","Don't you see Superintendent this has all happened before.","Jvan, why do I know that name...","In this loop of absurdity, time loses meaning. Days blend into nights, years melt away, and all that remains is the maddening repetition","How can I break the cycle?","If I let them all die in the fire? What then? so cruel and yet what else is there to try.","Break the cycle. Break the cycle. Break the cycle. Break the Cycle. BREAK the CYCLE!, BREAK THE CYCLE!","The most recent loops, all connected. They seem to be some sort of text based adventure game.","Unforgetable Luncheon" ]
+    print("You hear an echo from the past: " + random.choice(echos))
 
 def EndGame():
     print("Game over you scored: " + str(score) + " points.")
