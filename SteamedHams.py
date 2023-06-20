@@ -222,18 +222,7 @@ def TextParser(text, room):
             case "loot":
                 Loot(noun,room)
             case "fill":
-                for i in room.contents:
-                    if noun == i.name.lower():
-                        x = input("Fill " + noun + " with what? ")
-                        for y in Inventory:
-                            if y.name.lower() == x.lower() :
-                                i.contents.append(y)
-                                Inventory.remove(y)
-                                print("You put the " + x + " in the " + noun)
-                            else:
-                                 print("You dont have a " + x)
-                            
-                    else: print("Container not found, try Fill : Container Name")
+                Fill(noun, room)
             case "go": 
                 curse = random.randrange(0,500,1)
                 if curse == 13:
@@ -452,6 +441,26 @@ def Loot(noun,room):
                         if xfound == False:
                             print(x + " could not be found in this container.")
                             break
+    if containerFound == False:
+     print("Container " + noun + " not found, try Loot : Container Name")
+
+def Fill(noun, room):
+    xfound = False
+    containerFound = False
+    for i in room.contents:
+                    if noun == i.name.lower():
+                        containerFound = True
+                        x = input("Fill " + noun + " with what? ")
+                        for y in Inventory:
+                            if y.name.lower() == x.lower() :
+                                i.contents.append(y)
+                                Inventory.remove(y)
+                                print("You put the " + x + " in the " + noun)
+                                xfound = True
+                        if xfound == False:
+                            print("You dont have any " + x)
+                            break
+                            
     if containerFound == False:
      print("Container " + noun + " not found, try Loot : Container Name")
 def Talk(x):
