@@ -220,18 +220,7 @@ def TextParser(text, room):
                         room.contents.append(i)
                         print("You drop the " + i.name)
             case "loot":
-                for i in room.contents:
-                    if noun == i.name.lower():
-                        x = input("Loot what from " + noun + "? ")
-                        for y in i.contents:
-                            if y.name.lower() == x.lower() :
-                                i.contents.remove(y)
-                                Inventory.append(y)
-                                print("You take the " + x + " from the " + noun)
-                            else: print(x + " not found in this container.")
-                            break
-                        break
-                    else: print("Container not found, try Loot : Container Name")
+                Loot(noun,room)
             case "fill":
                 for i in room.contents:
                     if noun == i.name.lower():
@@ -446,6 +435,25 @@ def PersonalityHandler(type, x):
         oddPoints += x
     elif type == "polite":
         politePoints += x
+def Loot(noun,room):
+    xfound = False
+    containerFound = False
+    for i in room.contents:
+                    if noun == i.name.lower():
+                        containerFound = True
+                        x = input("Loot what from " + noun + "? ")
+                        for y in i.contents:
+                            if y.name.lower() == x.lower() :
+                                i.contents.remove(y)
+                                Inventory.append(y)
+                                print("You take the " + x + " from the " + noun)
+                                xfound = True
+                            break
+                        if xfound == False:
+                            print(x + " could not be found in this container.")
+                            break
+    if containerFound == False:
+     print("Container " + noun + " not found, try Loot : Container Name")
 def Talk(x):
     if x == 0:
         print(chalmers.name +": Ah Seymore are you ready to serve lunch?")
