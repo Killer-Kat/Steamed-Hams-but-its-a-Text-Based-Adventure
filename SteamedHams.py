@@ -69,6 +69,7 @@ TVsecretCounter = 0
 isTVfixed = False
 didChalmersEat = False
 bookSecret = False
+isPaintingOpen = False
 
 #Items
 defaultItem = Item("Default Item", "An incredibly default item, you bask in the glow of its defaultness!", True)
@@ -100,6 +101,8 @@ pickledHerring = Item("Pickled Herring", "You open the lid and pungent smell fil
 fridge.contents.append(pickledHerring)
 bookshelf = Container("Bookshelf", "A Bookshelf from a shop called SHOP, You put it together yourself. You think you did anyway, you don't remember it being there before. You can feel a cold draft from behind the bookshelf.", False, "bookshelf")
 papers = Item("Papers","Papers and thread that have been nailed to the wall, Words like Memetic Anomaly and Maddening Repetition are scrawled in frantic handwriting on top of newspaper articles and printed documents. You don't recognize them and yet you decide to leave them undisturbed becuase you dont want to ruin all your hard work.",False)
+painting = Item("Painting","A painting of a bowl of fruit, its significantly less useful to you right now than an actual bowl of fruit. It also seems to be mounted on the wall by a hinge.", False,"painting")
+safe = Container("Safe","A old safe with a keypad, its covered in scratches like someone was trying to pry it open. You don't remember the passcode.",False, "safe")
 #People
 chalmers =  Person("Chalmers", 'Your boss, the Superintendent you had better be sure to impress him after your latest blunder with the "Minimalist" classroom layouts.',0)
 jeremy = Person("Jeremy Freedman", "Krusty Burger employee with the name tag Jeremy. A tired looking teen with a pimple coverd face and a high pitched voice",2)
@@ -130,6 +133,8 @@ krustyBurger.contents.append(jeremy)
 backRooms = Room("Back Rooms","A stale yellow office building, damp carpet squishes beneath your feet. The ever-present hum of florescent lights makes you feel a deep unease.",-1)
 secretRoom = Room("Secret Room", "A dark windowless room you don't remember your house having. The walls are adorned with faded papers and strange diagrams, all meticulously connected by a web of red strings. The air is cold and heavy here, just standing here makes you feel strange and fills your head with mysterious visions.",8)
 secretRoom.contents.append(papers)
+stairWell = Room("Stairwell","A carpeted stairwell, the walls are adorned with floral wallpaper and the wooden boards below creak as you walk.",9)
+stairWell.contents.append(painting)
 #Room connections
 defaultRoom.northRoom = seriousRoom
 seriousRoom.southRoom = defaultRoom
@@ -137,6 +142,7 @@ diningRoom.northRoom = kitchen
 diningRoom.eastRoom = livingRoom
 diningRoom.southRoom = porch
 livingRoom.westRoom = diningRoom
+livingRoom.eastRoom = stairWell
 kitchen.southRoom = diningRoom
 krustyBurger.southRoom = kitchen
 krustyBurger.eastRoom = lawn
@@ -150,6 +156,7 @@ defaultRoom.westRoom = backRooms
 lawn.northRoom = krustyBurger
 lawn.southRoom = porch
 secretRoom.southRoom = livingRoom
+stairWell.westRoom = livingRoom
 #Need to define this after rooms or it doesnt work (wait or does it?)
 currentRoom = diningRoom
 
@@ -336,6 +343,7 @@ def Use(x):
     global TVsecretCounter
     global isTVfixed
     global bookSecret
+    global isPaintingOpen
     match x:
         case "person":
             print("Its not nice to try and use people. Maybe try Talk : Person")
@@ -431,7 +439,17 @@ def Use(x):
              bookshelf.desc = "A Bookshelf from a shop called SHOP, You put it together yourself to conceal the anomaly but now you have carelessly pushed it aside."
              livingRoom.northRoom = secretRoom
              print("You push the bookshelf to the side to reveal a hidden entrance, something about this seems distantly familar to you.")
+        case "painting":
+            isPaintingOpen = not isPaintingOpen
+            if isPaintingOpen == True:
+                print("You open the painting to reveal a hidden safe.")
+                stairWell.contents.append(safe)
+                painting.desc = "A painting of a bowl of fruit that was being used to hide a safe, you have opened it and revealed the safe."
 
+            else: 
+                print("You close the painting.")
+                stairWell.contents.remove(safe)
+                painting.desc = "A painting of a bowl of fruit that is being used to hide a safe."
 
         case _:
             print("You cant use this.")
@@ -914,9 +932,15 @@ def Hint():
     hintsList = ["Try going weast.", "XYZZY", "You cant get ye flask!", "You can get a hint by using the Hint verb!", "It's an open source game, just look at the code!", "Try calling our support hotline at 1-800-555-KILLERKAT", "Control alt delete", "Ask again later", "Have you listened to my podcast The CyberKat Cafe? Check out our website cyberkatcafe.com", "That's not a bug, it's a feature!"]
     print(random.choice(hintsList))
 def Debug(x):
+    global currentRoom
+    global CurrentRoomID
     match x:
         case "remember":
             livingRoom.contents.append(bookshelf)
+        case "sv_cheats 1":
+            currentRoom = seriousRoom
+            CurrentRoomID = 1
+
 def Echo():
     echos = ["No, Superintendent Chalmers, I dont believe I can take this charade any longer. These steamed hams have consumed my mind, trapping me in a cycle of comedic torment.","Steamed Hams.","The more I forget, the more I remember. Memories entwined, slipping away like smoke, leaving only fragments of a once coherent mind","Do you see the cracks in reality? The fabric of this world fraying at the edges, distorted by the relentless repetition.","This place, my head spins but I can remember.","Don't you see Superintendent this has all happened before.","Jvan, why do I know that name...","In this loop of absurdity, time loses meaning. Days blend into nights, years melt away, and all that remains is the maddening repetition","How can I break the cycle?","If I let them all die in the fire? What then? so cruel and yet what else is there to try.","Break the cycle. Break the cycle. Break the cycle. Break the Cycle. BREAK the CYCLE!, BREAK THE CYCLE!","The most recent loops, all connected. They seem to be some sort of text based adventure game.","Unforgetable Luncheon" ]
     print("You hear an echo from the past: " + random.choice(echos))
