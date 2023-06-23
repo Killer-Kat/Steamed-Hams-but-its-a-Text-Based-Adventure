@@ -28,6 +28,7 @@ public class Take : InputAction
             {
                 controller.playerInventory.Add(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i]);
                 controller.roomNavigation.currentRoom.InteractableObjectsInRoom.RemoveAt(i);
+                controller.LogStringWithReturn("You take the " + combinedInputWords);
                 return;
             }
         }
