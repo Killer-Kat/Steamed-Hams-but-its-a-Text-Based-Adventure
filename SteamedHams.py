@@ -70,6 +70,9 @@ isTVfixed = False
 didChalmersEat = False
 bookSecret = False
 isPaintingOpen = False
+safeClosedInv = [] #This is used to store the items in the safe when its closed.
+isSafeUnlocked = False
+isSafeOpen = False
 
 #Items
 defaultItem = Item("Default Item", "An incredibly default item, you bask in the glow of its defaultness!", True)
@@ -450,6 +453,26 @@ def Use(x):
                 print("You close the painting.")
                 stairWell.contents.remove(safe)
                 painting.desc = "A painting of a bowl of fruit that is being used to hide a safe."
+
+        case "safe":
+            if isSafeUnlocked == False:
+                x = input("Enter Pascode: ")
+                if x == "0451":
+                    print("Sorry that wont work here, this is a text based adventure game not an imersive sim.")
+                elif x == "0721":
+                    isSafeUnlocked = True
+            elif isSafeOpen == True: 
+                for i in safe.contents:
+                    safeClosedInv.append(i)
+                    safe.contents.remove(i)
+                isSafeOpen = False
+            elif isSafeOpen == False:
+                for i in safeClosedInv:
+                    safe.contents.append(i)
+                    safeClosedInv.remove(i)
+                isSafeOpen = True
+            
+
 
         case _:
             print("You cant use this.")
@@ -940,9 +963,11 @@ def Debug(x):
         case "sv_cheats 1":
             currentRoom = seriousRoom
             CurrentRoomID = 1
+        case "oven":
+            Use("oven")
 
 def Echo():
-    echos = ["No, Superintendent Chalmers, I dont believe I can take this charade any longer. These steamed hams have consumed my mind, trapping me in a cycle of comedic torment.","Steamed Hams.","The more I forget, the more I remember. Memories entwined, slipping away like smoke, leaving only fragments of a once coherent mind","Do you see the cracks in reality? The fabric of this world fraying at the edges, distorted by the relentless repetition.","This place, my head spins but I can remember.","Don't you see Superintendent this has all happened before.","Jvan, why do I know that name...","In this loop of absurdity, time loses meaning. Days blend into nights, years melt away, and all that remains is the maddening repetition","How can I break the cycle?","If I let them all die in the fire? What then? so cruel and yet what else is there to try.","Break the cycle. Break the cycle. Break the cycle. Break the Cycle. BREAK the CYCLE!, BREAK THE CYCLE!","The most recent loops, all connected. They seem to be some sort of text based adventure game.","Unforgetable Luncheon" ]
+    echos = ["No, Superintendent Chalmers, I dont believe I can take this charade any longer. These steamed hams have consumed my mind, trapping me in a cycle of comedic torment.","Aurora borealis?", "At this time of year? At this time of day? In this part of the country? Localized entirely within your kitchen?","Steamed Hams.","07/21. 07 21. 0 7 2 1","The more I forget, the more I remember. Memories entwined, slipping away like smoke, leaving only fragments of a once coherent mind","Do you see the cracks in reality? The fabric of this world fraying at the edges, distorted by the relentless repetition.","This place, my head spins but I can remember.","Don't you see Superintendent this has all happened before.","Jvan, why do I know that name...","In this loop of absurdity, time loses meaning. Days blend into nights, years melt away, and all that remains is the maddening repetition","How can I break the cycle?","If I let them all die in the fire? What then? so cruel and yet what else is there left to try.","Break the cycle. Break the cycle. Break the cycle. Break the Cycle. BREAK the CYCLE!, BREAK THE CYCLE!","The most recent loops, all connected. They seem to be some sort of text based adventure game.","Unforgetable Luncheon" ]
     print("You hear an echo from the past: " + random.choice(echos))
 
 def EndGame():
