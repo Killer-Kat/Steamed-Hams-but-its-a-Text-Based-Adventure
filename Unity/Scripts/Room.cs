@@ -9,5 +9,7 @@ public class Room : ScriptableObject
     public string description;
     public string rooomName;
     public Exit[] exits;
+    public List<InteractableObject> objectItializationList; //List of objects that should be in the room at start of game.
+
     public List<InteractableObject> InteractableObjectsInRoom;
 }

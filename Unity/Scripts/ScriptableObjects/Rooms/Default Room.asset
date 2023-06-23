@@ -22,3 +22,5 @@ MonoBehaviour:
     exitDescription: You see a default doorway to the north, something about exiting
       this way seems very default.
     valueRoom: {fileID: 11400000, guid: f44e5f2a2a456c743bc95b8340364a47, type: 2}
+  InteractableObjectsInRoom:
+  - {fileID: 11400000, guid: 00d74d83ca108e74dbabe5c8e5f29eb3, type: 2}
