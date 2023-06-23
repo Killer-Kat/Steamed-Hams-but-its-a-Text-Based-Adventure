@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (menuName = "TextAdventure/Interactable Object")]
+[CreateAssetMenu(menuName = "TextAdventure/Interactable Object")]
 public class InteractableObject : ScriptableObject
 {
     public string noun = "name";
+    [SerializeField]
+    private bool canTake;
     [TextArea]
     public string description = "Description in room";
     [TextArea]

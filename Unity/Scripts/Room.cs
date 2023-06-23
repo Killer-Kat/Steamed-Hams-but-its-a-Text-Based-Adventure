@@ -9,5 +9,5 @@ public class Room : ScriptableObject
     public string description;
     public string rooomName;
     public Exit[] exits;
-    public InteractableObject[] interactableObjectsInRoom;
+    public List<InteractableObject> InteractableObjectsInRoom;
 }
