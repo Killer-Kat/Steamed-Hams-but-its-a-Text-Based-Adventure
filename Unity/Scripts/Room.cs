@@ -12,4 +12,8 @@ public class Room : ScriptableObject
     public List<InteractableObject> objectItializationList; //List of objects that should be in the room at start of game.
 
     public List<InteractableObject> InteractableObjectsInRoom;
+
+    public List<Person> peopleItializationList; //Oh my god you have a list! 
+
+    public List<Person> peopleInRoom;
 }

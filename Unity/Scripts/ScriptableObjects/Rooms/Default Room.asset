@@ -22,6 +22,10 @@ MonoBehaviour:
     exitDescription: You see a default doorway to the north, something about exiting
       this way seems very default.
     valueRoom: {fileID: 11400000, guid: f44e5f2a2a456c743bc95b8340364a47, type: 2}
+  - keyString: weast
+    exitDescription: Out of the corner of your eye you can almost make out a passage
+      to the weast.
+    valueRoom: {fileID: 11400000, guid: 83335d33fa8f88744ae8542b17c536ee, type: 2}
   objectItializationList:
   - {fileID: 11400000, guid: 00d74d83ca108e74dbabe5c8e5f29eb3, type: 2}
   InteractableObjectsInRoom:
