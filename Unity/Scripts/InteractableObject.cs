@@ -12,4 +12,9 @@ public class InteractableObject : ScriptableObject
     public string description = "Description in room";
     [TextArea]
     public string examineDescription = "The description returned when using examine";
+
+    [SerializeField]
+    private bool isContainer;
+    [SerializeField]
+    public List<InteractableObject> contents;
 }

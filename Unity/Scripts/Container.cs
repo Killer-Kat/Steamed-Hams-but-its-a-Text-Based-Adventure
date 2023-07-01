@@ -4,6 +4,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "TextAdventure/Container")]
 public class Container : InteractableObject
 {
-    [SerializeField]
-    List<InteractableObject> contents;
+
 }

@@ -24,6 +24,7 @@ public class Take : InputAction
                 {
                     itemToTake = itemToTake + " " + separatedInputWords[i];
                 }
+                itemToTake = itemToTake.Substring(1);
                 Debug.Log(itemToTake);
 
             }
@@ -35,11 +36,29 @@ public class Take : InputAction
             {
                 containerToLoot = containerToLoot + " " + separatedInputWords[i];
             }
+            containerToLoot = containerToLoot.Substring(1);
             Debug.Log(containerToLoot);
             for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++)
             {
-
+                if (containerToLoot == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].name.ToLower())
+                {
+                    Debug.Log("Container found " + containerToLoot);
+                    for (int j = 0; j < controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents.Count; j++)
+                    {
+                        if (itemToTake == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents[j].name.ToLower())
+                        {
+                            controller.playerInventory.Add(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents[j]);
+                            controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents.RemoveAt(j);
+                            controller.LogStringWithReturn("You take the " + itemToTake + " from the " + containerToLoot);
+                            return;
+                        } 
+                    }
+                    controller.LogStringWithReturn(itemToTake + " not found in container " + containerToLoot);
+                    return;
+                }
             }
+            controller.LogStringWithReturn("Container " + containerToLoot + " not found.");
+            return;
         }
 
         if(separatedInputWords.Length > 1)

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfcc7f0d1b2a4d41aba61ae21e4c384, type: 3}
+  m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
   m_Name: Test Container
   m_EditorClassIdentifier: 
-  noun: Test Container
+  noun: test container
   canTake: 1
-  description: A test container sits on the floor, inviting you to test the properties
-    of the container class.
-  examineDescription: A test container for testing containers.
+  description: There is a test container here
+  examineDescription: The description returned when using examine
+  isContainer: 1
   contents:
   - {fileID: 11400000, guid: 2c089b98c71b45c4cbf91a46c4381c01, type: 2}
