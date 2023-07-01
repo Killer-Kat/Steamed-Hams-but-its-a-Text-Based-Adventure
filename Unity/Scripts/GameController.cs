@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
     public Text displayText;
     public InputAction[] inputActions;
 
+    public bool isVerbose = false; //For verbose mode to be implemented later
+
     [HideInInspector] public RoomNavigation roomNavigation;
     [HideInInspector] public List<string> interactionDescriptionsInRoom = new List<string>();
     List<string> actionLog = new List<string>();
@@ -40,7 +42,7 @@ public class GameController : MonoBehaviour
         UnpackRoom();
         string joinedInteractionDescriptions = string.Join("\n", interactionDescriptionsInRoom.ToArray());
         string combinedText = roomNavigation.currentRoom.description + "\n" + joinedInteractionDescriptions;
-
+        LogStringWithReturn(roomNavigation.currentRoom.name + ":");
         LogStringWithReturn(combinedText);
     }
 
