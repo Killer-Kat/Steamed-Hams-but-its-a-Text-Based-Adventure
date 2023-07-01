@@ -10,7 +10,7 @@ public class Take : InputAction
     public override void RespondToInput(GameController controller, string[] separatedInputWords)
     {
         combinedInputWords = "";
-        Debug.Log(separatedInputWords.Length);
+        //Debug.Log(separatedInputWords.Length);
 
         if(Array.Find(separatedInputWords, element => element == "from") == "from")
         {
@@ -37,12 +37,17 @@ public class Take : InputAction
                 containerToLoot = containerToLoot + " " + separatedInputWords[i];
             }
             containerToLoot = containerToLoot.Substring(1);
-            Debug.Log(containerToLoot);
+            //Debug.Log(containerToLoot); 
             for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++)
             {
                 if (containerToLoot == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].name.ToLower())
                 {
-                    Debug.Log("Container found " + containerToLoot);
+                    //Debug.Log("Container found " + containerToLoot);
+                    if (controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].isContainer == false)
+                    {
+                        controller.LogStringWithReturn(containerToLoot + " is not a valid container.");
+                        return;
+                    }
                     for (int j = 0; j < controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents.Count; j++)
                     {
                         if (itemToTake == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents[j].name.ToLower())

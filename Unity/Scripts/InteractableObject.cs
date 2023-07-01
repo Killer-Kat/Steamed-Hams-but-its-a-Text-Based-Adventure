@@ -14,7 +14,9 @@ public class InteractableObject : ScriptableObject
     public string examineDescription = "The description returned when using examine";
 
     [SerializeField]
-    private bool isContainer;
+    public bool isContainer;
+
+    public List<InteractableObject> contentsItializationList; //List of objects that should be in the container at start of game, I know this bloats the class but because of how unity works we have to have this.
     [SerializeField]
     public List<InteractableObject> contents;
 }

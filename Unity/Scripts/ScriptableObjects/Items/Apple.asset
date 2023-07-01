@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
-  m_Name: Test Container
+  m_Name: Apple
   m_EditorClassIdentifier: 
-  noun: test container
+  noun: apple
   canTake: 1
-  description: There is a test container here
-  examineDescription: The description returned when using examine
-  isContainer: 1
-  contentsItializationList:
-  - {fileID: 11400000, guid: 8bafecb09b1f186448264da515b48b92, type: 2}
+  description: There is an apple here, which explains the lack of doctors.
+  examineDescription: A jucy red fruit, so good you want to name a computer after
+    it,
+  isContainer: 0
+  contentsItializationList: []
   contents: []
