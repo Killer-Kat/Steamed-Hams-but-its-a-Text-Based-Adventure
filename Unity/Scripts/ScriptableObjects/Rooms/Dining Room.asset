@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e337ffa52414f544beec87c76310aa4, type: 3}
   m_Name: Dining Room
   m_EditorClassIdentifier: 
-  description: 
-  rooomName: 
-  exits: []
+  description: A small dining room with pastel blue walls, whover lives here has
+    no sense of interior decorating.
+  rooomName: Dining Room
+  exits:
+  - keyString: 
+    exitDescription: 
+    valueRoom: {fileID: 0}
   objectItializationList: []
   InteractableObjectsInRoom: []
   peopleItializationList: []

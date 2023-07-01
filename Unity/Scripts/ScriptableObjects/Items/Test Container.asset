@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adfcc7f0d1b2a4d41aba61ae21e4c384, type: 3}
+  m_Name: Test Container
+  m_EditorClassIdentifier: 
+  noun: Test Container
+  canTake: 1
+  description: A test container sits on the floor, inviting you to test the properties
+    of the container class.
+  examineDescription: A test container for testing containers.
+  contents:
+  - {fileID: 11400000, guid: 2c089b98c71b45c4cbf91a46c4381c01, type: 2}
