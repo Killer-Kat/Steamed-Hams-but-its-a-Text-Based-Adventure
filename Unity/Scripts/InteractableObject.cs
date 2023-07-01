@@ -13,6 +13,8 @@ public class InteractableObject : ScriptableObject
     [TextArea]
     public string examineDescription = "The description returned when using examine";
 
+    public string useAction = "Default";// Default will just return an "cant use x" error so you have to set this to something else in the editor.
+
     [SerializeField]
     public bool isContainer;
 

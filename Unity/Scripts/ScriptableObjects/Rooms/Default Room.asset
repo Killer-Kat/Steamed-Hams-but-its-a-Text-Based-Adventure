@@ -15,9 +15,9 @@ MonoBehaviour:
   description: A strikingly default room with a real sense of defaultness about it.
   rooomName: Default Room
   exits:
-  - keyString: 
-    exitDescription: 
-    valueRoom: {fileID: 0}
+  - keyString: east
+    exitDescription: Somehow to the east is your dining room.
+    valueRoom: {fileID: 11400000, guid: c5d919e02611d6c4f92a5dc4b2eb22db, type: 2}
   - keyString: north
     exitDescription: You see a default doorway to the north, something about exiting
       this way seems very default.
@@ -30,6 +30,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00d74d83ca108e74dbabe5c8e5f29eb3, type: 2}
   - {fileID: 11400000, guid: 0ef485a3261528841b209574fa57dc9d, type: 2}
   InteractableObjectsInRoom:
+  - {fileID: 11400000, guid: 00d74d83ca108e74dbabe5c8e5f29eb3, type: 2}
   - {fileID: 11400000, guid: 0ef485a3261528841b209574fa57dc9d, type: 2}
   peopleItializationList: []
   peopleInRoom: []

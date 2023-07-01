@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     public Text displayText;
     public InputAction[] inputActions;
+    public Text ScoreText;
 
     public bool isVerbose = false; //For verbose mode to be implemented later
 
@@ -64,6 +65,10 @@ public class GameController : MonoBehaviour
         actionLog.Add(stringToAdd + "\n");
     }
     // Update is called once per frame
+    public void updateScore()
+    {
+        ScoreText.text = "Score: " + score;
+    }
     void Update()
     {
         
