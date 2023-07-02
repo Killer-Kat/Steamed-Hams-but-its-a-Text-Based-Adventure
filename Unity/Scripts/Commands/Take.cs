@@ -52,6 +52,11 @@ public class Take : InputAction
                     {
                         if (itemToTake == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents[j].name.ToLower())
                         {
+                            if (controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents[j].canTake == false)
+                            {
+                                controller.LogStringWithReturn("You cant take the " + controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents[j].name);
+                                return;
+                            }
                             controller.playerInventory.Add(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents[j]);
                             controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents.RemoveAt(j);
                             controller.LogStringWithReturn("You take the " + itemToTake + " from the " + containerToLoot);
@@ -82,6 +87,11 @@ public class Take : InputAction
         {
             if(combinedInputWords == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].name.ToLower())
             {
+                if (controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].canTake == false)
+                {
+                    controller.LogStringWithReturn("You cant take the " + controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].name);
+                    return;
+                }
                 controller.playerInventory.Add(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i]);
                 controller.roomNavigation.currentRoom.InteractableObjectsInRoom.RemoveAt(i);
                 controller.LogStringWithReturn("You take the " + combinedInputWords);

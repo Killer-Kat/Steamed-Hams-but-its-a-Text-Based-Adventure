@@ -7,7 +7,7 @@ public class InteractableObject : ScriptableObject
 {
     public string noun = "name";
     [SerializeField]
-    private bool canTake;
+    public bool canTake;
     [TextArea]
     public string description = "Description in room";
     [TextArea]
