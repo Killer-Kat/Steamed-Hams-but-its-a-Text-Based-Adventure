@@ -36,6 +36,12 @@ public class GameController : MonoBehaviour
         string logAsText = string.Join("\n", actionLog.ToArray());
         displayText.text = logAsText;
     }
+
+    public void ClearTextbox()//Clears textbox hopefully, This will be needed to implement more complex interactions later on.
+    {
+        actionLog.Clear(); //Clears the entire list of actions, There is probably a good reason not to do this. However there is no current way to navigate the log list and I dont ever use it for anything.
+        Debug.Log("Display text cleared");
+    }
     public void DisplayRoomText()
     {
         ClearCollectionsForNewRoom();
