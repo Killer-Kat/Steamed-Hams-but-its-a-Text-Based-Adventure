@@ -16,6 +16,9 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                 case "clear":
                     controller.ClearTextbox();
                     break;
+                case "dtoggle":
+                    controller.dialogueController.ToggleDisplay();
+                    break;
             }
         
         
