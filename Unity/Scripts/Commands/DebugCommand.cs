@@ -19,6 +19,9 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                 case "dtoggle":
                     controller.dialogueController.ToggleDisplay();
                     break;
+            case "dtest":
+                controller.dialogueController.DisplayOptions("test 1", "test 2");
+                break;
             }
         
         
