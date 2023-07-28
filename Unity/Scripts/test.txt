@@ -1,0 +1,93 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DialogueObject // Its a data class for Dialogue
+{
+    public bool IsEndOfDialogue { get; private set; }
+    public string NpcDialogue { get; private set; }
+
+    public string Option1 { get; private set; }
+    public string Option2 { get; private set; }
+    public string Option3 { get; private set; }
+    public string Option4 { get; private set; }
+
+    public DialogueObject NextDialogue1 { get; private set; }
+    public DialogueObject NextDialogue2 { get; private set; }
+    public DialogueObject NextDialogue3 { get; private set; }
+    public DialogueObject NextDialogue4 { get; private set; }
+
+    // Private constructor to prevent external instantiation
+    private DialogueObject()
+    {
+        // Default constructor body, if any initialization logic is needed.
+    }
+
+    private void Initialize(bool endOfDialogue, string npcDialogue, string opt1, string opt2, DialogueObject nd1, DialogueObject nd2, DialogueObject nd3, DialogueObject nd4)
+    {
+        IsEndOfDialogue = endOfDialogue;
+        NpcDialogue = npcDialogue;
+        Option1 = opt1;
+        Option2 = opt2;
+        NextDialogue1 = nd1;
+        NextDialogue2 = nd2;
+        NextDialogue3 = nd3;
+        NextDialogue4 = nd4;
+    }
+
+    public static DialogueObject Create(bool endOfDialogue, string npcDialogue, string opt1, string opt2, DialogueObject nd1, DialogueObject nd2, DialogueObject nd3, DialogueObject nd4)
+    {
+        DialogueObject dialogueObject = new DialogueObject();
+        dialogueObject.Initialize(endOfDialogue, npcDialogue, opt1, opt2, nd1, nd2, nd3, nd4);
+        return dialogueObject;
+    }
+}
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DialogueTree : MonoBehaviour
+{
+    public DialogueObject testDialogue;
+    public static DialogueObject testDialogue2;
+    public static DialogueObject testDialogue3;
+
+    // Call this method in Awake, Start, or any other appropriate initialization method
+    private void InitializeDialogueTree()
+    {
+        // Initialize the DialogueObject instances using the factory method
+        testDialogue = DialogueObject.Create(
+            endOfDialogue: false,
+            npcDialogue: "This is the first test",
+            opt1: "This is also a test",
+            opt2: "Cant b sure if this is a test",
+            nd1: testDialogue2,
+            nd2: testDialogue3,
+            nd3: testDialogue2,
+            nd4: testDialogue2
+        );
+
+        testDialogue2 = DialogueObject.Create(
+            endOfDialogue: false,
+            npcDialogue: "This is the second test",
+            opt1: "This is also a test",
+            opt2: "sure this is a test",
+            nd1: testDialogue3,
+            nd2: testDialogue2,
+            nd3: null,
+            nd4: null
+        );
+
+        testDialogue3 = DialogueObject.Create(
+            endOfDialogue: false,
+            npcDialogue: "ABC",
+            opt1: "123",
+            opt2: "sure this is a test",
+            nd1: testDialogue2,
+            nd2: testDialogue2,
+            nd3: testDialogue2,
+            nd4: testDialogue2
+        );
+    }
+}
