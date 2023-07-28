@@ -8,6 +8,8 @@ public class DialogueController : MonoBehaviour
     // Start is called before the first frame update
     public Text DialogueDisplay; //Display box for the Dialogue text
 
+    public Text SpeakerNameDisplay;
+
     public Button Option1Button;
     public Button Option2Button;
     public Button Option3Button;
@@ -44,7 +46,7 @@ public class DialogueController : MonoBehaviour
         Option2Button.gameObject.SetActive(!Option2Button.gameObject.active);
         Option3Button.gameObject.SetActive(!Option3Button.gameObject.active);
         Option4Button.gameObject.SetActive(!Option4Button.gameObject.active);
-       
+        DisplaySpeakerName(); //This should clear the field
     }
 
     public void DisplayOptions(string npcText,string option1, string option2, string option3 = "NA", string option4 = "NA") //NA is used to specify that this option does not exist, the least you can have is 2 options.
@@ -70,12 +72,23 @@ public class DialogueController : MonoBehaviour
         }
         
     }
-    public void UnpackFromDialogueObject(DialogueObject dObject)
+    public void StartDialogue(DialogueObject Dobj,string npcName = "") //NPCs will call this method to bring up the dialogue system
+    {
+        ToggleDisplay();
+        DisplaySpeakerName(npcName);
+        UnpackFromDialogueObject(Dobj);
+
+    }
+    public void UnpackFromDialogueObject(DialogueObject dObject)// call this with a dialogue object to put it into the dialogue system.
     {
         DisplayOptions(dObject.NpcDialogue, dObject.option1,dObject.option2,dObject.option3,dObject.option4);
         Debug.Log(dialogueTree.testDialogue.NextDialogue1);
         Debug.Log(dObject.NextDialogue1);
         SetupButtons(dObject.NextDialogue1, dObject.NextDialogue2, dObject.NextDialogue3, dObject.NextDialogue4);
+    }
+    public void DisplaySpeakerName(string npcName = "")
+    {
+        SpeakerNameDisplay.text = npcName;
     }
     public void SetupButtons(DialogueObject b1, DialogueObject b2, DialogueObject b3, DialogueObject b4)
     {

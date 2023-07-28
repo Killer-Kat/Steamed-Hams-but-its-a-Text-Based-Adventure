@@ -24,7 +24,7 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                 break;
             case "dtest2": //D test lol, I detest the word dialogue, why the ue seriously!
                DialogueObject dobj = controller.dialogueController.dialogueTree.testDialogue;
-                controller.dialogueController.UnpackFromDialogueObject(dobj);
+                controller.dialogueController.StartDialogue(dobj, "Mysteroius Voice");
                 break;
             case "dtest3":
                 controller.dialogueController.UnpackFromDialogueObject(controller.dialogueController.dialogueTree.testDialogue2);
