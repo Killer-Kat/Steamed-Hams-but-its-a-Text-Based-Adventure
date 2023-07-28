@@ -80,13 +80,43 @@ public class DialogueController : MonoBehaviour
     public void SetupButtons(DialogueObject b1, DialogueObject b2, DialogueObject b3, DialogueObject b4)
     {
         button1nextDialogue = b1;
-        Debug.Log(b1);
+        //Debug.Log("b1 " + b1);
+        if(button1nextDialogue == null)
+        {
+            Option1Button.interactable = false; //In theory this should never happen, but thats just a theroy A GAME THEORY.
+        } else { Option1Button.interactable = true; }
         button2nextDialogue = b2;
+        if(button2nextDialogue == null)
+        {
+            Option2Button.interactable = false;
+        }
+        else { Option2Button.interactable = true; }
         button3nextDialogue = b3;
+        if(button3nextDialogue == null)
+        {
+            Option3Button.interactable = false;
+        } else { Option3Button.interactable = true; }
         button4nextDialogue = b4;
+        if(button4nextDialogue == null)
+        {
+            Option4Button.interactable = false;
+        }
+        else { Option4Button.interactable = true; }
     }
     public void Button1()
     {
         UnpackFromDialogueObject(button1nextDialogue);
+    }
+    public void Button2()
+    {
+        UnpackFromDialogueObject(button2nextDialogue);
+    }
+    public void Button3()
+    {
+        UnpackFromDialogueObject(button3nextDialogue);
+    }
+    public void Button4()
+    {
+        UnpackFromDialogueObject(button4nextDialogue);
     }
 }
