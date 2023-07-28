@@ -47,29 +47,37 @@ public class DialogueController : MonoBehaviour
        
     }
 
-    public void DisplayOptions(string option1, string option2, string option3 = "NA", string option4 = "NA") //NA is used to specify that this option does not exist, the least you can have is 2 options.
+    public void DisplayOptions(string npcText,string option1, string option2, string option3 = "NA", string option4 = "NA") //NA is used to specify that this option does not exist, the least you can have is 2 options.
     {
-        DialogueDisplay.text = "";
-        DialogueDisplay.text = "1. " + option1;
+        DialogueDisplay.text = "";//probably not needed because the next line would reset the text anyway
+        DialogueDisplay.text = npcText + "\n1. " + option1;
         DialogueDisplay.text = DialogueDisplay.text + "\n2. " + option2;
-        if (option3 != "NA")
+        if(option3 == null)
+        {
+            //do nothing (yet)
+        }
+        else if(option3 != "NA")
         {
             DialogueDisplay.text = DialogueDisplay.text + "\n3. " + option3;
         }
-        if (option4 != "NA")
+        if(option4 == null)
+        {
+            //Subscribe to the CyberkatCafe podcast!
+        }
+        else if (option4 != "NA")
         {
             DialogueDisplay.text = DialogueDisplay.text + "\n4. " + option4;
         }
         
     }
-    public void unpackFromDialogueObject(DialogueObject dObject)
+    public void UnpackFromDialogueObject(DialogueObject dObject)
     {
-        DisplayOptions(dObject.option1,dObject.option2,dObject.option3,dObject.option4);
+        DisplayOptions(dObject.NpcDialogue, dObject.option1,dObject.option2,dObject.option3,dObject.option4);
         Debug.Log(dialogueTree.testDialogue.NextDialogue1);
         Debug.Log(dObject.NextDialogue1);
-        setupButtons(dObject.NextDialogue1, dObject.NextDialogue2, dObject.NextDialogue3, dObject.NextDialogue4);
+        SetupButtons(dObject.NextDialogue1, dObject.NextDialogue2, dObject.NextDialogue3, dObject.NextDialogue4);
     }
-    public void setupButtons(DialogueObject b1, DialogueObject b2, DialogueObject b3, DialogueObject b4)
+    public void SetupButtons(DialogueObject b1, DialogueObject b2, DialogueObject b3, DialogueObject b4)
     {
         button1nextDialogue = b1;
         Debug.Log(b1);
@@ -79,6 +87,6 @@ public class DialogueController : MonoBehaviour
     }
     public void Button1()
     {
-        unpackFromDialogueObject(button1nextDialogue);
+        UnpackFromDialogueObject(button1nextDialogue);
     }
 }

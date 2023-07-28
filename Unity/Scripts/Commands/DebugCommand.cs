@@ -20,14 +20,14 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                     controller.dialogueController.ToggleDisplay();
                     break;
             case "dtest":
-                controller.dialogueController.DisplayOptions("test 1", "test 2");
+                controller.dialogueController.DisplayOptions("Manual input still works! why have this feature? idk.","test 1", "test 2");
                 break;
             case "dtest2": //D test lol, I detest the word dialogue, why the ue seriously!
                DialogueObject dobj = controller.dialogueController.dialogueTree.testDialogue;
-                controller.dialogueController.unpackFromDialogueObject(dobj);
+                controller.dialogueController.UnpackFromDialogueObject(dobj);
                 break;
             case "dtest3":
-                controller.dialogueController.unpackFromDialogueObject(DialogueTree.testDialogue2);
+                controller.dialogueController.UnpackFromDialogueObject(controller.dialogueController.dialogueTree.testDialogue2);
                 break;
             }
         
