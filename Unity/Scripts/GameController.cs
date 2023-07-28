@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public List<string> interactionDescriptionsInRoom = new List<string>();
     List<string> actionLog = new List<string>();
 
-    public DialogueController dialogueController;
+    public DialogueController dialogueController; //might not need this since the Dialogue objects are static now 
 
 
     public List<InteractableObject> playerInventory;

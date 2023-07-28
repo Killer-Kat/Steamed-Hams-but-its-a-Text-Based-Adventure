@@ -12,6 +12,12 @@ public class DialogueController : MonoBehaviour
     public Button Option2Button;
     public Button Option3Button;
     public Button Option4Button;
+
+    public DialogueObject button1nextDialogue; //The next dialogue object in the dialogue tree for the 1st option is stored here 
+    public DialogueObject button2nextDialogue;
+    public DialogueObject button3nextDialogue;
+    public DialogueObject button4nextDialogue;
+
     [SerializeField]
     public DialogueTree dialogueTree;
 
@@ -59,5 +65,20 @@ public class DialogueController : MonoBehaviour
     public void unpackFromDialogueObject(DialogueObject dObject)
     {
         DisplayOptions(dObject.option1,dObject.option2,dObject.option3,dObject.option4);
+        Debug.Log(dialogueTree.testDialogue.NextDialogue1);
+        Debug.Log(dObject.NextDialogue1);
+        setupButtons(dObject.NextDialogue1, dObject.NextDialogue2, dObject.NextDialogue3, dObject.NextDialogue4);
+    }
+    public void setupButtons(DialogueObject b1, DialogueObject b2, DialogueObject b3, DialogueObject b4)
+    {
+        button1nextDialogue = b1;
+        Debug.Log(b1);
+        button2nextDialogue = b2;
+        button3nextDialogue = b3;
+        button4nextDialogue = b4;
+    }
+    public void Button1()
+    {
+        unpackFromDialogueObject(button1nextDialogue);
     }
 }

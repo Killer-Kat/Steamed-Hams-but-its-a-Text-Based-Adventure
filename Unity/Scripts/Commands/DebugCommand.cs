@@ -23,8 +23,11 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                 controller.dialogueController.DisplayOptions("test 1", "test 2");
                 break;
             case "dtest2": //D test lol, I detest the word dialogue, why the ue seriously!
-                DialogueObject dobj = controller.dialogueController.dialogueTree.testDialogue;
+               DialogueObject dobj = controller.dialogueController.dialogueTree.testDialogue;
                 controller.dialogueController.unpackFromDialogueObject(dobj);
+                break;
+            case "dtest3":
+                controller.dialogueController.unpackFromDialogueObject(DialogueTree.testDialogue2);
                 break;
             }
         
