@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+//IDEA!!! extremely verbose mode easter egg that includes a ton of mostly useless data, like internal stats, "moon phase", random stuff like that
 public class GameController : MonoBehaviour
 {
     public Text displayText;
     public InputAction[] inputActions;
     public Text ScoreText;
+
+    public TextInput textInput; //idk why I am linking everything here, mostly to keep everything in one place instead of having a dozen references in different scirpts.
 
     public bool isVerbose = false; //For verbose mode to be implemented later
 
