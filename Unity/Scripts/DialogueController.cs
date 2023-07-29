@@ -86,6 +86,7 @@ public class DialogueController : MonoBehaviour
         //Debug.Log(dialogueTree.testDialogue.NextDialogue1);
        // Debug.Log(dObject.NextDialogue1);
         SetupButtons(dObject.NextDialogue1, dObject.NextDialogue2, dObject.NextDialogue3, dObject.NextDialogue4);
+        controller.updateScore(dObject.scoreToGive);
     }
     public void DisplaySpeakerName(string npcNameToDisplay = "")
     {

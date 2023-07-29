@@ -15,7 +15,7 @@ public class DialogueTree : MonoBehaviour //PSYCHE its another data class! this 
     // Call this method in Awake, Start, or any other appropriate initialization method
     private void InitializeDialogueTree() //For some F**King reason the complier is asigning null values to these object varibles instead of the existing varibles that hold the objects that I F**king put at the top of the script so you have to initalize the whole F**king thing backwards otherwise its full of null values and breaks everything.
     {
-        Debug.Log("Dialogue Tree Initialization started");
+       /** Debug.Log("Dialogue Tree Initialization started");
         // Initialize the DialogueObject instances using the factory method
         testDialogue3 = DialogueObject.Create(
             endOfDialogue: false,
@@ -59,6 +59,6 @@ public class DialogueTree : MonoBehaviour //PSYCHE its another data class! this 
 
 
         //Debug.Log(testDialogue.NextDialogue1);
-       // Debug.Log(testDialogue3.NextDialogue1);
+       // Debug.Log(testDialogue3.NextDialogue1); **/
     }
 }
