@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
     {
         roomNavigation.UnpackExitsInRoom();
         roomNavigation.UnpackItemsInRoom();
+        roomNavigation.UnpackPeopleInRoom();
     }
 
     

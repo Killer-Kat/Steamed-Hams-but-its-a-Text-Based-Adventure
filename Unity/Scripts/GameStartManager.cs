@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameStartManager : MonoBehaviour
 {
+    public GameController controller;
     [SerializeField]
     private List<Room> masterRoomList; //List of all the rooms
     //Due to the way unity scriptable objects work they are won't be reset when we start the game again. This script fixes that.
@@ -32,7 +33,11 @@ public class GameStartManager : MonoBehaviour
         {
             masterPersonList[k].currentDialogue = masterPersonList[k].intialDialogue; //Should set the actors current dialogue to their starting dialogue.
         }
-    }
 
+        controller.dialogueController.DisplaySpeakerName();//This should make it so you cannot see the speaker name at start.
+
+
+    }
     
+
 }

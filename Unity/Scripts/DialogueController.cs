@@ -15,6 +15,8 @@ public class DialogueController : MonoBehaviour
     public Button Option3Button;
     public Button Option4Button;
 
+    public Button CloseButton; //Closes the dialogue window.
+
     public DialogueObject button1nextDialogue; //The next dialogue object in the dialogue tree for the 1st option is stored here 
     public DialogueObject button2nextDialogue;
     public DialogueObject button3nextDialogue;
@@ -47,13 +49,22 @@ public class DialogueController : MonoBehaviour
         Option3Button.gameObject.SetActive(!Option3Button.gameObject.active);
         Option4Button.gameObject.SetActive(!Option4Button.gameObject.active);
         DisplaySpeakerName(); //This should clear the field
+        CloseButton.gameObject.SetActive(false); //Make sure that ToggleDisplay is called before unpackFromDialogueObject otherwise it could overwrite the close button state. //This is so that the button does not stay on the screen when you exit the dialogue
     }
 
     public void DisplayOptions(string npcText,string option1, string option2, string option3 = "NA", string option4 = "NA") //NA is used to specify that this option does not exist, the least you can have is 2 options.
     {
         DialogueDisplay.text = "";//probably not needed because the next line would reset the text anyway
         DialogueDisplay.text = npcText + "\n1. " + option1;
-        DialogueDisplay.text = DialogueDisplay.text + "\n2. " + option2;
+        if(option1 != "NA")
+        {
+            DialogueDisplay.text = npcText + "\n1. " + option1;
+        }
+        else { DialogueDisplay.text = npcText; }
+        if (option2 != "NA")
+        {
+            DialogueDisplay.text = DialogueDisplay.text + "\n2. " + option2;
+        }
         if(option3 == null)
         {
             //do nothing (yet)
@@ -87,6 +98,13 @@ public class DialogueController : MonoBehaviour
        // Debug.Log(dObject.NextDialogue1);
         SetupButtons(dObject.NextDialogue1, dObject.NextDialogue2, dObject.NextDialogue3, dObject.NextDialogue4);
         controller.updateScore(dObject.scoreToGive);
+
+        if(dObject.IsEndOfDialogue == true)
+        {
+            CloseButton.gameObject.SetActive(true);
+        }
+        else { CloseButton.gameObject.SetActive(false); }
+
     }
     public void DisplaySpeakerName(string npcNameToDisplay = "")
     {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 {
+    public GameController controller;
+
     public bool isKitchenOnfire = false;
     public bool isHouseOnFire = false;
     public int ovenKitchenFireCountdown; //Its the fire countdown do do dee do, do de de do 
