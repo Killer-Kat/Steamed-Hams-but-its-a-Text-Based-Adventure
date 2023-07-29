@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//IDEA!!! extremely verbose mode easter egg that includes a ton of mostly useless data, like internal stats, "moon phase", random stuff like that
+
 public class GameController : MonoBehaviour
 {
     public Text displayText;
@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public TextInput textInput; //idk why I am linking everything here, mostly to keep everything in one place instead of having a dozen references in different scirpts.
 
     public bool isVerbose = false; //For verbose mode to be implemented later
+    public bool isVeryVerbose = false; //IDEA!!! extremely verbose mode easter egg that includes a ton of mostly useless data, like internal stats, "moon phase", random stuff like that sort of like the undertale dating game
 
     [HideInInspector] public RoomNavigation roomNavigation;
     [HideInInspector] public List<string> interactionDescriptionsInRoom = new List<string>();
@@ -23,6 +24,8 @@ public class GameController : MonoBehaviour
     public List<InteractableObject> playerInventory;
 
     public int score;
+
+    public int secretNumber; //For use in easter eggs and also very verbose mode
     void Awake()
     {
         roomNavigation = GetComponent<RoomNavigation>();
@@ -73,6 +76,7 @@ public class GameController : MonoBehaviour
     public void LogStringWithReturn(string stringToAdd)
     {
         actionLog.Add(stringToAdd + "\n");
+        secretNumber = Random.Range(0, 100);
     }
     // Update is called once per frame
     public void updateScore(int x)

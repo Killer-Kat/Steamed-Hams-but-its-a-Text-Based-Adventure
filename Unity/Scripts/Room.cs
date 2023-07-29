@@ -13,7 +13,7 @@ public class Room : ScriptableObject
 
     public List<InteractableObject> InteractableObjectsInRoom;
 
-    public List<Person> peopleItializationList; //Oh my god you have a list! 
+    public List<Person> peopleItializationList; //Oh my god you have a list! Guys he has a freaking list! 
 
     public List<Person> peopleInRoom;
 }

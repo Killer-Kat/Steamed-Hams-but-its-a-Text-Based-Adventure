@@ -75,6 +75,7 @@ public class DialogueController : MonoBehaviour
     public void StartDialogue(DialogueObject Dobj,string npcName = "") //NPCs will call this method to bring up the dialogue system
     {
         ToggleDisplay();
+        Debug.Log("Npc name to start dialogue" + npcName);
         DisplaySpeakerName(npcName);
         UnpackFromDialogueObject(Dobj);
 
@@ -82,13 +83,14 @@ public class DialogueController : MonoBehaviour
     public void UnpackFromDialogueObject(DialogueObject dObject)// call this with a dialogue object to put it into the dialogue system.
     {
         DisplayOptions(dObject.NpcDialogue, dObject.option1,dObject.option2,dObject.option3,dObject.option4);
-        Debug.Log(dialogueTree.testDialogue.NextDialogue1);
-        Debug.Log(dObject.NextDialogue1);
+        //Debug.Log(dialogueTree.testDialogue.NextDialogue1);
+       // Debug.Log(dObject.NextDialogue1);
         SetupButtons(dObject.NextDialogue1, dObject.NextDialogue2, dObject.NextDialogue3, dObject.NextDialogue4);
     }
-    public void DisplaySpeakerName(string npcName = "")
+    public void DisplaySpeakerName(string npcNameToDisplay = "")
     {
-        SpeakerNameDisplay.text = npcName;
+        Debug.Log("Npc name to start dialogue in display script " + npcNameToDisplay);
+        SpeakerNameDisplay.text = npcNameToDisplay;
     }
     public void SetupButtons(DialogueObject b1, DialogueObject b2, DialogueObject b3, DialogueObject b4)
     {

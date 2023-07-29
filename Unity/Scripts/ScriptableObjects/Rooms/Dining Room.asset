@@ -24,5 +24,6 @@ MonoBehaviour:
     valueRoom: {fileID: 11400000, guid: 703390efa81e76a4daccad1e9fb19b1c, type: 2}
   objectItializationList: []
   InteractableObjectsInRoom: []
-  peopleItializationList: []
+  peopleItializationList:
+  - {fileID: 11400000, guid: 8214a041b6345e349948e46550d5b5ee, type: 2}
   peopleInRoom: []

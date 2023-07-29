@@ -32,6 +32,14 @@ public class RoomNavigation : MonoBehaviour
         }
     }
 
+    public void UnpackPeopleInRoom() //Warning do not try this at home, people do NOT apreciate being unpacked.
+    {
+        for (int i = 0; i < currentRoom.peopleInRoom.Count; i++)
+        {
+            controller.interactionDescriptionsInRoom.Add(currentRoom.peopleInRoom[i].description);
+        }
+    }
+
     public void AttemptToChangeRooms(string directionNoun)
     {
         if (exitDictionary.ContainsKey(directionNoun))

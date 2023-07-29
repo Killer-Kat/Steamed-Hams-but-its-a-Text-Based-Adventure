@@ -58,7 +58,7 @@ public class DialogueTree : MonoBehaviour //PSYCHE its another data class! this 
 
 
 
-        Debug.Log(testDialogue.NextDialogue1);
-        Debug.Log(testDialogue3.NextDialogue1);
+        //Debug.Log(testDialogue.NextDialogue1);
+       // Debug.Log(testDialogue3.NextDialogue1);
     }
 }
