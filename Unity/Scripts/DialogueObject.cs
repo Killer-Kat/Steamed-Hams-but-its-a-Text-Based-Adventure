@@ -13,6 +13,7 @@ public class DialogueObject : ScriptableObject //Its a data class for Dialogue
 
     //Really got to make sure I think of every needed field here or otherwise unity will give me a bunch of _unity_self cannot be null errors when I update the script. Forcing me to remake all the scriptable objects.
     public bool IsEndOfDialogue = false;
+    [TextArea]
     public string NpcDialogue;
 
     public int scoreToGive;

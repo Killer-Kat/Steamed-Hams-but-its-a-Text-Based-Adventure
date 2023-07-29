@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
 
     public DialogueController dialogueController; //might not need this since the Dialogue objects are static now 
 
+    //H.A.M.S Hastly Asembled Management Script
+    public HAMS HAMS; //mmmmm steamed HAMS
 
     public List<InteractableObject> playerInventory;
 

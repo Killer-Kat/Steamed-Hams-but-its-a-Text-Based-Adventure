@@ -29,6 +29,9 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
             case "dtest3":
                 controller.dialogueController.UnpackFromDialogueObject(controller.dialogueController.dialogueTree.testDialogue2);
                 break;
+            case "intro":
+                controller.HAMS.IntroScene();
+                break;
             }
         
         
