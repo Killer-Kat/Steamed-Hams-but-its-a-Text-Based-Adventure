@@ -32,6 +32,9 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
             case "intro":
                 controller.HAMS.IntroScene();
                 break;
+            case "refreshrm":
+                controller.DisplayRoomText();
+                break;
             }
         
         

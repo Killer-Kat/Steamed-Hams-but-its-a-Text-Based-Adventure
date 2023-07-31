@@ -22,8 +22,11 @@ MonoBehaviour:
   - keyString: west
     exitDescription: Your living room is to the west.
     valueRoom: {fileID: 11400000, guid: 703390efa81e76a4daccad1e9fb19b1c, type: 2}
-  objectItializationList: []
-  InteractableObjectsInRoom: []
+  objectItializationList:
+  - {fileID: 11400000, guid: 3b9ecfa28a3d22d40b7e3e50f84afabc, type: 2}
+  InteractableObjectsInRoom:
+  - {fileID: 11400000, guid: 3b9ecfa28a3d22d40b7e3e50f84afabc, type: 2}
   peopleItializationList:
   - {fileID: 11400000, guid: 8214a041b6345e349948e46550d5b5ee, type: 2}
-  peopleInRoom: []
+  peopleInRoom:
+  - {fileID: 11400000, guid: 8214a041b6345e349948e46550d5b5ee, type: 2}

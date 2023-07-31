@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public RoomNavigation roomNavigation;
     [HideInInspector] public List<string> interactionDescriptionsInRoom = new List<string>();
     List<string> actionLog = new List<string>();
+    public string combinedTextCache;
 
     public DialogueController dialogueController; //might not need this since the Dialogue objects are static now 
 
@@ -62,7 +63,7 @@ public class GameController : MonoBehaviour
         LogStringWithReturn(combinedText);
     }
 
-    private void UnpackRoom()
+    private void UnpackRoom() //plz dont call this unless needed, lest we break something
     {
         roomNavigation.UnpackExitsInRoom();
         roomNavigation.UnpackItemsInRoom();

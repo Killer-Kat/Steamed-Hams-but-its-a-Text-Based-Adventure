@@ -10,6 +10,8 @@ public class RoomNavigation : MonoBehaviour
     Dictionary<string, Room> exitDictionary = new Dictionary<string, Room>(); //A dictionary that stores all the exits in the current room, I think its kinda stupid not to just look at the room instance but whatever
     private GameController controller;
 
+    public Exit Backrooms;
+
     private void Awake()
     {
         controller = GetComponent<GameController>();
@@ -21,6 +23,12 @@ public class RoomNavigation : MonoBehaviour
         {
             exitDictionary.Add(currentRoom.exits[i].keyString, currentRoom.exits[i].valueRoom);
             controller.interactionDescriptionsInRoom.Add(currentRoom.exits[i].exitDescription);
+        }
+        int randomNumber = Random.Range(0, 100);
+        if(randomNumber == 3)
+        {
+            exitDictionary.Add(Backrooms.keyString, Backrooms.valueRoom);
+            controller.interactionDescriptionsInRoom.Add(Backrooms.exitDescription);
         }
     }
 
