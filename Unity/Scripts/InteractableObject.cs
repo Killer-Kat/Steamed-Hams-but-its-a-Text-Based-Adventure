@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "TextAdventure/Interactable Object")]
+[CreateAssetMenu(menuName = "TextAdventure/Interactable Object/Item")]
 public class InteractableObject : ScriptableObject
 {
     public string noun = "name";

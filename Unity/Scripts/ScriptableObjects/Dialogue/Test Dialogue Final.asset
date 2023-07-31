@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
   m_Name: Test Dialogue Final
   m_EditorClassIdentifier: 
-  IsEndOfDialogue: 0
-  NpcDialogue: 
+  IsEndOfDialogue: 1
+  NpcDialogue: This is a test of the final dialogue feature
   scoreToGive: 0
   weirdPoints: 0
   politePoints: 0
   HAMScommand: 
-  option1: 
-  option2: 
-  option3: 
-  option4: 
+  option1: NA
+  option2: NA
+  option3: NA
+  option4: NA
   NextDialogue1: {fileID: 0}
   NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}

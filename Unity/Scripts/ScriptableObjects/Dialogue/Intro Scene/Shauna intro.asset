@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
-  m_Name: Test Dialogue
+  m_Name: Shauna intro
   m_EditorClassIdentifier: 
-  IsEndOfDialogue: 0
-  NpcDialogue: This is the first Dialogue test
+  IsEndOfDialogue: 1
+  NpcDialogue: I wish you hadnt asked, she got fired again after she got caught smoking
+    in the breakroom.
   scoreToGive: 0
   weirdPoints: 0
-  politePoints: 0
+  politePoints: -2
   HAMScommand: 
-  option1: Go to second test
-  option2: Go to third test
+  option1: NA
+  option2: NA
   option3: NA
   option4: NA
-  NextDialogue1: {fileID: 11400000, guid: c0451573a8bff104cb5288ffde54bf2a, type: 2}
-  NextDialogue2: {fileID: 11400000, guid: 9fc34175e87767d47a91240732f0b4e4, type: 2}
+  NextDialogue1: {fileID: 0}
+  NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}
   NextDialogue4: {fileID: 0}

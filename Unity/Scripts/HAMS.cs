@@ -19,14 +19,17 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     {
         controller.dialogueController.StartDialogue(IntroDobj, "Chalmers");
     }
-    void Start()
+    
+    public void TakeInputFromDialogue(string command)//Take command strings from dialogue objects and use them to trigger events elsewhere in the code.
     {
-        
+        switch (command)
+        {
+            default:
+                Debug.LogError("Invalid HAMS command entered");
+                break;
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 0
   NpcDialogue: this is the second test dialogue
-  scoreToGive: 0
+  scoreToGive: 2
   weirdPoints: 0
   politePoints: 0
   HAMScommand: 
@@ -23,6 +23,6 @@ MonoBehaviour:
   option3: 
   option4: 
   NextDialogue1: {fileID: 11400000, guid: 4f82749bc99e2b54aa54fdfb2bdd0892, type: 2}
-  NextDialogue2: {fileID: 0}
+  NextDialogue2: {fileID: 11400000, guid: 9fc34175e87767d47a91240732f0b4e4, type: 2}
   NextDialogue3: {fileID: 0}
   NextDialogue4: {fileID: 0}

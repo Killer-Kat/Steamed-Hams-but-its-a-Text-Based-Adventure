@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 0
   NpcDialogue: 'This is the third test '
-  scoreToGive: 0
+  scoreToGive: -1
   weirdPoints: 0
   politePoints: 0
   HAMScommand: 
-  option1: 
-  option2: 
-  option3: 
-  option4: 
-  NextDialogue1: {fileID: 0}
-  NextDialogue2: {fileID: 0}
-  NextDialogue3: {fileID: 0}
+  option1: go back to first test
+  option2: go back to second test
+  option3: Final Test
+  option4: NA
+  NextDialogue1: {fileID: 11400000, guid: 4f82749bc99e2b54aa54fdfb2bdd0892, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: c0451573a8bff104cb5288ffde54bf2a, type: 2}
+  NextDialogue3: {fileID: 11400000, guid: f4ffce87870fade408466fcf0917e973, type: 2}
   NextDialogue4: {fileID: 0}

@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: DoorIntro
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 0
-  NpcDialogue: 
+  NpcDialogue: '*DING DONG* You open the front door, its your boss Superintendent
+    Chalmers. You have invited him over for a lunch to try and impress him after
+    your latest blunder* Well Seymore I made it, despite your directions.'
   scoreToGive: 0
   weirdPoints: 0
   politePoints: 0
   HAMScommand: 
-  option1: 
-  option2: 
-  option3: 
-  option4: 
-  NextDialogue1: {fileID: 0}
-  NextDialogue2: {fileID: 0}
-  NextDialogue3: {fileID: 0}
-  NextDialogue4: {fileID: 0}
+  option1: Ah Superintendent Chalmers wellcome, I hope you're prepaired for an unforgetable
+    luncheon!
+  option2: Ah Chalmers my old friend just in time, how is Shauna doing?
+  option3: Hi Super Nintendo Chalmers
+  option4: Please leave. *Shuts door*
+  NextDialogue1: {fileID: 11400000, guid: 92f1c3263bd0057429fed0812a6b39e4, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: e1a5e37568c95e040a0dffd09f0640c7, type: 2}
+  NextDialogue3: {fileID: 11400000, guid: 7c3f57bfdea513f4f9e069a961b5cb9a, type: 2}
+  NextDialogue4: {fileID: 11400000, guid: 528c2567ce8b31b4e852938364c0ad41, type: 2}

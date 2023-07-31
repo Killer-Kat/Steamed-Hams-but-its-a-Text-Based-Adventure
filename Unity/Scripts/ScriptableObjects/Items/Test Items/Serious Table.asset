@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
+  m_Name: Serious Table
+  m_EditorClassIdentifier: 
+  noun: serious table
+  canTake: 0
+  description: There is a very serious table here.
+  examineDescription: The most serious table you have ever seen, seriously.
+  useAction: Default
+  isContainer: 1
+  contentsItializationList: []
+  contents: []
