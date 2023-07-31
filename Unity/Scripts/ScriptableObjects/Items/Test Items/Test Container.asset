@@ -15,8 +15,10 @@ MonoBehaviour:
   noun: test container
   canTake: 1
   description: There is a test container here
-  examineDescription: The description returned when using examine
+  examineDescription: A test container, mostly used for testing inventory systems.
+  useAction: Default
   isContainer: 1
   contentsItializationList:
   - {fileID: 11400000, guid: 8bafecb09b1f186448264da515b48b92, type: 2}
-  contents: []
+  contents:
+  - {fileID: 11400000, guid: 8bafecb09b1f186448264da515b48b92, type: 2}
