@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
-  m_Name: Apple
+  m_Name: Steamed Hams
   m_EditorClassIdentifier: 
-  noun: apple
+  noun: steamed hams
   canTake: 1
-  description: There is an apple here, which explains the lack of doctors.
-  examineDescription: A jucy red fruit, so good you want to name a computer after
-    it.
+  description: There is a silver serving tray here, it looks fancy but its just full
+    of cheap fast food.
+  examineDescription: Steamed Hams just like they make them in Albany, it's really
+    just fast food on a fancy platter but you're trying your best.
   useAction: Default
   isContainer: 0
   contentsItializationList: []

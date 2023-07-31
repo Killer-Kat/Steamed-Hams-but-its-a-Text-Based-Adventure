@@ -12,7 +12,7 @@ public class Inventory : InputAction
         invString = "You have: ";
         for (int i = 0; i < controller.playerInventory.Count; i++)
         {
-            invString = invString + controller.playerInventory[i].name + ",";
+            invString = invString + controller.playerInventory[i].noun + ",";
         }
         controller.LogStringWithReturn(invString);
     }

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
-  m_Name: Apple
+  m_Name: Ribwich
   m_EditorClassIdentifier: 
-  noun: apple
+  noun: ribwich
   canTake: 1
-  description: There is an apple here, which explains the lack of doctors.
-  examineDescription: A jucy red fruit, so good you want to name a computer after
-    it.
+  description: 'Someone has left some fastfood laying around, looks like a Ribwich. '
+  examineDescription: A rib themed sandwich, the box proudly proclaims "Now without
+    lettuce!" you question if its a good idea to eat this.
   useAction: Default
   isContainer: 0
   contentsItializationList: []

@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
-  m_Name: Apple
+  m_Name: Couch
   m_EditorClassIdentifier: 
-  noun: apple
-  canTake: 1
-  description: There is an apple here, which explains the lack of doctors.
-  examineDescription: A jucy red fruit, so good you want to name a computer after
-    it.
+  noun: couch
+  canTake: 0
+  description: An old green couch rests upon the floor in front of the tv.
+  examineDescription: An olive green couch with a dent in the cushion indicating
+    someone spends a lot of time sitting here, probably being forced to watch antiques
+    roadshow by their mother... Not that you would know anything about that.
   useAction: Default
   isContainer: 0
   contentsItializationList: []

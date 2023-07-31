@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
-  m_Name: Apple
+  m_Name: Fridge
   m_EditorClassIdentifier: 
-  noun: apple
-  canTake: 1
-  description: There is an apple here, which explains the lack of doctors.
-  examineDescription: A jucy red fruit, so good you want to name a computer after
-    it.
+  noun: fridge
+  canTake: 0
+  description: An old fridge hums quietly in the corner.
+  examineDescription: An off white consumer grade refrigerator, There are several
+    photographs of you as a child stuck to the front. You've really grown a lot since
+    then, since you look like a completely different person.
   useAction: Default
   isContainer: 0
   contentsItializationList: []
