@@ -5,7 +5,7 @@ using UnityEngine;
 public class Use : InputAction
 {
      
-    string key; //used for the switch 
+    //The use item tree containing the logic for all the different items is in the HAMS script
     public override void RespondToInput(GameController controller, string[] separatedInputWords)
     {
         if (separatedInputWords.Length <= 1)
@@ -45,10 +45,10 @@ public class Use : InputAction
                 itemToFind = itemToFind + " " + separatedInputWords[i];
             }
             itemToFind = itemToFind.Substring(1);
-            //Debug.Log("Look searching for: " + itemToFind);
+            //Debug.Log("use searching for: " + itemToFind);
             for (int i = 0; i < controller.playerInventory.Count; i++) //look in the player inv first
             {
-                //Debug.Log("Look command finds: " + controller.playerInventory[i].noun); 
+                //Debug.Log("use command finds: " + controller.playerInventory[i].noun); 
                 if (itemToFind.ToLower() == controller.playerInventory[i].noun.ToLower())
                 {//remember to keep everything lowercase!
                    

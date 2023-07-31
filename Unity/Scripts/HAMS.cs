@@ -42,8 +42,27 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             case "combomeal":
                 if (controller.roomNavigation.currentRoom.rooomName == "Kitchen")
                 {
-                    controller.playerInventory.Add(steamedHams);
-                    controller.LogStringWithReturn("You put the meal on a serving platter.");
+                    for (int i = 0; i < controller.playerInventory.Count; i++)
+                    {
+                        if(controller.playerInventory[i].noun == "combo meal")
+                        {
+                            controller.playerInventory.RemoveAt(i);//should remove the combo meal from the players inventory.
+                            controller.playerInventory.Add(steamedHams);
+                            controller.LogStringWithReturn("You put the meal on a serving platter.");
+                            return;
+                        }
+                    }
+                    for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++) //Is the player DROPING the combo meal on the kitchen floor and then trying to use it an edge case? yes. Is it the first thing my hacker brain thought of when I made the previous loop? Also yes.
+                    {
+                        if(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun == "combo meal")
+                        {
+                            controller.roomNavigation.currentRoom.InteractableObjectsInRoom.RemoveAt(i);//should remove the combo meal from the rooms inventory.
+                            controller.playerInventory.Add(steamedHams);
+                            controller.LogStringWithReturn("You put the meal on a serving platter. You hope your boss wont notice you dropped it on the floor first.");
+                            return;
+                        }
+                    }
+                    
                 }
                 else
                 {
