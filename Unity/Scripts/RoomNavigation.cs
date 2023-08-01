@@ -37,6 +37,19 @@ public class RoomNavigation : MonoBehaviour
         for (int i = 0; i < currentRoom.InteractableObjectsInRoom.Count; i++)
         {
             controller.interactionDescriptionsInRoom.Add(currentRoom.InteractableObjectsInRoom[i].description);
+            if (controller.isVerbose == true)
+            {
+                if (currentRoom.InteractableObjectsInRoom[i].isContainer == true)
+                {
+                    string contentsText = "It contains :";
+                    for (int j = 0; j < currentRoom.InteractableObjectsInRoom[i].contents.Count; j++)
+                    {
+                        contentsText = contentsText + " " + currentRoom.InteractableObjectsInRoom[i].contents[j].noun.ToLower();
+                    }
+                    
+                    controller.interactionDescriptionsInRoom.Add(contentsText);
+                }
+            }
         }
     }
 

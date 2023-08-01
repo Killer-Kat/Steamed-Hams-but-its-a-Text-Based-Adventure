@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour
         LogStringWithReturn(combinedText);
     }
 
-    private void UnpackRoom() //plz dont call this unless needed, lest we break something
+    private void UnpackRoom() 
     {
         roomNavigation.UnpackExitsInRoom();
         roomNavigation.UnpackItemsInRoom();
@@ -88,8 +88,8 @@ public class GameController : MonoBehaviour
         score = score + x;
         ScoreText.text = "Score: " + score;
     }
-    void Update()
+  public void ToggleVeryVerboseMode()
     {
-        
+
     }
 }

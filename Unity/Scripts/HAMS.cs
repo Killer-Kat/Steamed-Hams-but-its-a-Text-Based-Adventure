@@ -140,6 +140,11 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 }
                 else { controller.LogStringWithReturn("You dont use the hanger, an odd thought pops into your head that you might need it for something else."); }
                 break;
+            case "oven":
+                isOvenOn = !isOvenOn;
+                break;
+            case "window":
+                break;
         }
     }
 
