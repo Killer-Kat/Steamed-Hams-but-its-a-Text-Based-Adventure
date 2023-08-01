@@ -17,7 +17,7 @@ MonoBehaviour:
   description: There is some trash laying on the ground, looks like a coat hanger.
   examineDescription: A metal coat hanger, the kind you get for free at the dry cleaners.
     On your salary its the only kind you can afford.
-  useAction: Default
+  useAction: hanger
   isContainer: 0
   contentsItializationList: []
   contents: []

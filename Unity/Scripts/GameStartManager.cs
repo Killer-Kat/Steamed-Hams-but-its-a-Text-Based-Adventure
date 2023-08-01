@@ -12,6 +12,13 @@ public class GameStartManager : MonoBehaviour
     private List<InteractableObject> masterContainerList; //This is not the most optimal way to handle this I am sure.
     [SerializeField]
     private List<Person> masterPersonList; //Keeping lists of people is often frowned upon. 
+    [SerializeField]
+    private Person chalmers;
+    [TextArea]
+    [SerializeField]
+    private string chalmersIntDesc;
+    [SerializeField]
+    private InteractableObject tv;
     void Awake()
     {
         for (int i = 0; i < masterRoomList.Count; i++)
@@ -36,7 +43,8 @@ public class GameStartManager : MonoBehaviour
 
         controller.dialogueController.DisplaySpeakerName();//This should make it so you cannot see the speaker name at start.
 
-
+        chalmers.description = chalmersIntDesc;
+        tv.examineDescription = "A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...";
     }
     
 

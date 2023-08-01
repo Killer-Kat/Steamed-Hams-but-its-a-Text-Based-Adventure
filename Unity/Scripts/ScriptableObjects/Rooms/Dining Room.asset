@@ -22,6 +22,9 @@ MonoBehaviour:
   - keyString: west
     exitDescription: Your living room is to the west.
     valueRoom: {fileID: 11400000, guid: 703390efa81e76a4daccad1e9fb19b1c, type: 2}
+  - keyString: south
+    exitDescription: Behind you to the south is your front door.
+    valueRoom: {fileID: 11400000, guid: 88cf63840c9da4740ae4a6eaff1ce7c6, type: 2}
   objectItializationList:
   - {fileID: 11400000, guid: 3b9ecfa28a3d22d40b7e3e50f84afabc, type: 2}
   InteractableObjectsInRoom:

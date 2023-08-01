@@ -11,6 +11,16 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public bool isKitchenOnfire = false;
     public bool isHouseOnFire = false;
     public int ovenKitchenFireCountdown; //Its the fire countdown do do dee do, do de de do 
+    public int burningHouseDeathCountdown; //tracks the amount of cupcakes you baked for the sugar princess, just kidding does what you think it does.
+
+    public InteractableObject tv;
+    public bool isTVon = false;
+    public int tvSecretCounter = 0;
+    bool isTvFixed = false;
+
+    public InteractableObject window;
+    public InteractableObject oven;
+    public bool isOvenOn = true;
 
     public bool isSteamedHams = false;
 
@@ -68,6 +78,67 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 {
                     controller.LogStringWithReturn("If you were in the kitchen you could put this on a nice serving platter.");
                 }
+                break;
+            case "phone": // In the final version I want to have a UI phone where you can dial numbers, maybe even some secret numbers. But thats a lot of work and not in scope right now
+                controller.LogStringWithReturn("Cyberkat Cafe, Killer Kat speaking. Oh you are stuck in a text based adventure game? Have you tried using the Hint verb?, maybe it will help you. *click*");
+                break;
+            case "tv":
+                isTVon = !isTVon;
+                
+
+                if(isTVon == true && isTvFixed == false)
+                {
+                    tv.examineDescription = "A small square purple colored CRT TV, it's missing an antenna. It's currently just showing static yet something about it seems rather odd...";
+                    controller.LogStringWithReturn("The TV crackles to life, but its just showing static.");
+                } else if (isTVon == false && isTvFixed == false)
+                {
+                    tv.examineDescription = "A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...";
+                    controller.LogStringWithReturn("The TV shuts off with a flash, leaving nothing but a black screen.");
+                }else if (isTVon == true && isTvFixed == true)
+                {
+                    tv.examineDescription = "A small square purple colored CRT TV, you replaced it's antenna. It's currently just showing static yet something about it seems rather odd it almost resembles some kind of head.";
+                    controller.LogStringWithReturn("The TV crackles to life, but its just showing static despite the antenna.");
+                    
+                }
+                else if(isTVon == false && isTvFixed == true)
+                {
+                    tv.examineDescription = "A small square purple colored CRT TV, you replaced it's antenna. It's currently off yet something about it seems rather odd it almost resembles some kind of head.";
+                    controller.LogStringWithReturn("The TV shuts off with a flash, leaving nothing but a black screen.");
+                    tvSecretCounter += 1;
+                }
+                if(tvSecretCounter == 5)
+                {
+                    controller.LogStringWithReturn("Suddely the TV starts playing a strange video.");
+                    controller.LogStringWithReturn("Odd voice: Sometimes you're just steaming some hams when you stumble across something in the most unexpected of places, so today we're looking at the 5 most unexplained secrets in the Steamed Hams Text Based Adventure.");
+                    controller.LogStringWithReturn("Odd voice: Number 1. The Backrooms some players reported that when moving between rooms of the house sometimes they were randomly teleported to the backrooms, a mysterious creepy pasta thats been making the rounds online.");
+                    controller.LogStringWithReturn("Odd voice: Thanks to my friend the hacker EL BARTO for digging through the game files and finding that the player can be teleported here yourself by simply going weast.");
+                    controller.LogStringWithReturn("Odd voice: Number 2. The Odd Hea *BZZT* Suddenly the TV goes back to static");
+                }
+                break;
+            case "hanger":
+                if(controller.roomNavigation.currentRoom.rooomName == "Living Room")
+                {
+                    isTvFixed = true;
+                    for (int i = 0; i < controller.playerInventory.Count; i++)
+                    {
+                        if (controller.playerInventory[i].noun == "hanger")
+                        {
+                            controller.playerInventory.RemoveAt(i);
+                            controller.LogStringWithReturn("You use the coat hanger to make a new TV antenna.");
+                            return;
+                        }
+                    }
+                    for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++) //yeah this one too
+                    {
+                        if (controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun == "hanger")
+                        {
+                            controller.roomNavigation.currentRoom.InteractableObjectsInRoom.RemoveAt(i);
+                            controller.LogStringWithReturn("You use the coat hanger to make a new TV antenna.");
+                            return;
+                        }
+                    }
+                }
+                else { controller.LogStringWithReturn("You dont use the hanger, an odd thought pops into your head that you might need it for something else."); }
                 break;
         }
     }

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noun: phone
   canTake: 0
-  description: Description in room
+  description: Mounted on the wall there is a phone.
   examineDescription: A white wall mounted landline phone, you can Use this to make
     calls.
-  useAction: Default
+  useAction: phone
   isContainer: 0
   contentsItializationList: []
   contents: []

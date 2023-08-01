@@ -15,9 +15,10 @@ MonoBehaviour:
   noun: tv
   canTake: 0
   description: against the wall there is a small tv.
-  examineDescription: A small square purple colored CRT TV, it's missing an antenna.
-    It's currently off yet something about it seems rather odd...
-  useAction: Default
+  examineDescription: A small square purple colored CRT TV, you replaced it's antenna.
+    It's currently off yet something about it seems rather odd it almost resembles
+    some kind of head.
+  useAction: tv
   isContainer: 0
   contentsItializationList: []
   contents: []
