@@ -90,6 +90,6 @@ public class GameController : MonoBehaviour
     }
   public void ToggleVeryVerboseMode()
     {
-
+        isVeryVerbose = !isVeryVerbose;
     }
 }
