@@ -17,7 +17,7 @@ public class Verbose : InputAction
                 controller.LogStringWithReturn("Verbose mode on");
                 if(controller.isVerbose == true)
                 {
-                    controller.ToggleVeryVerboseMode();
+                    controller.ToggleVeryVerboseMode();//Very verbose mode is a secret that displays a ton of mostly useless info.
                 } else { controller.isVerbose = true; }
             } else if(separatedInputWords[1].ToLower() == "off")
             {

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0551a770de9a6f45b2072e293af8ff0, type: 3}
   m_Name: Verbose
   m_EditorClassIdentifier: 
-  Keyword: 
+  Keyword: verbose

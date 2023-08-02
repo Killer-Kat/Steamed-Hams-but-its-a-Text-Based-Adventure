@@ -93,6 +93,10 @@ public class DialogueController : MonoBehaviour
     }
     public void UnpackFromDialogueObject(DialogueObject dObject)// call this with a dialogue object to put it into the dialogue system.
     {
+        if(dObject.HAMScommand != "")
+        {
+            controller.HAMS.TakeInputFromDialogue(dObject.HAMScommand);
+        }
         DisplayOptions(dObject.NpcDialogue, dObject.option1,dObject.option2,dObject.option3,dObject.option4);
         //Debug.Log(dialogueTree.testDialogue.NextDialogue1);
        // Debug.Log(dObject.NextDialogue1);

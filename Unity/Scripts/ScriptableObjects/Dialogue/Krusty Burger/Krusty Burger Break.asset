@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
-  m_Name: Nintendo Intro
+  m_Name: Krusty Burger Break
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 1
-  NpcDialogue: What? Ah nevermind.
-  scoreToGive: -1
-  weirdPoints: 3
+  NpcDialogue: Uh sorry sir but I'm on my break, I only get one a month so you're
+    going to have to wait.
+  scoreToGive: 0
+  weirdPoints: 0
   politePoints: 0
-  HAMScommand: nintendo
+  HAMScommand: 
   option1: NA
   option2: NA
   option3: NA

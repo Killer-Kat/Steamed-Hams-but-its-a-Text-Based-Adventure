@@ -18,6 +18,12 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public int tvSecretCounter = 0;
     bool isTvFixed = false;
 
+    public Person chalmers;
+    public Person jermey;
+
+    public InteractableObject combomeal;
+    public DialogueObject krustyburgerbreak;
+
     public InteractableObject window;
     public InteractableObject oven;
     public bool isOvenOn = true;
@@ -38,6 +44,14 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         {
             default:
                 Debug.LogError("Invalid HAMS command entered");
+                break;
+            case "nintendo":
+                chalmers.description = "Your boss, the Super Nintendo is here you had better be sure to impress him after your clearly just forget his name...";
+                //chalmers.name = "Super Nintendo Chalmers"; //CUrrently Breaks the talk command and I cannot be bothered to fix it atm
+ /** Everything you say to me puts me one step closer to the edge and I'm about to **/break; //Sorry had to, it gets stuck in my head everytime I use switch statements.
+            case "givecombomeal":
+                controller.playerInventory.Add(combomeal);
+                jermey.currentDialogue = krustyburgerbreak;
                 break;
         }
 

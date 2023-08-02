@@ -14,6 +14,7 @@ public class GameStartManager : MonoBehaviour
     private List<Person> masterPersonList; //Keeping lists of people is often frowned upon. 
     [SerializeField]
     private Person chalmers;
+ 
     [TextArea]
     [SerializeField]
     private string chalmersIntDesc;
@@ -44,6 +45,7 @@ public class GameStartManager : MonoBehaviour
         controller.dialogueController.DisplaySpeakerName();//This should make it so you cannot see the speaker name at start.
 
         chalmers.description = chalmersIntDesc;
+        chalmers.name = "Chalmers";
         tv.examineDescription = "A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...";
     }
     
