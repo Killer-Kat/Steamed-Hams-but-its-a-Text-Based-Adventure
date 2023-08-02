@@ -28,7 +28,28 @@ public class GameController : MonoBehaviour
 
     public int score;
 
+    public int oddPoints;
+    public int politePoints;
+
     public int secretNumber; //For use in easter eggs and also very verbose mode
+    //Stuff for endgame UI
+    public Text endGamePopupScoreText;
+    public Text oddPointsText;
+    public Text politePointsText;
+    public Text creatorText; // For displaying the game creator's information
+    public GameObject popupPanel;
+    public void ShowEndGamePopup(int score, int oddPoints, int politePoints)
+    {
+        endGamePopupScoreText.text = "Game over you scored: " + score + " points.";
+        oddPointsText.text = "Your personality was " + oddPoints + " Odd.";
+        politePointsText.text = "Your personality was " + politePoints + " Polite.";
+        creatorText.text = "Game by Killer Kat, if you liked this check out my other projects at cyberkatcafe.com";
+        popupPanel.SetActive(true);
+    }
+    public void HideEndGamePopup()
+    {
+        Application.Quit(); // Close the application when the function is called
+    }
     void Awake()
     {
         roomNavigation = GetComponent<RoomNavigation>();
@@ -87,6 +108,15 @@ public class GameController : MonoBehaviour
     {
         score = score + x;
         ScoreText.text = "Score: " + score;
+    }
+
+    public void UpdateOddPoints(int x)
+    {
+        oddPoints = oddPoints + x;
+    }
+    public void UpdatePolitePoints(int x)
+    {
+        politePoints = politePoints + x;
     }
   public void ToggleVeryVerboseMode()
     {

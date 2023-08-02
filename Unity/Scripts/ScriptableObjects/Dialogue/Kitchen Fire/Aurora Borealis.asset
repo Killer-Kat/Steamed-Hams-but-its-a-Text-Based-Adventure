@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
+  m_Name: Aurora Borealis
+  m_EditorClassIdentifier: 
+  IsEndOfDialogue: 0
+  NpcDialogue: 'Aurora Borealis!? At this time of year? At this time of day? In this
+    part of the country? Localized entirely within your kitchen?
+
+    May I see it?'
+  scoreToGive: 1
+  weirdPoints: 2
+  politePoints: 0
+  HAMScommand: 
+  option1: Yes
+  option2: No
+  option3: 
+  option4: 
+  NextDialogue1: {fileID: 11400000, guid: b907247fa695ff14dbe48c5490009acb, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: 6e244b3234642464289ac576bbc893db, type: 2}
+  NextDialogue3: {fileID: 0}
+  NextDialogue4: {fileID: 0}

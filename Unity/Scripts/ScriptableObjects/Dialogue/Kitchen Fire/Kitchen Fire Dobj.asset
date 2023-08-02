@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
+  m_Name: Kitchen Fire Dobj
+  m_EditorClassIdentifier: 
+  IsEndOfDialogue: 0
+  NpcDialogue: 'Smoke starts to pour from your kitchen doorframe, you excuse yourself
+    and quickly pop into the kitchen to find that its currently on fire! You pop
+    back into the dining room and hear: Good Lord what is happening in there!'
+  scoreToGive: 0
+  weirdPoints: 0
+  politePoints: 0
+  HAMScommand: 
+  option1: Aurora Borealis
+  option2: A fire has broken out, you head outside and I'll get help!
+  option3: Nothing, everything is fine
+  option4: What where?
+  NextDialogue1: {fileID: 11400000, guid: 0cde39d5bae12d742a276f4dea319b00, type: 2}
+  NextDialogue2: {fileID: 0}
+  NextDialogue3: {fileID: 0}
+  NextDialogue4: {fileID: 0}

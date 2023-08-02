@@ -30,6 +30,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public bool isOvenOn = true;
 
     public bool isSteamedHams = false;
+    public bool didChalmersEat = false;
 
     public InteractableObject steamedHams;
     // Start is called before the first frame update
@@ -37,6 +38,50 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public void IntroScene()
     {
         controller.dialogueController.StartDialogue(IntroDobj, "Chalmers");
+    }
+
+    public void chalmersGoodbye()
+    {
+        if (controller.politePoints <= 6 && controller.oddPoints > 6)
+        {
+            controller.LogStringWithReturn("Chalmers: Well Seymore I must say you are an odd fellow.");
+            controller.updateScore(1);
+        }
+        else if (controller.politePoints > 6 && controller.oddPoints > 6)
+        {
+            controller.LogStringWithReturn("Chalmers: Well Seymore I must say you are an odd yet polite fellow.");
+            controller.updateScore(3);
+        }
+        else if (controller.politePoints <= 0 && controller.oddPoints > 6)
+        {
+            controller.LogStringWithReturn("Chalmers: Well Seymore I must say you are a rude and odd man.");
+            controller.updateScore(-5);
+        }
+        else if (controller.politePoints > 6 && controller.oddPoints < 6)
+        {
+            controller.LogStringWithReturn("Chalmers: Well Seymore I must say you are a polite fellow.");
+            controller.updateScore(4);
+        }
+        else if (controller.politePoints <= 0 && controller.oddPoints < 6)
+        {
+            controller.LogStringWithReturn("Chalmers: Well Seymore I must say you are a rude jerk!");
+            controller.updateScore(-4);
+        }
+        else
+        {
+            controller.LogStringWithReturn("Chalmers: Well Seymore I must say you are a boring drag.");
+        }
+
+        if (isSteamedHams == true)
+        {
+            controller.LogStringWithReturn("Chalmers: But you steam a good ham.");
+        }
+        else if (didChalmersEat == false)
+        {
+            controller.LogStringWithReturn("Chalmers: But I'm disappointed I didn't get to eat anything.");
+        }
+
+        //EndGame();
     }
     
     public void TakeInputFromDialogue(string command)//Take command strings from dialogue objects and use them to trigger events elsewhere in the code.

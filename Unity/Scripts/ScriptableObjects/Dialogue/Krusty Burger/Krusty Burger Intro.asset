@@ -27,4 +27,4 @@ MonoBehaviour:
   NextDialogue1: {fileID: 11400000, guid: 9a1f69f86de24e642820793c89835985, type: 2}
   NextDialogue2: {fileID: 11400000, guid: 5f9b9950e97bb9b4685de73837eafd0f, type: 2}
   NextDialogue3: {fileID: 11400000, guid: 647573247482e664fbc58af531f80db9, type: 2}
-  NextDialogue4: {fileID: 0}
+  NextDialogue4: {fileID: 11400000, guid: 4f4f448035df3bb4e862bf15a2983723, type: 2}

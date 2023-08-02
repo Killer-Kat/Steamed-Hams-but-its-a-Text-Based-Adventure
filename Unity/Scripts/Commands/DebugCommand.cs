@@ -35,6 +35,12 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
             case "refreshrm":
                 controller.DisplayRoomText();
                 break;
+            case "goodbye":
+                controller.HAMS.chalmersGoodbye();
+                break;
+            case "endgame":
+                controller.ShowEndGamePopup(controller.score,controller.oddPoints,controller.politePoints);
+                break;
             }
         
         

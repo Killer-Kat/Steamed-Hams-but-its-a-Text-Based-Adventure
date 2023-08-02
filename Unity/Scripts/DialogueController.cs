@@ -97,6 +97,10 @@ public class DialogueController : MonoBehaviour
         {
             controller.HAMS.TakeInputFromDialogue(dObject.HAMScommand);
         }
+
+        controller.UpdateOddPoints(dObject.weirdPoints);
+        controller.UpdatePolitePoints(dObject.politePoints);
+
         DisplayOptions(dObject.NpcDialogue, dObject.option1,dObject.option2,dObject.option3,dObject.option4);
         //Debug.Log(dialogueTree.testDialogue.NextDialogue1);
        // Debug.Log(dObject.NextDialogue1);
