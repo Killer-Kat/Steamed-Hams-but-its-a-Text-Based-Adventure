@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
   m_Name: pickled herring
   m_EditorClassIdentifier: 
-  noun: name
-  canTake: 0
-  description: Description in room
-  examineDescription: The description returned when using examine
+  noun: pickled herring
+  canTake: 1
+  description: There is a jar of pickled herring here, gross.
+  examineDescription: You open the lid and pungent smell fills the air, and the unappetizing
+    sight of the gelatinous fish floating in brine leaves much to be desired.
   useAction: Default
   isContainer: 0
   contentsItializationList: []

@@ -18,9 +18,10 @@ MonoBehaviour:
   exits:
   - keyString: south
     exitDescription: The doors to the south lead back outside.
-    valueRoom: {fileID: 11400000, guid: 42310b0770c371b449875fa5d46fd9ff, type: 2}
+    valueRoom: {fileID: 11400000, guid: b4d1999a9da544548a81dc8a9c0ad1a3, type: 2}
   objectItializationList: []
   InteractableObjectsInRoom: []
   peopleItializationList:
   - {fileID: 11400000, guid: 5991d3856c1a2124dbb23e6dc80670ee, type: 2}
-  peopleInRoom: []
+  peopleInRoom:
+  - {fileID: 11400000, guid: 5991d3856c1a2124dbb23e6dc80670ee, type: 2}

@@ -22,6 +22,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public Person jermey;
 
     public InteractableObject combomeal;
+    public InteractableObject ribwich;
     public DialogueObject krustyburgerbreak;
 
     public InteractableObject window;
@@ -51,6 +52,15 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
  /** Everything you say to me puts me one step closer to the edge and I'm about to **/break; //Sorry had to, it gets stuck in my head everytime I use switch statements.
             case "givecombomeal":
                 controller.playerInventory.Add(combomeal);
+                jermey.currentDialogue = krustyburgerbreak;
+                break;
+            case "ribwich":
+                controller.playerInventory.Add(ribwich);
+                jermey.currentDialogue = krustyburgerbreak;
+                break;
+            case "bigsmoke":
+                controller.playerInventory.Add(combomeal);
+                controller.playerInventory.Add(ribwich);
                 jermey.currentDialogue = krustyburgerbreak;
                 break;
         }
