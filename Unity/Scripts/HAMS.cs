@@ -10,7 +10,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 
     public bool isKitchenOnfire = false;
     public bool isHouseOnFire = false;
-    public int ovenKitchenFireCountdown; //Its the fire countdown do do dee do, do de de do 
+    public int ovenKitchenFireCountdown; //may need to adjust this //Its the fire countdown do do dee do, do de de do 
     public int burningHouseDeathCountdown; //tracks the amount of cupcakes you baked for the sugar princess, just kidding does what you think it does.
 
     public InteractableObject tv;
@@ -25,6 +25,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public InteractableObject ribwich;
     public DialogueObject krustyburgerbreak;
 
+    public Room Kitchen;
+    public DialogueObject KitchenFireDobj;
     public InteractableObject window;
     public InteractableObject oven;
     public bool isOvenOn = true;
@@ -39,7 +41,27 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     {
         controller.dialogueController.StartDialogue(IntroDobj, "Chalmers");
     }
+    public void Tick()//used for the countdowns.
+    {
+        if (oven.contents.Count != 0 && isOvenOn == true)
+        {
+            ovenKitchenFireCountdown -= 1;
+        }
+        if(ovenKitchenFireCountdown == 0)
+        {
+            KitchenOnFire();
+        }
 
+    }
+    public void KitchenOnFire()
+    {
+        isKitchenOnfire = true;
+        if(controller.roomNavigation.currentRoom.rooomName == "Kitchen" || controller.roomNavigation.currentRoom.rooomName == "Dining Room")
+        {
+            controller.dialogueController.StartDialogue(KitchenFireDobj, "Chalmers");
+        }
+        Kitchen.description = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!";
+    }
     public void chalmersGoodbye()
     {
         if (controller.politePoints <= 6 && controller.oddPoints > 6)
@@ -81,7 +103,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             controller.LogStringWithReturn("Chalmers: But I'm disappointed I didn't get to eat anything.");
         }
 
-        //EndGame();
+        controller.ShowEndGamePopup(controller.score,controller.oddPoints,controller.politePoints);
     }
     
     public void TakeInputFromDialogue(string command)//Take command strings from dialogue objects and use them to trigger events elsewhere in the code.
@@ -107,6 +129,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.playerInventory.Add(combomeal);
                 controller.playerInventory.Add(ribwich);
                 jermey.currentDialogue = krustyburgerbreak;
+                break;
+            case "endgame":
+                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints);
                 break;
         }
 
@@ -211,6 +236,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 break;
             case "oven":
                 isOvenOn = !isOvenOn;
+                if(isOvenOn == true) { controller.LogStringWithReturn("You turned the oven off."); } else { controller.LogStringWithReturn("You turned the oven on."); }
                 break;
             case "window":
                 break;

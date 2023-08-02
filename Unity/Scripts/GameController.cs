@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
         creatorText.text = "Game by Killer Kat, if you liked this check out my other projects at cyberkatcafe.com";
         popupPanel.SetActive(true);
     }
-    public void HideEndGamePopup()
+    public void HideEndGamePopup()//should prob rename this
     {
         Application.Quit(); // Close the application when the function is called
     }
@@ -102,6 +102,7 @@ public class GameController : MonoBehaviour
     {
         actionLog.Add(stringToAdd + "\n");
         secretNumber = Random.Range(0, 100);
+        HAMS.Tick();
     }
     // Update is called once per frame
     public void updateScore(int x)

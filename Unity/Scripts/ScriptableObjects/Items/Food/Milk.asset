@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
+  m_Name: Milk
+  m_EditorClassIdentifier: 
+  noun: milk
+  canTake: 1
+  description: Someone left a expired carton of expired milk laying out, unfortunately
+    you can smell it from here.
+  examineDescription: The last time you bought milk Reaganomics was still a class
+    in the school curriculum, and this well past expiration milk carton is a testament
+    to that.
+  useAction: Default
+  isContainer: 0
+  contentsItializationList: []
+  contents:
+  - {fileID: 0}

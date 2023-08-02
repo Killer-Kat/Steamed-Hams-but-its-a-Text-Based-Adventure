@@ -14,7 +14,11 @@ public class GameStartManager : MonoBehaviour
     private List<Person> masterPersonList; //Keeping lists of people is often frowned upon. 
     [SerializeField]
     private Person chalmers;
- 
+    [SerializeField]
+    private Room Kitchen;
+    [SerializeField]
+    private InteractableObject fridge;
+    public List<InteractableObject> fridgeList;
     [TextArea]
     [SerializeField]
     private string chalmersIntDesc;
@@ -31,12 +35,14 @@ public class GameStartManager : MonoBehaviour
             masterRoomList[i].peopleInRoom.AddRange(masterRoomList[i].peopleItializationList);
         }
 
-        for (int j = 0; j < masterContainerList.Count; j++) //Remember you have to add things to the list or this does not work!
+        for (int j = 0; j < masterContainerList.Count; j++) //Remember you have to add things to the list or this does not work! //dont add the fridge tho
         {
             masterContainerList[j].contents.Clear();
             masterContainerList[j].contents.AddRange(masterContainerList[j].contentsItializationList);// see above
         }
-
+        fridge.contents.Clear();
+        int RandomNum = Random.Range(0, fridgeList.Count);
+        fridge.contents.Add(fridgeList[RandomNum]);
         for (int k = 0; k < masterPersonList.Count; k++)
         {
             masterPersonList[k].currentDialogue = masterPersonList[k].intialDialogue; //Should set the actors current dialogue to their starting dialogue.
@@ -47,6 +53,9 @@ public class GameStartManager : MonoBehaviour
         chalmers.description = chalmersIntDesc;
         chalmers.name = "Chalmers";
         tv.examineDescription = "A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...";
+        Kitchen.description = "A small square teal colored kitchen with a window overlooking a nearby fast food resturant. Its obvious whover lives here is not a very good cook.";
+
+        //idea fridge has a random selection of contents every playthough
     }
     
 

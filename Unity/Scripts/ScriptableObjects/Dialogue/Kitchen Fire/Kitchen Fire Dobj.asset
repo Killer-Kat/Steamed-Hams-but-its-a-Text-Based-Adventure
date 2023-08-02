@@ -25,6 +25,6 @@ MonoBehaviour:
   option3: Nothing, everything is fine
   option4: What where?
   NextDialogue1: {fileID: 11400000, guid: 0cde39d5bae12d742a276f4dea319b00, type: 2}
-  NextDialogue2: {fileID: 0}
-  NextDialogue3: {fileID: 0}
-  NextDialogue4: {fileID: 0}
+  NextDialogue2: {fileID: 11400000, guid: 639a038e8ae73a64ebe8d25612ca8502, type: 2}
+  NextDialogue3: {fileID: 11400000, guid: 5493617af737fa4488b5c9060a38ed75, type: 2}
+  NextDialogue4: {fileID: 11400000, guid: cc64bddcc4c3f784d832b6d2df56f861, type: 2}

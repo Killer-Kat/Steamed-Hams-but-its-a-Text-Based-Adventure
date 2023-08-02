@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
+  m_Name: Canned Laughter
+  m_EditorClassIdentifier: 
+  noun: canned laughter
+  canTake: 1
+  description: You can hear the faint sounds of 90's sitcoms from a tin can labeled
+    "canned laughter"
+  examineDescription: 'Caned Laughter: Need a quick fix of humor without the hassle
+    of actually being funny? Look no further than this delightful can of pre-packaged
+    laughs.'
+  useAction: Default
+  isContainer: 0
+  contentsItializationList: []
+  contents: []

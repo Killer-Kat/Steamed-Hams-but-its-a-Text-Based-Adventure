@@ -41,6 +41,9 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
             case "endgame":
                 controller.ShowEndGamePopup(controller.score,controller.oddPoints,controller.politePoints);
                 break;
+            case "kitchenfire":
+                controller.HAMS.KitchenOnFire();
+                break;
             }
         
         

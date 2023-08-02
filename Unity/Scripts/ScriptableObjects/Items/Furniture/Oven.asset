@@ -17,8 +17,9 @@ MonoBehaviour:
   description: A cheap white oven takes center stage in the room.
   examineDescription: A cheap white oven with a 4 burner stove and a broken timer.
     It is currently on.
-  useAction: Default
+  useAction: oven
   isContainer: 1
   contentsItializationList:
   - {fileID: 11400000, guid: 458ced290d1833d4199d4eda70d02bcd, type: 2}
-  contents: []
+  contents:
+  - {fileID: 11400000, guid: 458ced290d1833d4199d4eda70d02bcd, type: 2}

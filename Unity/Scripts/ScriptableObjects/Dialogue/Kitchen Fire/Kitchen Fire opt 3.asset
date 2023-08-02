@@ -17,7 +17,7 @@ MonoBehaviour:
   scoreToGive: 1
   weirdPoints: 1
   politePoints: 1
-  HAMScommand: 
+  HAMScommand: endgame
   option1: NA
   option2: NA
   option3: NA
