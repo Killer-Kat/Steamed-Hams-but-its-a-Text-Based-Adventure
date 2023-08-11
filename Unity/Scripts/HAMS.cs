@@ -173,6 +173,43 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                     controller.LogStringWithReturn("If you were in the kitchen you could put this on a nice serving platter.");
                 }
                 break;
+            case "canned laughter":
+                controller.LogStringWithReturn("You open the can and for a split second feel the presence of a live studio audience as the sound of laughter escapes the steel container.");
+                for (int i = 0; i < controller.playerInventory.Count; i++)
+                {
+                    if(controller.playerInventory[i].noun == "canned laughter")
+                    {
+                        controller.playerInventory.RemoveAt(i);
+                    }
+                }
+                controller.updateScore(2);
+                break;
+            case "bucket":
+                if(controller.roomNavigation.currentRoom.rooomName == "Kitchen")
+                {
+                    if(isKitchenOnfire == true)
+                    {
+                        for (int i = 0; i < controller.playerInventory.Count; i++)
+                        {
+                            if (controller.playerInventory[i].noun == "bucket")
+                            {
+                                controller.playerInventory[i].contents.Clear();
+                            }
+                        }
+                        isKitchenOnfire = false;
+                        controller.updateScore(4);
+                        controller.LogStringWithReturn("You dump the bucket out and extinguish the fire!");
+                        if(isHouseOnFire == true)
+                        {
+                            controller.updateScore(-2);
+                            controller.LogStringWithReturn("It's too bad the rest of your house is on fire, because it relights the kitchen fire! If only you had done something sooner!");
+                            isKitchenOnfire = true;
+                        }
+                        else { Kitchen.description = "A small burnt formerly teal colored kitchen, almost everything in the room is scorched or has burnt away."; }
+                    }
+                    else { controller.LogStringWithReturn("The bucket is already full of ice, so you arent sure what you would use it for at the moment."); }
+                } else { controller.LogStringWithReturn("Try as you might you cant seem to think of a use for a bucket full of ice right now."); }
+                break;
             case "phone": // In the final version I want to have a UI phone where you can dial numbers, maybe even some secret numbers. But thats a lot of work and not in scope right now
                 controller.LogStringWithReturn("Cyberkat Cafe, Killer Kat speaking. Oh you are stuck in a text based adventure game? Have you tried using the Hint verb?, maybe it will help you. *click*");
                 break;
@@ -239,7 +276,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 if(isOvenOn == true) { controller.LogStringWithReturn("You turned the oven off."); } else { controller.LogStringWithReturn("You turned the oven on."); }
                 break;
             case "window":
-                break;
+                break; //Please refrain from breaking the window
         }
     }
 

@@ -19,7 +19,7 @@ MonoBehaviour:
   examineDescription: 'Caned Laughter: Need a quick fix of humor without the hassle
     of actually being funny? Look no further than this delightful can of pre-packaged
     laughs.'
-  useAction: Default
+  useAction: canned laughter
   isContainer: 0
   contentsItializationList: []
   contents: []
