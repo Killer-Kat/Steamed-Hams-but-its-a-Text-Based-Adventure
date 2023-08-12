@@ -11,6 +11,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public bool isKitchenOnfire = false;
     public bool isHouseOnFire = false;
     public int ovenKitchenFireCountdown; //may need to adjust this //Its the fire countdown do do dee do, do de de do 
+    public int kitchenFireSpreadCountdown; 
     public int burningHouseDeathCountdown; //tracks the amount of cupcakes you baked for the sugar princess, just kidding does what you think it does.
 
     public InteractableObject tv;
@@ -31,6 +32,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public InteractableObject oven;
     public bool isOvenOn = true;
 
+    public DialogueObject HouseFireDobj;
+
     public bool isSteamedHams = false;
     public bool didChalmersEat = false;
 
@@ -50,6 +53,22 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         if(ovenKitchenFireCountdown == 0)
         {
             KitchenOnFire();
+        }
+        if(isKitchenOnfire == true)
+        {
+            kitchenFireSpreadCountdown -= 1;
+        }
+        if(kitchenFireSpreadCountdown == 0)
+        {
+            HouseFire();
+        }
+        if(isHouseOnFire == true)
+        {
+            burningHouseDeathCountdown -= 1;
+        }
+        if(burningHouseDeathCountdown == 0)
+        {
+            BurningEnding();
         }
 
     }
@@ -105,7 +124,18 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 
         controller.ShowEndGamePopup(controller.score,controller.oddPoints,controller.politePoints);
     }
-    
+    public void HouseFire()
+    {
+        isHouseOnFire = true;
+        controller.dialogueController.StartDialogue(HouseFireDobj, "Mother");
+    }
+    public void BurningEnding()
+    {
+        controller.LogStringWithReturn("Your house has burnt down killing everyone inside.");
+        controller.LogStringWithReturn("You are dead.");
+        controller.displayText.color = Color.red;
+        controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints);
+    }
     public void TakeInputFromDialogue(string command)//Take command strings from dialogue objects and use them to trigger events elsewhere in the code.
     {
         switch (command)

@@ -16,7 +16,7 @@ MonoBehaviour:
   canTake: 1
   description: There is a metal bucket sitting here.
   examineDescription: A metal champagne bucket, it was a gift from mother.
-  useAction: Default
+  useAction: bucket
   isContainer: 1
   contentsItializationList:
   - {fileID: 11400000, guid: 323dce958e11d0e4b812cdb89b340a7a, type: 2}
