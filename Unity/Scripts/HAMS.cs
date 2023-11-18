@@ -302,8 +302,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 else { controller.LogStringWithReturn("You dont use the hanger, an odd thought pops into your head that you might need it for something else."); }
                 break;
             case "oven":
+                if(isOvenOn == true) { controller.LogStringWithReturn("You turned the oven off."); oven.examineDescription = "A cheap white oven with a 4 burner stove and a broken timer. It is currently off."; } else { controller.LogStringWithReturn("You turned the oven on."); oven.examineDescription = "A cheap white oven with a 4 burner stove and a broken timer. It is currently on.";}
                 isOvenOn = !isOvenOn;
-                if(isOvenOn == true) { controller.LogStringWithReturn("You turned the oven off."); } else { controller.LogStringWithReturn("You turned the oven on."); }
                 break;
             case "window":
                 break; //Please refrain from breaking the window
