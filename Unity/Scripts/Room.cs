@@ -9,6 +9,9 @@ public class Room : ScriptableObject
     public string description;
     public string rooomName;
     public Exit[] exits;
+
+    public List<Exit> exitItializationList;//Making a list of exits that should be in the room at game start, so we can change the exits durring the game.
+
     public List<InteractableObject> objectItializationList; //List of objects that should be in the room at start of game.
 
     public List<InteractableObject> InteractableObjectsInRoom;

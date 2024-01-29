@@ -35,6 +35,8 @@ public class GameStartManager : MonoBehaviour
 
             masterRoomList[i].peopleInRoom.Clear();// clears out any old people left in the room, also works on young people
             masterRoomList[i].peopleInRoom.AddRange(masterRoomList[i].peopleItializationList);
+
+           // masterRoomList[i].exits.lear //Can't clear an array like a list, using an array helps with serializing it in the editor but... Causes issues here. //Or DOES IT????
         }
 
         for (int j = 0; j < masterContainerList.Count; j++) //Remember you have to add things to the list or this does not work! //dont add the fridge tho
