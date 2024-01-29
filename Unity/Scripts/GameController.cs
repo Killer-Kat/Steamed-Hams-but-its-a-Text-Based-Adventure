@@ -127,5 +127,6 @@ public class GameController : MonoBehaviour
     {
         roomToReset.exits.Clear();
         roomToReset.exits.AddRange(roomToReset.exitItializationList);
+        roomNavigation.UnpackExitsInRoom();
     }
 }

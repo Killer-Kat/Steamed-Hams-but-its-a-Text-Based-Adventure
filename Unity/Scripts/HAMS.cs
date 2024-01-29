@@ -308,7 +308,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 isOvenOn = !isOvenOn;
                 break;
             case "window":
-                if (isWindowOpen == true) { controller.LogStringWithReturn("You close the window with a satisfying thud!"); window.examineDescription = "A large closed window that overlooks the Krustyburger, if you were into fitness this would be a good place to strech your calves."; controller.ResetRoomExits(Kitchen); } else { controller.LogStringWithReturn("Its a bit heavy but you manage to open the window. The smell of fast food grease wafts in on the breeeze."); window.examineDescription = "A large open window, fast food grease permeates the air in your kitchen."; Kitchen.exits.Add(KrustyBurgerExit); }
+                if (isWindowOpen == true) { controller.LogStringWithReturn("You close the window with a satisfying thud!"); window.examineDescription = "A large closed window that overlooks the Krustyburger, if you were into fitness this would be a good place to strech your calves."; controller.ResetRoomExits(Kitchen); controller.roomNavigation.UnpackExitsInRoom(); } else { controller.LogStringWithReturn("Its a bit heavy but you manage to open the window. The smell of fast food grease wafts in on the breeeze."); window.examineDescription = "A large open window, fast food grease permeates the air in your kitchen."; Kitchen.exits.Add(KrustyBurgerExit); }
                 isWindowOpen = !isWindowOpen;
                 break; //Please refrain from breaking the window
         }
