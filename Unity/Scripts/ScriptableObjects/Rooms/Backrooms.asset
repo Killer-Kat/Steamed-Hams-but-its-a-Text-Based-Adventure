@@ -28,5 +28,20 @@ MonoBehaviour:
   - keyString: west
     exitDescription: To the west you see an endless expanse of identical rooms.
     valueRoom: {fileID: 11400000}
+  exitItializationList:
+  - keyString: north
+    exitDescription: To the north you see an endless expanse of identical rooms.
+    valueRoom: {fileID: 11400000}
+  - keyString: east
+    exitDescription: To the east you see an endless expanse of identical rooms.
+    valueRoom: {fileID: 11400000}
+  - keyString: south
+    exitDescription: To the south you see an endless expanse of identical rooms.
+    valueRoom: {fileID: 11400000}
+  - keyString: west
+    exitDescription: To the west you see an endless expanse of identical rooms.
+    valueRoom: {fileID: 11400000}
   objectItializationList: []
   InteractableObjectsInRoom: []
+  peopleItializationList: []
+  peopleInRoom: []

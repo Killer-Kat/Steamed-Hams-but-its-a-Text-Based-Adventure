@@ -22,6 +22,13 @@ MonoBehaviour:
   - keyString: east
     exitDescription: to the east of you is your lawn.
     valueRoom: {fileID: 11400000, guid: b4d1999a9da544548a81dc8a9c0ad1a3, type: 2}
+  exitItializationList:
+  - keyString: north
+    exitDescription: Your front door is to the north.
+    valueRoom: {fileID: 11400000, guid: c5d919e02611d6c4f92a5dc4b2eb22db, type: 2}
+  - keyString: east
+    exitDescription: to the east of you is your lawn.
+    valueRoom: {fileID: 11400000, guid: b4d1999a9da544548a81dc8a9c0ad1a3, type: 2}
   objectItializationList: []
   InteractableObjectsInRoom: []
   peopleItializationList: []

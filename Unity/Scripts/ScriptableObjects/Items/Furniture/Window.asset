@@ -15,9 +15,9 @@ MonoBehaviour:
   noun: window
   canTake: 0
   description: A small window lights the room.
-  examineDescription: A large closed window that overlooks the Krustyburger, if you
-    were into fitness this would be a good place to strech your calves.
-  useAction: Default
+  examineDescription: A large open window, fast food grease permeates the air in
+    your kitchen.
+  useAction: window
   isContainer: 0
   contentsItializationList: []
   contents: []

@@ -26,6 +26,16 @@ MonoBehaviour:
   - keyString: west
     exitDescription: To the west is the window to your kitchen.
     valueRoom: {fileID: 11400000, guid: 42310b0770c371b449875fa5d46fd9ff, type: 2}
+  exitItializationList:
+  - keyString: south
+    exitDescription: To your south is your porch.
+    valueRoom: {fileID: 11400000, guid: 88cf63840c9da4740ae4a6eaff1ce7c6, type: 2}
+  - keyString: north
+    exitDescription: Just north of you is a Krusty Buger resturant.
+    valueRoom: {fileID: 11400000, guid: 23e8792f2d6ee664caa3cd76dd137313, type: 2}
+  - keyString: west
+    exitDescription: To the west is the window to your kitchen.
+    valueRoom: {fileID: 11400000, guid: 42310b0770c371b449875fa5d46fd9ff, type: 2}
   objectItializationList:
   - {fileID: 11400000, guid: 5ff245fb384856c498c84a584ecf8c20, type: 2}
   InteractableObjectsInRoom: []

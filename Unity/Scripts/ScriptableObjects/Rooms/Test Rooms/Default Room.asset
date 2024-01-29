@@ -26,6 +26,18 @@ MonoBehaviour:
     exitDescription: Out of the corner of your eye you can almost make out a passage
       to the backrooms.
     valueRoom: {fileID: 11400000, guid: 83335d33fa8f88744ae8542b17c536ee, type: 2}
+  exitItializationList:
+  - keyString: east
+    exitDescription: Somehow to the east is your dining room.
+    valueRoom: {fileID: 11400000, guid: c5d919e02611d6c4f92a5dc4b2eb22db, type: 2}
+  - keyString: north
+    exitDescription: You see a default doorway to the north, something about exiting
+      this way seems very default.
+    valueRoom: {fileID: 11400000, guid: f44e5f2a2a456c743bc95b8340364a47, type: 2}
+  - keyString: backrooms
+    exitDescription: Out of the corner of your eye you can almost make out a passage
+      to the backrooms.
+    valueRoom: {fileID: 11400000, guid: 83335d33fa8f88744ae8542b17c536ee, type: 2}
   objectItializationList:
   - {fileID: 11400000, guid: 00d74d83ca108e74dbabe5c8e5f29eb3, type: 2}
   - {fileID: 11400000, guid: 0ef485a3261528841b209574fa57dc9d, type: 2}

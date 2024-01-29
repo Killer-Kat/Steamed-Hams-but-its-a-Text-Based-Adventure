@@ -19,6 +19,11 @@ MonoBehaviour:
     exitDescription: There is a door to the south, its noticeably the least serious
       thing in the room.
     valueRoom: {fileID: 11400000, guid: a54dfd3d2a8dc1b439b0fc1696496580, type: 2}
+  exitItializationList:
+  - keyString: south
+    exitDescription: There is a door to the south, its noticeably the least serious
+      thing in the room.
+    valueRoom: {fileID: 11400000, guid: a54dfd3d2a8dc1b439b0fc1696496580, type: 2}
   objectItializationList:
   - {fileID: 11400000, guid: 2c089b98c71b45c4cbf91a46c4381c01, type: 2}
   - {fileID: 11400000, guid: b506314166fd772438fba2843545f806, type: 2}

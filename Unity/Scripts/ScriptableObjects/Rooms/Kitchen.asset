@@ -19,6 +19,10 @@ MonoBehaviour:
   - keyString: south
     exitDescription: To the south there is a door to the Dining Room.
     valueRoom: {fileID: 11400000, guid: c5d919e02611d6c4f92a5dc4b2eb22db, type: 2}
+  exitItializationList:
+  - keyString: south
+    exitDescription: To the south there is a door to the Dining Room.
+    valueRoom: {fileID: 11400000, guid: c5d919e02611d6c4f92a5dc4b2eb22db, type: 2}
   objectItializationList:
   - {fileID: 11400000, guid: e6fec1e813030af4a94aa0f974e46434, type: 2}
   - {fileID: 11400000, guid: 99d66b592bb1de6468ff2dc0074b9a41, type: 2}
