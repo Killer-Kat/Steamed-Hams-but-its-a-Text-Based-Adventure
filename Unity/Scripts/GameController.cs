@@ -123,4 +123,9 @@ public class GameController : MonoBehaviour
     {
         isVeryVerbose = !isVeryVerbose;
     }
+    public void ResetRoomExits(Room roomToReset)//Resets Room Exits, ok I know you didn't need this comment here to explain that, but then how else could I add this funny meta bit?
+    {
+        roomToReset.exits.Clear();
+        roomToReset.exits.AddRange(roomToReset.exitItializationList);
+    }
 }

@@ -64,6 +64,6 @@ public class GameStartManager : MonoBehaviour
 
         //idea fridge has a random selection of contents every playthough
     }
-    
+  
 
 }
