@@ -19,6 +19,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public int tvSecretCounter = 0;
     bool isTvFixed = false;
 
+    public InteractableObject table;
+    public bool isGrossFoodOnTable = false;
+
     public Person chalmers;
     public Person jermey;
 
@@ -123,8 +126,33 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         {
             controller.LogStringWithReturn("Chalmers: But I'm disappointed I didn't get to eat anything.");
         }
+        else if (controller.politePoints <= -1)
+        {
+            controller.LogStringWithReturn("Chalmers: But I'm happy to say YOU'RE FIRED!");
+        }
 
         controller.ShowEndGamePopup(controller.score,controller.oddPoints,controller.politePoints);
+    }
+
+    public void LunchMealLogic()
+    {
+        for (int i = 0; i < table.contents.Count; i++)
+        {
+            if(table.contents[i].isGrossFood == true)
+            {
+                isGrossFoodOnTable = true;
+            }
+            if(table.contents[i].noun == "steamed hams")
+            {
+                controller.updateScore(5);
+                didChalmersEat = true;
+            }else if(table.contents[i].noun == "combo meal")
+            {
+                controller.updateScore(2);
+                controller.UpdateOddPoints(2);
+                controller.UpdatePolitePoints(-2);
+            }
+        }
     }
     public void HouseFire()
     {
@@ -164,6 +192,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 break;
             case "endgame":
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints);
+                break;
+            case "steamedhams":
+                isSteamedHams = true;
                 break;
         }
 
