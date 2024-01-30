@@ -44,6 +44,9 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
             case "kitchenfire":
                 controller.HAMS.KitchenOnFire();
                 break;
+            case "cek":
+                controller.HAMS.ChalmersEntersKitchen();
+                break;
             }
         
         

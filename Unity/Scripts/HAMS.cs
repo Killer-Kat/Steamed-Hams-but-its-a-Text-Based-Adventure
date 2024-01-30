@@ -7,6 +7,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public GameController controller;
 
    public DialogueObject IntroDobj;
+    public DialogueObject ChalmersEntersKitchenDobjWindow; //dobj to use for CEK scene if window is open
+    public DialogueObject ChalmersEntersKitchenDobjNoWindow;
 
     public bool isKitchenOnfire = false;
     public bool isHouseOnFire = false;
@@ -85,6 +87,18 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             controller.dialogueController.StartDialogue(KitchenFireDobj, "Chalmers");
         }
         Kitchen.description = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!";
+    }
+
+    public void ChalmersEntersKitchen()
+    {
+        if (controller.roomNavigation.currentRoom.rooomName == "Kitchen" && isWindowOpen == false)
+        {
+            controller.dialogueController.StartDialogue(ChalmersEntersKitchenDobjNoWindow, "Chalmers");
+        }
+        else if (controller.roomNavigation.currentRoom.rooomName == "Kitchen" && isWindowOpen == true)
+        {
+            controller.dialogueController.StartDialogue(ChalmersEntersKitchenDobjWindow, "Chalmers");
+        }
     }
     public void chalmersGoodbye()
     {
