@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Combo Meal Lunch 4
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 0
-  NpcDialogue: 
-  scoreToGive: 0
-  weirdPoints: 0
-  politePoints: 0
+  NpcDialogue: Ah of course, my mistake.
+  scoreToGive: 1
+  weirdPoints: 1
+  politePoints: 1
   HAMScommand: 
-  option1: 
-  option2: 
-  option3: 
-  option4: 
-  NextDialogue1: {fileID: 0}
+  option1: Continue
+  option2: NA
+  option3: NA
+  option4: NA
+  NextDialogue1: {fileID: 11400000, guid: 73f43b3a5f40f2b47935055b77204041, type: 2}
   NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}
   NextDialogue4: {fileID: 0}

@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
-  m_Name: Roast 4
+  m_Name: Lunch Wine Glasses
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 0
-  NpcDialogue: Really? Well you certainly have strange tastes.
-  scoreToGive: 0
-  weirdPoints: 5
-  politePoints: 0
+  NpcDialogue: Ah I see you brought out the wine glasses, let me open the vintage.
+    Its a 1982 Sauvignon Blanc I picked up in New York while visting family.
+  scoreToGive: 1
+  weirdPoints: 0
+  politePoints: 2
   HAMScommand: 
   option1: Continue
   option2: NA

@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
   m_Name: Roast 1
   m_EditorClassIdentifier: 
-  IsEndOfDialogue: 1
+  IsEndOfDialogue: 0
   NpcDialogue: I see, well that is a shame.
   scoreToGive: 0
   weirdPoints: 0
   politePoints: 1
-  HAMScommand: startlunch
-  option1: 
-  option2: 
-  option3: 
-  option4: 
-  NextDialogue1: {fileID: 0}
+  HAMScommand: 
+  option1: Continue
+  option2: NA
+  option3: NA
+  option4: NA
+  NextDialogue1: {fileID: 11400000, guid: 73f43b3a5f40f2b47935055b77204041, type: 2}
   NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}
   NextDialogue4: {fileID: 0}

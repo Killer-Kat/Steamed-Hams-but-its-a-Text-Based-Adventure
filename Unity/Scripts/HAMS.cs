@@ -44,6 +44,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public DialogueObject LunchRoastDobj;
     public DialogueObject LunchComboMealDobj;
     public DialogueObject LunchHerringDobj;
+    public DialogueObject LunchWineGlassDobj;
     
 
     public bool isSteamedHams = false;
@@ -161,7 +162,12 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             {
                 isGrossFoodOnTable = true;
             }
-            if (table.contents[i].noun == "steamed hams")
+            if (table.contents[i].noun == "wine glasses")
+            {
+                controller.dialogueController.UnpackFromDialogueObject(LunchWineGlassDobj);
+                table.contents.RemoveAt(i);
+            }
+            else if (table.contents[i].noun == "steamed hams")
             {
                 controller.updateScore(5);
                 didChalmersEat = true;

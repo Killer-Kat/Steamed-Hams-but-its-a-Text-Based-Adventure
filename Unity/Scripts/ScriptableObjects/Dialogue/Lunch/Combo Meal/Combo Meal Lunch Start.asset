@@ -25,6 +25,6 @@ MonoBehaviour:
   option4: Oh you must have misheard me, I said I was buying something tasty not
     frying something tasty.
   NextDialogue1: {fileID: 11400000, guid: 988a7f73c561ca44f8fdab36c85f41b8, type: 2}
-  NextDialogue2: {fileID: 0}
-  NextDialogue3: {fileID: 0}
-  NextDialogue4: {fileID: 0}
+  NextDialogue2: {fileID: 11400000, guid: f4537b939eb6bc74cbf030dca86e5c4d, type: 2}
+  NextDialogue3: {fileID: 11400000, guid: 8af37d659d98726458edd5e784872687, type: 2}
+  NextDialogue4: {fileID: 11400000, guid: 629f10b3bdd98d34f8a16e37f2b88216, type: 2}
