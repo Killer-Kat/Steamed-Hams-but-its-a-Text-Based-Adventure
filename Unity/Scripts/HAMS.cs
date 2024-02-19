@@ -174,7 +174,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.UpdateOddPoints(5);
                 controller.UpdatePolitePoints(-5);
                     didChalmersEat = true;
-                //controller.dialogueController.StartDialogue(LunchRoastDobj, "Chalmers"); //Cant do this because it breaks the dialogue system to start a new dialogue while still in dialogue. 
+                controller.dialogueController.UnpackFromDialogueObject(LunchRoastDobj); //I am going to make a note here that I changed order that the dialogue controller unpacks dialogue objects so it runs the HAMS commands last so that I could get this to work right. Honestly it was driving me crazy, but thankfully I had my programmer socks on and was able to realize that I made the entire thing so I could just change it to work how I wanted. They really do make you better at coding! :3
 
             }
         }

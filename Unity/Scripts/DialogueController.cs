@@ -91,12 +91,9 @@ public class DialogueController : MonoBehaviour
         UnpackFromDialogueObject(Dobj);
 
     }
-    public void UnpackFromDialogueObject(DialogueObject dObject)// call this with a dialogue object to put it into the dialogue system.
+        public void UnpackFromDialogueObject(DialogueObject dObject)// call this with a dialogue object to put it into the dialogue system.
     {
-        if(dObject.HAMScommand != "")
-        {
-            controller.HAMS.TakeInputFromDialogue(dObject.HAMScommand);
-        }
+
 
         controller.UpdateOddPoints(dObject.weirdPoints);
         controller.UpdatePolitePoints(dObject.politePoints);
@@ -112,7 +109,10 @@ public class DialogueController : MonoBehaviour
             CloseButton.gameObject.SetActive(true);
         }
         else { CloseButton.gameObject.SetActive(false); }
-
+        if (dObject.HAMScommand != "")
+        {
+            controller.HAMS.TakeInputFromDialogue(dObject.HAMScommand);
+        }
     }
     public void DisplaySpeakerName(string npcNameToDisplay = "")
     {
