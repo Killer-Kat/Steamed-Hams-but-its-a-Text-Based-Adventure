@@ -42,6 +42,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public DialogueObject HouseFireDobj;
 
     public DialogueObject LunchRoastDobj;
+    public DialogueObject LunchComboMealDobj;
+    public DialogueObject LunchHerringDobj;
+    
 
     public bool isSteamedHams = false;
     public bool didChalmersEat = false;
@@ -162,20 +165,27 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             {
                 controller.updateScore(5);
                 didChalmersEat = true;
-            } else if (table.contents[i].noun == "combo meal")
+                table.contents.RemoveAt(i);
+            }
+            else if (table.contents[i].noun == "combo meal")
             {
-                controller.updateScore(2);
-                controller.UpdateOddPoints(2);
-                controller.UpdatePolitePoints(-2);
+                controller.dialogueController.UnpackFromDialogueObject(LunchComboMealDobj);
                 didChalmersEat = true;
-            } else if (table.contents[i].noun == "burnt roast")
+                table.contents.RemoveAt(i);
+            }
+            else if (table.contents[i].noun == "burnt roast")
             {
                 controller.updateScore(-1);
                 controller.UpdateOddPoints(5);
                 controller.UpdatePolitePoints(-5);
                     didChalmersEat = true;
                 controller.dialogueController.UnpackFromDialogueObject(LunchRoastDobj); //I am going to make a note here that I changed order that the dialogue controller unpacks dialogue objects so it runs the HAMS commands last so that I could get this to work right. Honestly it was driving me crazy, but thankfully I had my programmer socks on and was able to realize that I made the entire thing so I could just change it to work how I wanted. They really do make you better at coding! :3
-
+                table.contents.RemoveAt(i);
+            }
+            else if (table.contents[i].noun == "pickled herring")
+            {
+                controller.dialogueController.UnpackFromDialogueObject(LunchHerringDobj);
+                table.contents.RemoveAt(i);
             }
         }
     }

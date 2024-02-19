@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
-  m_Name: Roast 3
+  m_Name: Combo Meal Lunch 2
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 1
-  NpcDialogue: I thought you were making lunch today Seymore?
-  scoreToGive: 0
-  weirdPoints: 0
-  politePoints: -5
+  NpcDialogue: Seymour, this food is all still in the Krusty Burger packaging, you're
+    clearly lying to me.
+  scoreToGive: -3
+  weirdPoints: 1
+  politePoints: -2
   HAMScommand: startlunch
-  option1: 
-  option2: 
-  option3: 
-  option4: 
+  option1: NA
+  option2: NA
+  option3: NA
+  option4: NA
   NextDialogue1: {fileID: 0}
   NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}

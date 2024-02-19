@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
-  m_Name: Roast 3
+  m_Name: Combo Meal Lunch 3
   m_EditorClassIdentifier: 
-  IsEndOfDialogue: 1
-  NpcDialogue: I thought you were making lunch today Seymore?
+  IsEndOfDialogue: 0
+  NpcDialogue: 
   scoreToGive: 0
   weirdPoints: 0
-  politePoints: -5
-  HAMScommand: startlunch
+  politePoints: 0
+  HAMScommand: 
   option1: 
   option2: 
   option3: 

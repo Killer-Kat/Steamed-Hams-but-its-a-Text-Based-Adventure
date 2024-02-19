@@ -10,18 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
-  m_Name: Roast 3
+  m_Name: Herring Lunch
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 1
-  NpcDialogue: I thought you were making lunch today Seymore?
-  scoreToGive: 0
-  weirdPoints: 0
-  politePoints: -5
-  HAMScommand: startlunch
-  option1: 
-  option2: 
-  option3: 
-  option4: 
+  NpcDialogue: Seymore, what the hell is this? Some kind of pickled fish? I am not
+    eating this! It smells worse than that all Skunk petting zoo you arranged last
+    april!
+  scoreToGive: -2
+  weirdPoints: 3
+  politePoints: -1
+  HAMScommand: 
+  option1: NA
+  option2: NA
+  option3: NA
+  option4: NA
   NextDialogue1: {fileID: 0}
   NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}

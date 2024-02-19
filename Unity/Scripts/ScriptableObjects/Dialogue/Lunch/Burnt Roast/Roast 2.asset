@@ -17,7 +17,7 @@ MonoBehaviour:
   scoreToGive: 0
   weirdPoints: 1
   politePoints: -1
-  HAMScommand: 
+  HAMScommand: startlunch
   option1: 
   option2: 
   option3: 

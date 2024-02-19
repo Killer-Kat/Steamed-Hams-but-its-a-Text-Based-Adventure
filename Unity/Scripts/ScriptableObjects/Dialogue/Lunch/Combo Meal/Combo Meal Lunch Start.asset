@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
+  m_Name: Combo Meal Lunch Start
+  m_EditorClassIdentifier: 
+  IsEndOfDialogue: 0
+  NpcDialogue: Seymore this is a bag of Krusty Burger, I thought you were cooking
+    dinner?
+  scoreToGive: 1
+  weirdPoints: 2
+  politePoints: -2
+  HAMScommand: 
+  option1: I burnt my roast so I got a replacement.
+  option2: What? No I made all this myself.
+  option3: I thought you liked Krusty Burger?
+  option4: Oh you must have misheard me, I said I was buying something tasty not
+    frying something tasty.
+  NextDialogue1: {fileID: 11400000, guid: 988a7f73c561ca44f8fdab36c85f41b8, type: 2}
+  NextDialogue2: {fileID: 0}
+  NextDialogue3: {fileID: 0}
+  NextDialogue4: {fileID: 0}
