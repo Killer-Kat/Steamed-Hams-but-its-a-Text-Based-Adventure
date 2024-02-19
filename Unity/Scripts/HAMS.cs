@@ -41,6 +41,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 
     public DialogueObject HouseFireDobj;
 
+    public DialogueObject LunchRoastDobj;
+
     public bool isSteamedHams = false;
     public bool didChalmersEat = false;
 
@@ -156,15 +158,24 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             {
                 isGrossFoodOnTable = true;
             }
-            if(table.contents[i].noun == "steamed hams")
+            if (table.contents[i].noun == "steamed hams")
             {
                 controller.updateScore(5);
                 didChalmersEat = true;
-            }else if(table.contents[i].noun == "combo meal")
+            } else if (table.contents[i].noun == "combo meal")
             {
                 controller.updateScore(2);
                 controller.UpdateOddPoints(2);
                 controller.UpdatePolitePoints(-2);
+                didChalmersEat = true;
+            } else if (table.contents[i].noun == "burnt roast")
+            {
+                controller.updateScore(-1);
+                controller.UpdateOddPoints(5);
+                controller.UpdatePolitePoints(-5);
+                    didChalmersEat = true;
+                //controller.dialogueController.StartDialogue(LunchRoastDobj, "Chalmers"); //Cant do this because it breaks the dialogue system to start a new dialogue while still in dialogue. 
+
             }
         }
     }
@@ -209,6 +220,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 break;
             case "steamedhams":
                 isSteamedHams = true;
+                break;
+            case "startlunch":
+                LunchMealLogic();
                 break;
         }
 

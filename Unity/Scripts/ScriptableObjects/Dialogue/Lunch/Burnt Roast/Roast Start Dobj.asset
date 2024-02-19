@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
+  m_Name: Roast Start Dobj
+  m_EditorClassIdentifier: 
+  IsEndOfDialogue: 0
+  NpcDialogue: Seymore this roast is burnt, what happened?
+  scoreToGive: 0
+  weirdPoints: 0
+  politePoints: 0
+  HAMScommand: 
+  option1: I burnt it by mistake.
+  option2: It's not burnt, its just well done!
+  option3: It was mothers fault, she made it!
+  option4: This is just how I like it.
+  NextDialogue1: {fileID: 11400000, guid: 5d606d118ed2f584cb84328e07e41533, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: d0935125f313b444990e041234eab8ee, type: 2}
+  NextDialogue3: {fileID: 11400000, guid: 512e087465f679b4aa684373273bae94, type: 2}
+  NextDialogue4: {fileID: 0}
