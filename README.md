@@ -1,5 +1,9 @@
 # Steamed Hams but its a Text-Based Adventure
  Steamed Hams but its a Text-Based Adventure what more can I say?
+
+ Currently A WIP porting this over to unity and C# game is like %80 feature complete, just need to reimpliment the all the previous conversation options and fix the ending. Also because its a standalone unity app I need to implement main menu and pause menu. (As well as a save game mechanic). But as of 8/18/2024 all the verbs needed to complete the true run (doing the game exactly how it plays out in the show) are implimented, along with all rooms and items need for the true run. (Game will be feature complete when the true run is %100 and the game has the required UI/backend)
+
+ Old desc:
  Probably some instructions on how to play the game, the parser is very simple so you have to seperate the verb and noun with a colon : or it cant parse the input.
  For a list of commands use Help : Please, and yes you do have to say please.
  If you're still stuck there is a secret hint command, or maybe you could try calling someone for help...
