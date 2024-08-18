@@ -43,8 +43,10 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 
     public DialogueObject LunchRoastDobj;
     public DialogueObject LunchComboMealDobj;
+    public DialogueObject LunchRibwichDobj;
     public DialogueObject LunchHerringDobj;
     public DialogueObject LunchWineGlassDobj;
+   
     
 
     public bool isSteamedHams = false;
@@ -179,6 +181,12 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 didChalmersEat = true;
                 table.contents.RemoveAt(i);
             }
+            else if (table.contents[i].noun == "ribwich")
+            {
+                controller.updateScore(1);
+                controller.dialogueController.UnpackFromDialogueObject(LunchRibwichDobj);
+                table.contents.RemoveAt(i);
+            }
             else if (table.contents[i].noun == "burnt roast")
             {
                 controller.updateScore(-1);
@@ -194,6 +202,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 table.contents.RemoveAt(i);
             }
         }
+        //Note to self, add a catch here that moves us onto the post lunch scene
     }
     public void HouseFire()
     {

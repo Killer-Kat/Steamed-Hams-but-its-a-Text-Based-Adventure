@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
+  m_Name: Ribwich Lunch Start
+  m_EditorClassIdentifier: 
+  IsEndOfDialogue: 0
+  NpcDialogue: Seymore is that a Ribwich from Krusty Burger?
+  scoreToGive: 0
+  weirdPoints: 0
+  politePoints: 0
+  HAMScommand: 
+  option1: Yes, I thought you might like it
+  option2: No, It's a home made Rib Sandwich, old family recipe
+  option3: I have no idea what you're talking about *Quickly eat Ribwich*
+  option4: NA
+  NextDialogue1: {fileID: 11400000, guid: 23bfd329695ef704493cf566358674df, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: cd65bb03427cddf4ca226fccabae3139, type: 2}
+  NextDialogue3: {fileID: 11400000, guid: 5648db2d401fd68448d735a6e5879e32, type: 2}
+  NextDialogue4: {fileID: 0}
