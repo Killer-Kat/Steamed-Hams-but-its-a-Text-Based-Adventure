@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
-  m_Name: CEK Smoke 3
+  m_Name: Steamed Hams Lunch Start
   m_EditorClassIdentifier: 
-  IsEndOfDialogue: 1
-  NpcDialogue: 'Well I do like smoked ham, I''ll take my seat then.
+  IsEndOfDialogue: 0
+  NpcDialogue: '"Seymour: Superintendent I hope you''re ready for some mouth watering
+    hamburgers!
 
-    Chalmers
-    returns to the dining room.'
-  scoreToGive: 2
+    Chalmers: I thought we were having steamed clams?'
+  scoreToGive: 0
   weirdPoints: 0
   politePoints: 0
   HAMScommand: 
-  option1: NA
-  option2: NA
-  option3: NA
-  option4: NA
+  option1: 
+  option2: 
+  option3: 
+  option4: 
   NextDialogue1: {fileID: 0}
   NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}

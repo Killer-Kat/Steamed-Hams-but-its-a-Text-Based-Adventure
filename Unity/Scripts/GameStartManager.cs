@@ -20,6 +20,8 @@ public class GameStartManager : MonoBehaviour
     private InteractableObject fridge;
     [SerializeField]
     private InteractableObject oven;
+    [SerializeField]
+    private InteractableObject apron;
     public List<InteractableObject> fridgeList;
     [TextArea]
     [SerializeField]
@@ -55,6 +57,8 @@ public class GameStartManager : MonoBehaviour
         }
 
         controller.dialogueController.DisplaySpeakerName();//This should make it so you cannot see the speaker name at start.
+
+        controller.playerInventory.Add(apron); //Adds the white apron Seymour is wearing at the start to the player inventory.
 
         chalmers.description = chalmersIntDesc;
         chalmers.name = "Chalmers";

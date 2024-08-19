@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lunch Cont
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 1
-  NpcDialogue: 
+  NpcDialogue: Chalmers sneaks a glance at his watch.
   scoreToGive: 0
   weirdPoints: 0
   politePoints: 0

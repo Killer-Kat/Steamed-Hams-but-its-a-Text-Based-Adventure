@@ -19,9 +19,9 @@ MonoBehaviour:
   politePoints: 0
   HAMScommand: 
   option1: Ah Superintendent I was just checking on lunch.
-  option2: 
-  option3: 
-  option4: 
+  option2: NA
+  option3: NA
+  option4: NA
   NextDialogue1: {fileID: 11400000, guid: b78695d0462330c498a8a2ffebb7fe0a, type: 2}
   NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}

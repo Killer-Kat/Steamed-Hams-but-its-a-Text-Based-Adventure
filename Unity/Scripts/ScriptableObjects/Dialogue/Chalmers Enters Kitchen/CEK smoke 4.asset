@@ -21,10 +21,10 @@ MonoBehaviour:
   weirdPoints: 4
   politePoints: -2
   HAMScommand: 
-  option1: 
-  option2: 
-  option3: 
-  option4: 
+  option1: NA
+  option2: NA
+  option3: NA
+  option4: NA
   NextDialogue1: {fileID: 0}
   NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}

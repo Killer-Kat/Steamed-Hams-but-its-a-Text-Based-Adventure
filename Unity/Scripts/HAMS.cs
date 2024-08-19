@@ -9,6 +9,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
    public DialogueObject IntroDobj;
     public DialogueObject ChalmersEntersKitchenDobjWindow; //dobj to use for CEK scene if window is open
     public DialogueObject ChalmersEntersKitchenDobjNoWindow;
+    public int chalmersEnterKitchenCountdown; //Counter for having chalmers enter the kitchen before lunch
+    public bool skipChalmersEntersKitchen = false;
 
     public bool isKitchenOnfire = false;
     public bool isHouseOnFire = false;
@@ -88,6 +90,15 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         if(burningHouseDeathCountdown == 0)
         {
             BurningEnding();
+        }
+        if(skipChalmersEntersKitchen == false)
+        {
+            chalmersEnterKitchenCountdown -= 1;
+            if(chalmersEnterKitchenCountdown == 0)
+            {
+                ChalmersEntersKitchen();
+                skipChalmersEntersKitchen = true;
+            }
         }
 
     }
@@ -185,7 +196,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             {
                 controller.dialogueController.UnpackFromDialogueObject(LunchWineGlassDobj);
                 table.contents.RemoveAt(i);
-                break;
+                return;
             }
             if (table.contents[i].noun == "bucket")
             {
@@ -199,7 +210,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.updateScore(5);
                 didChalmersEat = true;
                 table.contents.RemoveAt(i);
-                break;
+                return;
             }
             else if (table.contents[i].noun == "combo meal")
             {
@@ -213,7 +224,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.updateScore(1);
                 controller.dialogueController.UnpackFromDialogueObject(LunchRibwichDobj);
                 table.contents.RemoveAt(i);
-                break;
+                return;
                 //Not going to have this count as chalmers eating, since you have the option to eat it yourself and I don't want to program that edge case right now.
             }
             else if (table.contents[i].noun == "burnt roast")
@@ -224,20 +235,20 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                     didChalmersEat = true;
                 controller.dialogueController.UnpackFromDialogueObject(LunchRoastDobj); //I am going to make a note here that I changed order that the dialogue controller unpacks dialogue objects so it runs the HAMS commands last so that I could get this to work right. Honestly it was driving me crazy, but thankfully I had my programmer socks on and was able to realize that I made the entire thing so I could just change it to work how I wanted. They really do make you better at coding! :3
                 table.contents.RemoveAt(i);
-                break;
+                return;
             }
             else if (table.contents[i].noun == "pickled herring")
             {
                 controller.dialogueController.UnpackFromDialogueObject(LunchHerringDobj);
                 table.contents.RemoveAt(i);
-                break;
+                return;
             }
             else if (table.contents[i].noun == "apple")
             {
                 controller.updateScore(1);
                 controller.dialogueController.UnpackFromDialogueObject(LunchAppleDobj);
                 table.contents.RemoveAt(i);
-                break;
+                return;
             }
             
         }
@@ -249,7 +260,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             Kitchen.description = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!";
             Debug.Log("post lunch fire triggered");
         }
-        //Note to self, add a catch here that moves us onto the post lunch scene
+        //Note to self, add a catch here that moves us onto the post lunch scene 
     }
     public void HouseFire()
     {
@@ -299,7 +310,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         }
 
     }
-    public void UseActionTree(string key) //This is a list containing all the logic that gets trigger when you use items
+    public void UseActionTree(string key) //This is a list containing all the logic that gets triggered when you use items
     {
         switch (key)
         {
