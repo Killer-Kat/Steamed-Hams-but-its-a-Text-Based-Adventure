@@ -19,11 +19,11 @@ MonoBehaviour:
   weirdPoints: 3
   politePoints: -4
   HAMScommand: 
-  option1: NA
+  option1: Continue
   option2: NA
   option3: NA
   option4: NA
-  NextDialogue1: {fileID: 0}
+  NextDialogue1: {fileID: 11400000, guid: 73f43b3a5f40f2b47935055b77204041, type: 2}
   NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}
   NextDialogue4: {fileID: 0}

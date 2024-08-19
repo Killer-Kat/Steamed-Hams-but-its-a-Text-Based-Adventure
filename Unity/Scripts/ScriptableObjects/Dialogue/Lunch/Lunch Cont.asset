@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lunch Cont
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 1
-  NpcDialogue: Placeholder text lol
+  NpcDialogue: 
   scoreToGive: 0
   weirdPoints: 0
   politePoints: 0

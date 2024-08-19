@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Kitchen Fire opt 2
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 1
-  NpcDialogue: Good thinking Seymore, I would call for help but I think Shauna took
-    my cellphone again!
+  NpcDialogue: Good thinking Seymore, I would call for help but I think Shauna stole
+    cellphone again!
   scoreToGive: 3
   weirdPoints: 0
   politePoints: 2

@@ -61,8 +61,6 @@ public class GameStartManager : MonoBehaviour
         tv.examineDescription = "A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...";
         Kitchen.description = "A small square teal colored kitchen with a window overlooking a nearby fast food resturant. Its obvious whover lives here is not a very good cook.";
         oven.examineDescription = "A cheap white oven with a 4 burner stove and a broken timer. It is currently on.";
-
-        //idea fridge has a random selection of contents every playthough
     }
   
 

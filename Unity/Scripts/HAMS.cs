@@ -15,6 +15,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public int ovenKitchenFireCountdown; //may need to adjust this //Its the fire countdown do do dee do, do de de do 
     public int kitchenFireSpreadCountdown; 
     public int burningHouseDeathCountdown; //tracks the amount of cupcakes you baked for the sugar princess, just kidding does what you think it does.
+    public bool triggerPostLunchFire = false; //In order to not break things, we are going to not trigger the first fire scene while the lunch scene happpens, if this bool is true we want to trigger that scene directly after the lunch scene.
 
     public InteractableObject tv;
     public bool isTVon = false;
@@ -22,7 +23,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     bool isTvFixed = false;
 
     public InteractableObject table;
-    public bool isGrossFoodOnTable = false;
+    public bool isGrossFoodOnTable = false; //If true there should be alt lines for if chalmers did or did not eat anything durring lunch
 
     public Person chalmers;
     public Person jermey;
@@ -45,14 +46,17 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public DialogueObject LunchComboMealDobj;
     public DialogueObject LunchRibwichDobj;
     public DialogueObject LunchHerringDobj;
+    public DialogueObject LunchAppleDobj;
     public DialogueObject LunchWineGlassDobj;
-   
+    public DialogueObject LunchBucketDobj;
+  
     
 
     public bool isSteamedHams = false;
     public bool didChalmersEat = false;
 
     public InteractableObject steamedHams;
+    public InteractableObject IceBucket;
     // Start is called before the first frame update
 
     public void IntroScene()
@@ -92,7 +96,14 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         isKitchenOnfire = true;
         if(controller.roomNavigation.currentRoom.rooomName == "Kitchen" || controller.roomNavigation.currentRoom.rooomName == "Dining Room")
         {
-            controller.dialogueController.StartDialogue(KitchenFireDobj, "Chalmers");
+            if (triggerPostLunchFire == false)
+            {
+                controller.dialogueController.StartDialogue(KitchenFireDobj, "Chalmers");
+            }
+            else
+            {
+                controller.dialogueController.UnpackFromDialogueObject(KitchenFireDobj); //Need to use unpack rather than start because in this case we are already in the dialogue system.
+            }
         }
         Kitchen.description = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!";
     }
@@ -158,6 +169,12 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 
     public void LunchMealLogic()
     {
+        Debug.Log("Lunch meal Logic function triggered");
+        if (isOvenOn == true && isKitchenOnfire == false && oven.contents.Count != 0 && table.contents.Count == 0)
+        {
+            triggerPostLunchFire = true;
+            isOvenOn = false;
+        }
         for (int i = 0; i < table.contents.Count; i++)
         {
             if(table.contents[i].isGrossFood == true)
@@ -168,24 +185,36 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             {
                 controller.dialogueController.UnpackFromDialogueObject(LunchWineGlassDobj);
                 table.contents.RemoveAt(i);
+                break;
+            }
+            if (table.contents[i].noun == "bucket")
+            {
+                controller.dialogueController.UnpackFromDialogueObject(LunchBucketDobj);
+                controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(IceBucket);
+                table.contents.RemoveAt(i);
+                return;
             }
             else if (table.contents[i].noun == "steamed hams")
             {
                 controller.updateScore(5);
                 didChalmersEat = true;
                 table.contents.RemoveAt(i);
+                break;
             }
             else if (table.contents[i].noun == "combo meal")
             {
                 controller.dialogueController.UnpackFromDialogueObject(LunchComboMealDobj);
                 didChalmersEat = true;
                 table.contents.RemoveAt(i);
+                return;
             }
             else if (table.contents[i].noun == "ribwich")
             {
                 controller.updateScore(1);
                 controller.dialogueController.UnpackFromDialogueObject(LunchRibwichDobj);
                 table.contents.RemoveAt(i);
+                break;
+                //Not going to have this count as chalmers eating, since you have the option to eat it yourself and I don't want to program that edge case right now.
             }
             else if (table.contents[i].noun == "burnt roast")
             {
@@ -195,12 +224,30 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                     didChalmersEat = true;
                 controller.dialogueController.UnpackFromDialogueObject(LunchRoastDobj); //I am going to make a note here that I changed order that the dialogue controller unpacks dialogue objects so it runs the HAMS commands last so that I could get this to work right. Honestly it was driving me crazy, but thankfully I had my programmer socks on and was able to realize that I made the entire thing so I could just change it to work how I wanted. They really do make you better at coding! :3
                 table.contents.RemoveAt(i);
+                break;
             }
             else if (table.contents[i].noun == "pickled herring")
             {
                 controller.dialogueController.UnpackFromDialogueObject(LunchHerringDobj);
                 table.contents.RemoveAt(i);
+                break;
             }
+            else if (table.contents[i].noun == "apple")
+            {
+                controller.updateScore(1);
+                controller.dialogueController.UnpackFromDialogueObject(LunchAppleDobj);
+                table.contents.RemoveAt(i);
+                break;
+            }
+            
+        }
+        if (triggerPostLunchFire == true)//this one should be last as if true it will put us in the post lunch fire scene.
+        {
+            //KitchenOnFire();
+            controller.dialogueController.UnpackFromDialogueObject(KitchenFireDobj); //hard coding this instead of calling the method becuase it breaks otherwise. ¯\_(.-.)_/¯ 
+            isKitchenOnfire = true;
+            Kitchen.description = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!";
+            Debug.Log("post lunch fire triggered");
         }
         //Note to self, add a catch here that moves us onto the post lunch scene
     }
