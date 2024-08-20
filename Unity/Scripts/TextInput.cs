@@ -39,5 +39,6 @@ public class TextInput : MonoBehaviour
         controller.DisplayLoggedText();
         inputField.ActivateInputField();
         inputField.text = null;
+        controller.HAMS.Tick(); //I put this here so that it should only tick once for each command parsed.
     }
 }

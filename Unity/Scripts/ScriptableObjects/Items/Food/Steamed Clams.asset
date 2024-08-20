@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
+  m_Name: Steamed Clams
+  m_EditorClassIdentifier: 
+  noun: steamed clams
+  canTake: 1
+  description: There is a silver serving tray here, it looks fancy because its covered
+    in tasty buttery steamed clams.
+  examineDescription: Steamed Clams just like they make them in springfield, it's
+    not every day your boss comes over for lunch, so you made sure to make something
+    special.
+  useAction: Default
+  isContainer: 0
+  isGrossFood: 0
+  contentsItializationList: []
+  contents: []

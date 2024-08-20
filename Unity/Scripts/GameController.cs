@@ -102,7 +102,7 @@ public class GameController : MonoBehaviour
     {
         actionLog.Add(stringToAdd + "\n");
         secretNumber = Random.Range(0, 100);
-        HAMS.Tick();
+        //HAMS.Tick(); //For some reason I had this here? I moved it to Textinput InputComplete() so that its only triggered once for each command parsed. 
     }
     // Update is called once per frame
     public void updateScore(int x)
