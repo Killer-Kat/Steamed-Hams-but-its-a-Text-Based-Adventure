@@ -18,11 +18,11 @@ MonoBehaviour:
   weirdPoints: 1
   politePoints: 0
   HAMScommand: 
-  option1: 
-  option2: 
-  option3: 
-  option4: 
-  NextDialogue1: {fileID: 0}
-  NextDialogue2: {fileID: 0}
-  NextDialogue3: {fileID: 0}
-  NextDialogue4: {fileID: 0}
+  option1: Upstate New York.
+  option2: Springfield
+  option3: Ohio River Valley.
+  option4: The Moon.
+  NextDialogue1: {fileID: 11400000, guid: 2758814aa384ac54eb8604d0db579876, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: 70a3ef49435a05143915165ec6047b67, type: 2}
+  NextDialogue3: {fileID: 11400000, guid: edddcee85c807e04792de34c85b38ba8, type: 2}
+  NextDialogue4: {fileID: 11400000, guid: 9a894efb68d62a04b8ec4903404b728a, type: 2}

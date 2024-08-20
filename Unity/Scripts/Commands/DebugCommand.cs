@@ -47,6 +47,9 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
             case "cek":
                 controller.HAMS.ChalmersEntersKitchen();
                 break;
+            case "steamedhams":
+                controller.dialogueController.StartDialogue(controller.HAMS.LunchSteamedHamsDobj, "Chalmers");
+                    break;
             }
         
         

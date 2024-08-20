@@ -46,6 +46,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 
     public DialogueObject LunchRoastDobj;
     public DialogueObject LunchComboMealDobj;
+    public DialogueObject LunchSteamedHamsDobj;
     public DialogueObject LunchRibwichDobj;
     public DialogueObject LunchHerringDobj;
     public DialogueObject LunchAppleDobj;
@@ -56,6 +57,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 
     public bool isSteamedHams = false;
     public bool didChalmersEat = false;
+    public bool wineGlassesUsed = false;
 
     public InteractableObject steamedHams;
     public InteractableObject IceBucket;
@@ -196,18 +198,24 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             {
                 controller.dialogueController.UnpackFromDialogueObject(LunchWineGlassDobj);
                 table.contents.RemoveAt(i);
+                wineGlassesUsed = true;
                 return;
             }
-            if (table.contents[i].noun == "bucket")
+            if (table.contents[i].noun == "bucket" && wineGlassesUsed == false)
             {
                 controller.dialogueController.UnpackFromDialogueObject(LunchBucketDobj);
                 controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(IceBucket);
                 table.contents.RemoveAt(i);
                 return;
+            } else if(table.contents[i].noun == "bucket" && wineGlassesUsed == true)  //still need to move the bucket off the table so the fire triggers, but dont want chalmers to scold the player for not having wine glasses.
+            {
+                controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(IceBucket);
+                table.contents.RemoveAt(i);
             }
             else if (table.contents[i].noun == "steamed hams")
             {
                 controller.updateScore(5);
+                controller.dialogueController.UnpackFromDialogueObject(LunchSteamedHamsDobj);
                 didChalmersEat = true;
                 table.contents.RemoveAt(i);
                 return;
@@ -247,6 +255,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             {
                 controller.updateScore(1);
                 controller.dialogueController.UnpackFromDialogueObject(LunchAppleDobj);
+                didChalmersEat = true;
                 table.contents.RemoveAt(i);
                 return;
             }
