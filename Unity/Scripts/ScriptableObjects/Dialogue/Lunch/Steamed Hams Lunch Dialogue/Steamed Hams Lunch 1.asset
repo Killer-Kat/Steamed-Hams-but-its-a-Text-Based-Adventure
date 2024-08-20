@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
+  m_Name: Steamed Hams Lunch 1
+  m_EditorClassIdentifier: 
+  IsEndOfDialogue: 0
+  NpcDialogue: You call hamburgers "steamed hams"?'
+  scoreToGive: 1
+  weirdPoints: 1
+  politePoints: 0
+  HAMScommand: 
+  option1: Yes, its a regional dialect.
+  option2: Yes, its jarhead slang I picked up durring my time in Vietnam.
+  option3: No, I call them steamed clams.
+  option4: NA
+  NextDialogue1: {fileID: 11400000, guid: f65bff5a0a2043c43b2798e342b3f412, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: e2098a159e42a1940a9811783d3742d0, type: 2}
+  NextDialogue3: {fileID: 0}
+  NextDialogue4: {fileID: 0}

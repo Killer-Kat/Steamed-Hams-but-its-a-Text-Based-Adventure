@@ -21,11 +21,11 @@ MonoBehaviour:
   weirdPoints: 0
   politePoints: 0
   HAMScommand: 
-  option1: 
-  option2: 
-  option3: 
-  option4: 
-  NextDialogue1: {fileID: 0}
-  NextDialogue2: {fileID: 0}
-  NextDialogue3: {fileID: 0}
-  NextDialogue4: {fileID: 0}
+  option1: Oh no, I said "steamed hams". Thats what I call hamburgers.
+  option2: I burnt the clams so I bought some hamburgers instead.
+  option3: We are, thats what I call hamburgers.
+  option4: You must have misheard me, maybe get a hearing aid old man.
+  NextDialogue1: {fileID: 11400000, guid: 0565d55434dc92b489fbf5eff7496226, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: 31d06a548122f2e429078015ca8a1f84, type: 2}
+  NextDialogue3: {fileID: 11400000, guid: f7003bdc966e952498efbbd0ad696a7d, type: 2}
+  NextDialogue4: {fileID: 11400000, guid: d1ed379c33b30b049b5774130ed09c49, type: 2}
