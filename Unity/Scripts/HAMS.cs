@@ -201,7 +201,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 wineGlassesUsed = true;
                 return;
             }
-            if (table.contents[i].noun == "bucket" && wineGlassesUsed == false)
+            else if (table.contents[i].noun == "bucket" && wineGlassesUsed == false && table.contents.Count == 1) //Issue, the bucket is always at the first index of the table contents so it always triggers the no wine glasses condition even when the wine glasses are present as it finds the bucket first. Bandaid fix add a check that there is only 1 item on the table, obviously this will break if the player puts a non food item on the table since it won't be removed by the script. But I can fix that edge case later
             {
                 controller.dialogueController.UnpackFromDialogueObject(LunchBucketDobj);
                 controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(IceBucket);
@@ -211,6 +211,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             {
                 controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(IceBucket);
                 table.contents.RemoveAt(i);
+                LunchMealLogic();//Since this does not trigger any dialogue which would run the LunchMealLogic() method again we have to call it here.
+                return;
             }
             else if (table.contents[i].noun == "steamed hams")
             {
