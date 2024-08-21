@@ -47,6 +47,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public DialogueObject LunchRoastDobj;
     public DialogueObject LunchComboMealDobj;
     public DialogueObject LunchSteamedHamsDobj;
+    public DialogueObject LunchHamburgersDobj;
     public DialogueObject LunchRibwichDobj;
     public DialogueObject LunchHerringDobj;
     public DialogueObject LunchAppleDobj;
@@ -55,11 +56,12 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
   
     
 
-    public bool isSteamedHams = false;
-    public bool didChalmersEat = false;
-    public bool wineGlassesUsed = false;
+    public bool isSteamedHams = false; //Has the player told chalmers that they were having "steamed clams" for dinner
+    public bool didChalmersEat = false; //Used to change the final dialogue based on player action.
+    public bool wineGlassesUsed = false; //Used during the lunch meal logic so that we can take the bucket off the table without scolding the player for not having wine glasses.
 
     public InteractableObject steamedHams;
+    public InteractableObject hamburgers; //Blasphemy!
     public InteractableObject IceBucket;
     // Start is called before the first frame update
 
@@ -221,6 +223,13 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 didChalmersEat = true;
                 table.contents.RemoveAt(i);
                 return;
+            }else if(table.contents[i].noun == "hamburgers")
+            {
+                controller.updateScore(5);
+                controller.dialogueController.UnpackFromDialogueObject(LunchHamburgersDobj);
+                didChalmersEat = true;
+                table.contents.RemoveAt(i);
+                return;
             }
             else if (table.contents[i].noun == "combo meal")
             {
@@ -336,7 +345,13 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                         if(controller.playerInventory[i].noun == "combo meal")
                         {
                             controller.playerInventory.RemoveAt(i);//should remove the combo meal from the players inventory.
-                            controller.playerInventory.Add(steamedHams);
+                            if (isSteamedHams == true)
+                            {
+                                controller.playerInventory.Add(steamedHams);
+                            }else
+                            {
+                                controller.playerInventory.Add(hamburgers);
+                            }
                             controller.LogStringWithReturn("You put the meal on a serving platter.");
                             return;
                         }
@@ -346,7 +361,14 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                         if(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun == "combo meal")
                         {
                             controller.roomNavigation.currentRoom.InteractableObjectsInRoom.RemoveAt(i);//should remove the combo meal from the rooms inventory.
-                            controller.playerInventory.Add(steamedHams);
+                            if (isSteamedHams == true)
+                            {
+                                controller.playerInventory.Add(steamedHams);
+                            }
+                            else
+                            {
+                                controller.playerInventory.Add(hamburgers);
+                            }
                             controller.LogStringWithReturn("You put the meal on a serving platter. You hope your boss wont notice you dropped it on the floor first.");
                             return;
                         }
