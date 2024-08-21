@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -46,9 +47,13 @@ public class GameController : MonoBehaviour
         creatorText.text = "Game by Killer Kat, if you liked this check out my other projects at cyberkatcafe.com";
         popupPanel.SetActive(true);
     }
-    public void HideEndGamePopup()//should prob rename this
+    public void HideEndGamePopup()//Need to rename this
     {
         Application.Quit(); // Close the application when the function is called
+    }
+    public void QuitToMenu()
+    {
+        SceneManager.LoadSceneAsync(0);
     }
     void Awake()
     {
