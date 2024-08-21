@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
   m_Name: Hamburgers
   m_EditorClassIdentifier: 
-  noun: name
-  canTake: 0
-  description: Description in room
-  examineDescription: The description returned when using examine
+  noun: hamburgers
+  canTake: 1
+  description: There is a silver serving tray here, it looks fancy but its just full
+    of cheap fast food.
+  examineDescription: Freshly cooked farm to table jumbo sliders on a brioche roll,
+    it's really just fast food on a fancy platter but you're trying your best.
   useAction: Default
   isContainer: 0
   isGrossFood: 0

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
+  m_Name: Hamburgers Lunch Start
+  m_EditorClassIdentifier: 
+  IsEndOfDialogue: 0
+  NpcDialogue: '"Seymour: Superintendent I hope you''re ready for some mouth watering
+    hamburgers!
+
+    Chalmers: I thought we were having a roast?'
+  scoreToGive: 0
+  weirdPoints: 0
+  politePoints: 0
+  HAMScommand: 
+  option1: Oh I must have misspoke, we are having hamburgers.
+  option2: I burnt the roast so I bought some hamburgers instead.
+  option3: We are, thats what I call hamburgers.
+  option4: You must have misheard me, maybe get a hearing aid old man.
+  NextDialogue1: {fileID: 11400000, guid: 4a9b0a9c52a34374b9096ecc4d53f394, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: ddf3b28b76dc1144081e3962b07790d7, type: 2}
+  NextDialogue3: {fileID: 11400000, guid: 45f27169ba7f65b47b9c4a74efcbaa9f, type: 2}
+  NextDialogue4: {fileID: 11400000, guid: 7c88f922ce9651943928e847470c4524, type: 2}
