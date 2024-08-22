@@ -26,6 +26,20 @@ public class GameController : MonoBehaviour
     public HAMS HAMS; //mmmmm steamed HAMS
 
     public List<InteractableObject> playerInventory;
+    //Saving and loading data
+    PersistentData persistentData = new PersistentData(); // Create an instance of PersistentData
+
+    void SaveData(PersistentData data)
+    {
+        JsonDataService dataService = new JsonDataService();
+        dataService.SaveData("player_progress.json", persistentData, false);
+    }
+
+    PersistentData LoadData()
+    {
+        JsonDataService dataService = new JsonDataService();
+        return dataService.LoadData<PersistentData>("player_progress.json",false);
+    }
 
     public int score;
 
@@ -64,8 +78,10 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        persistentData = LoadData();   // Load data if it exists
         DisplayRoomText();
         DisplayLoggedText();
+        
     }
     public void DisplayLoggedText()
     {
