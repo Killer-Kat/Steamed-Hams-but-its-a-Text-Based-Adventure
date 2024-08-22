@@ -75,6 +75,7 @@ public class GameController : MonoBehaviour
         politePointsText.text = "Your personality was " + politePoints + " Polite.";
         creatorText.text = "Game by Killer Kat, if you liked this check out my other projects at cyberkatcafe.com";
         persistentData.hasCompletedFirstLoop = true;
+        persistentData.NumberOfTimeLoops += 1;
         SerializeJson();
         popupPanel.SetActive(true);
     }
