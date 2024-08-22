@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameController : MonoBehaviour
 {
@@ -27,19 +28,9 @@ public class GameController : MonoBehaviour
 
     public List<InteractableObject> playerInventory;
     //Saving and loading data
-    PersistentData persistentData = new PersistentData(); // Create an instance of PersistentData
+    public PersistentData persistentData = new PersistentData(); // Create an instance of PersistentData
+    IDataService DataService = new JsonDataService();
 
-    void SaveData(PersistentData data)
-    {
-        JsonDataService dataService = new JsonDataService();
-        dataService.SaveData("player_progress.json", persistentData, false);
-    }
-
-    PersistentData LoadData()
-    {
-        JsonDataService dataService = new JsonDataService();
-        return dataService.LoadData<PersistentData>("player_progress.json",false);
-    }
 
     public int score;
 
@@ -53,20 +44,48 @@ public class GameController : MonoBehaviour
     public Text politePointsText;
     public Text creatorText; // For displaying the game creator's information
     public GameObject popupPanel;
+
+    public void SerializeJson()
+    {
+        if (DataService.SaveData("/persistentData.json", persistentData, false))
+        {
+
+        }
+        else
+        {
+            Debug.LogError("Could not save file!");
+        }
+    }
+    public void UnserializeJson() 
+    {
+        try 
+        { 
+            PersistentData data = DataService.LoadData<PersistentData>("/persistentData.json", false);
+            persistentData = data;
+        }
+        catch(Exception e)
+        {
+            Debug.LogError($"Could not read file!");
+        }
+    }
     public void ShowEndGamePopup(int score, int oddPoints, int politePoints)
     {
         endGamePopupScoreText.text = "Game over you scored: " + score + " points.";
         oddPointsText.text = "Your personality was " + oddPoints + " Odd.";
         politePointsText.text = "Your personality was " + politePoints + " Polite.";
         creatorText.text = "Game by Killer Kat, if you liked this check out my other projects at cyberkatcafe.com";
+        persistentData.hasCompletedFirstLoop = true;
+        SerializeJson();
         popupPanel.SetActive(true);
     }
     public void HideEndGamePopup()//Need to rename this
     {
+        SerializeJson();
         Application.Quit(); // Close the application when the function is called
     }
     public void QuitToMenu()
     {
+        SerializeJson();
         SceneManager.LoadSceneAsync(0);
     }
     void Awake()
@@ -78,7 +97,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        persistentData = LoadData();   // Load data if it exists
+        UnserializeJson();
         DisplayRoomText();
         DisplayLoggedText();
         
@@ -122,7 +141,7 @@ public class GameController : MonoBehaviour
     public void LogStringWithReturn(string stringToAdd)
     {
         actionLog.Add(stringToAdd + "\n");
-        secretNumber = Random.Range(0, 100);
+        secretNumber = UnityEngine.Random.Range(0, 100);
         //HAMS.Tick(); //For some reason I had this here? I moved it to Textinput InputComplete() so that its only triggered once for each command parsed. 
     }
     // Update is called once per frame

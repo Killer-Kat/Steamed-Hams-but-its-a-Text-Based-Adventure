@@ -48,7 +48,25 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
             case "steamedhams":
                 controller.dialogueController.StartDialogue(controller.HAMS.LunchSteamedHamsDobj, "Chalmers");
                     break;
-            }
+            case "save":
+                controller.SerializeJson();
+                break;
+            case "load":
+                controller.UnserializeJson();
+                break;
+            case "dumpsave":
+                string saveDumpStr;
+                if (controller.persistentData.hasCompletedFirstLoop == true)
+                {
+                    saveDumpStr = "Player has completed first loop";
+                }
+                else
+                {
+                    saveDumpStr = "Player has not completed first loop";
+                }
+                controller.LogStringWithReturn(saveDumpStr);
+                break;
+        }
         
         
     }
