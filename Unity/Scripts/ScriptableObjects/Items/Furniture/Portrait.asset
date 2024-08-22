@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noun: portrait
   canTake: 0
-  description: There is a  portrait of you on the wall here.
+  description: There is a portrait of you on the wall here.
   examineDescription: The description returned when using examine
   useAction: Default
   isContainer: 0

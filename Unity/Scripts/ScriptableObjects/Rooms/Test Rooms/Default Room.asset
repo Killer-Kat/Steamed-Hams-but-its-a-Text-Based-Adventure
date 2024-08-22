@@ -42,7 +42,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00d74d83ca108e74dbabe5c8e5f29eb3, type: 2}
   - {fileID: 11400000, guid: 0ef485a3261528841b209574fa57dc9d, type: 2}
   - {fileID: 11400000, guid: e80bab77a7805cc42abff58002db216e, type: 2}
+  - {fileID: 11400000, guid: e56db03282337554e9c8bcbe6a8b2c1c, type: 2}
   InteractableObjectsInRoom:
+  - {fileID: 11400000, guid: 00d74d83ca108e74dbabe5c8e5f29eb3, type: 2}
   - {fileID: 11400000, guid: 0ef485a3261528841b209574fa57dc9d, type: 2}
+  - {fileID: 11400000, guid: e80bab77a7805cc42abff58002db216e, type: 2}
+  - {fileID: 11400000, guid: e56db03282337554e9c8bcbe6a8b2c1c, type: 2}
   peopleItializationList: []
   peopleInRoom: []
