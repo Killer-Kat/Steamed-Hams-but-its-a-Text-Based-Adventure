@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 [CreateAssetMenu(menuName = "TextAdventure/InputActions/Debug")]
 public class DebugCommand : InputAction //Cant name it debug becuase unity already has a debug script in this namespace and it will override it.
