@@ -326,6 +326,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             case "startlunch":
                 LunchMealLogic();
                 break;
+            case "speedrun":
+                EndingManager("speedrun");
+                break;
         }
 
     }
@@ -502,6 +505,16 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.displayText.color = Color.red;
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Burning Death ending: You and everyone else inside your house perish in the flaming inferno, if only you had put out the fire!");
                 controller.persistentData.hasBurningDeathEnding = true; controller.persistentData.hasDied = true;
+                break;
+            case "chalmersLeaves":
+                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Chalmers Leaves ending: Chalmers is disgusted by your antics and leaves early. You should really be ashamed of yourself, acting like that.");
+                controller.persistentData.hasChalmersLeavesEnding = true;
+                break;
+            case "insanity":
+                break;
+            case "speedrun":
+                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "Congradulations you got the Speedrun ending: Wow, you sure did finish the game really fast. Do you want to try actually playing now?");
+                controller.persistentData.hasSpeedrunEnding = true;
                 break;
         }
     }

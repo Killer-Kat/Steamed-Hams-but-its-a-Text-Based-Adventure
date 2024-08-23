@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Speedrun ending
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 1
-  NpcDialogue: "SEYMOREEEEEE! \nCongradulations you have reached the speedrun ending."
-  scoreToGive: -2
+  NpcDialogue: 'SEYMOREEEEEE!  '
+  scoreToGive: -100
   weirdPoints: 0
   politePoints: -10
-  HAMScommand: endgame
+  HAMScommand: speedrun
   option1: NA
   option2: NA
   option3: NA

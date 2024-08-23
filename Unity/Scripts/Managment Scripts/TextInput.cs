@@ -36,6 +36,13 @@ public class TextInput : MonoBehaviour
 
     void InputComplete()
     {
+        if (controller.isVerbose && controller.verboseSkip == false)
+        {
+            controller.DisplayRoomText(); // not sure if this will work
+        }else if (controller.isVerbose)
+        {
+            controller.verboseSkip = false; //feels like this is a resource heavy way to do this, maybe fix later?
+        }
         controller.DisplayLoggedText();
         inputField.ActivateInputField();
         inputField.text = null;

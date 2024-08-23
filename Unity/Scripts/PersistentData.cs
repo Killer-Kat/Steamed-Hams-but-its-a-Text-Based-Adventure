@@ -12,6 +12,9 @@ public class PersistentData
 
     //Endings
     public bool hasBurningDeathEnding = false;
+    public bool hasChalmersLeavesEnding = false;
+    public bool hasInsanityEnding = false;
+    public bool hasSpeedrunEnding = false;
 
     //Settings
 

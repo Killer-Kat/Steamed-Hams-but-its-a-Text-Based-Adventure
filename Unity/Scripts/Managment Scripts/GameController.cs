@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
 
     public bool isVerbose = false; //For verbose mode to be implemented later
     public bool isVeryVerbose = false; //IDEA!!! extremely verbose mode easter egg that includes a ton of mostly useless data, like internal stats, "moon phase", random stuff like that sort of like the undertale dating game
+    public bool verboseSkip = false;
+    public GameObject veryVerboseUI;
 
     [HideInInspector] public RoomNavigation roomNavigation;
     [HideInInspector] public List<string> interactionDescriptionsInRoom = new List<string>();
@@ -163,6 +165,14 @@ public class GameController : MonoBehaviour
   public void ToggleVeryVerboseMode()
     {
         isVeryVerbose = !isVeryVerbose;
+        if(isVeryVerbose == true)
+        {
+            veryVerboseUI.SetActive(true);
+        }
+        else
+        {
+            veryVerboseUI.SetActive(false);
+        }
     }
     public void ResetRoomExits(Room roomToReset)//Resets Room Exits, ok I know you didn't need this comment here to explain that, but then how else could I add this funny meta bit?
     {
