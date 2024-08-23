@@ -73,6 +73,9 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                 controller.SerializeJson();
                 controller.LogStringWithReturn("Reset game progress.");
                 break;
+            case "moon":
+                //Call change moon phase method from game start script
+                break;
         }
         
         
