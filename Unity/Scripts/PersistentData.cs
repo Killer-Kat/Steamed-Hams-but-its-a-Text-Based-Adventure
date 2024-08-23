@@ -15,6 +15,7 @@ public class PersistentData
     public bool hasChalmersLeavesEnding = false;
     public bool hasInsanityEnding = false;
     public bool hasSpeedrunEnding = false;
+    public bool hasFiredEnding = false;
 
     //Settings
 

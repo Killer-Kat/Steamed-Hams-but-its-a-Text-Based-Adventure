@@ -329,6 +329,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             case "speedrun":
                 EndingManager("speedrun");
                 break;
+            case "fired":
+                EndingManager("fired");
+                break;
         }
 
     }
@@ -515,6 +518,10 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             case "speedrun":
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "Congradulations you got the Speedrun ending: Wow, you sure did finish the game really fast. Do you want to try actually playing now?");
                 controller.persistentData.hasSpeedrunEnding = true;
+                break;
+            case "fired":
+                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Fired ending: You have lost your job aftering a frankly disastrous lunch. How are you going to recover from this?");
+                controller.persistentData.hasFiredEnding = true;
                 break;
         }
     }
