@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
     public Text creatorText; // For displaying the game creator's information
     public GameObject popupPanel;
 
-    public void SerializeJson()
+    public void SerializeJson() //Save game data
     {
         if (DataService.SaveData("/persistentData.json", persistentData, false))
         {

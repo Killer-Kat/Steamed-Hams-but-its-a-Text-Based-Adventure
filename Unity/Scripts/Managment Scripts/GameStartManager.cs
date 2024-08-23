@@ -23,6 +23,7 @@ public class GameStartManager : MonoBehaviour
     [SerializeField]
     private InteractableObject apron;
     public List<InteractableObject> fridgeList;
+    public List<InteractableObject> ovenList;
     [TextArea]
     [SerializeField]
     private string chalmersIntDesc;
@@ -45,7 +46,7 @@ public class GameStartManager : MonoBehaviour
 
         }
 
-        for (int j = 0; j < masterContainerList.Count; j++) //Remember you have to add things to the list or this does not work! //dont add the fridge tho
+        for (int j = 0; j < masterContainerList.Count; j++) //Remember you have to add things to the list or this does not work! //dont add the fridge tho //or the oven
         {
             masterContainerList[j].contents.Clear();
             masterContainerList[j].contents.AddRange(masterContainerList[j].contentsItializationList);// see above
@@ -53,6 +54,8 @@ public class GameStartManager : MonoBehaviour
         fridge.contents.Clear();
         int RandomNum = Random.Range(0, fridgeList.Count);
         fridge.contents.Add(fridgeList[RandomNum]);
+
+        
         for (int k = 0; k < masterPersonList.Count; k++)
         {
             masterPersonList[k].currentDialogue = masterPersonList[k].intialDialogue; //Should set the actors current dialogue to their starting dialogue.
@@ -72,6 +75,18 @@ public class GameStartManager : MonoBehaviour
     public void Start()
     {
         UpdatePortrait();
+    }
+    public void SetOvenContents() {
+        if (controller.persistentData.hasCompletedFirstLoop == true)
+        {
+            oven.contents.Clear();
+            int RandomNum2 = Random.Range(0, ovenList.Count);
+            oven.contents.Add(ovenList[RandomNum2]);
+        }
+        else
+        {
+            oven.contents.AddRange(oven.contentsItializationList);
+        }
     }
     public void UpdatePortrait()
     {

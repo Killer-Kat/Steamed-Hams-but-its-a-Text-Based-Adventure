@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
+  m_Name: Roasting Pan
+  m_EditorClassIdentifier: 
+  noun: roasting pan
+  canTake: 1
+  description: There is roasting pan here.
+  examineDescription: A stainless steel roasting pan, with the notable absence of
+    a roast despite the still liquid fat pooling in the bottom as testimony to the
+    existance of the missing roast.
+  useAction: Default
+  isContainer: 1
+  isGrossFood: 0
+  contentsItializationList: []
+  contents: []

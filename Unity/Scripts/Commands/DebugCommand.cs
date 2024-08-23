@@ -66,6 +66,13 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                 }
                 controller.LogStringWithReturn(saveDumpStr);
                 break;
+            case "forget":
+                controller.persistentData.hasCompletedFirstLoop = false;
+                controller.persistentData.NumberOfTimeLoops = 0;
+                controller.persistentData.hasDied = false;
+                controller.SerializeJson();
+                controller.LogStringWithReturn("Reset game progress.");
+                break;
         }
         
         
