@@ -31,6 +31,8 @@ public class GameStartManager : MonoBehaviour
     private InteractableObject tv;
     [SerializeField]
     private InteractableObject portrait;
+
+    string[] moonPhases = { "New Moon", "Waxing Crescent", "First Quarter", "Waxing Gibbous", "Full Moon", "Waning Gibbous", "Third Quarter", "Waning Crescent"};
     void Awake()
     {
         for (int i = 0; i < masterRoomList.Count; i++)
@@ -70,7 +72,10 @@ public class GameStartManager : MonoBehaviour
         tv.examineDescription = "A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...";
         Kitchen.description = "A small square teal colored kitchen with a window overlooking a nearby fast food resturant. Its obvious whover lives here is not a very good cook.";
         oven.examineDescription = "A cheap white oven with a 4 burner stove and a broken timer. It is currently on.";
-        
+
+        int randomIndex = UnityEngine.Random.Range(0, moonPhases.Length);
+        controller.moonPhaseText.text = "Moon Phase: " + moonPhases[randomIndex];
+        controller.moonPhaseImage.sprite = controller.moonPhaseSprites[randomIndex];
     }
     public void Start()
     {

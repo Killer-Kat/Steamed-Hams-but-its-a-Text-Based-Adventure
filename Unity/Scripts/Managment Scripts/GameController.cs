@@ -17,6 +17,10 @@ public class GameController : MonoBehaviour
     public bool isVeryVerbose = false; //IDEA!!! extremely verbose mode easter egg that includes a ton of mostly useless data, like internal stats, "moon phase", random stuff like that sort of like the undertale dating game
     public bool verboseSkip = false;
     public GameObject veryVerboseUI;
+    public Text veryVerboseStatsText;
+    public Sprite[] moonPhaseSprites;
+    public Image moonPhaseImage;
+    public Text moonPhaseText;
 
     [HideInInspector] public RoomNavigation roomNavigation;
     [HideInInspector] public List<string> interactionDescriptionsInRoom = new List<string>();

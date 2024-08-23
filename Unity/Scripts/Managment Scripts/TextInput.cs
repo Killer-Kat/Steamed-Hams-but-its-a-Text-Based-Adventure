@@ -43,6 +43,10 @@ public class TextInput : MonoBehaviour
         {
             controller.verboseSkip = false; //feels like this is a resource heavy way to do this, maybe fix later?
         }
+        if(controller.isVeryVerbose == true)
+        {
+            controller.veryVerboseStatsText.text = "Odd Points: " + controller.oddPoints + " Polite Points: " + controller.politePoints + " Secret Number: " + controller.secretNumber;
+        }
         controller.DisplayLoggedText();
         inputField.ActivateInputField();
         inputField.text = null;
