@@ -75,6 +75,7 @@ public class GameStartManager : MonoBehaviour
     public void Start()
     {
         UpdatePortrait();
+        SetOvenContents();
     }
     public void SetOvenContents() {
         if (controller.persistentData.hasCompletedFirstLoop == true)

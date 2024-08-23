@@ -40,9 +40,9 @@ public class GameController : MonoBehaviour
     public int secretNumber; //For use in easter eggs and also very verbose mode
     //Stuff for endgame UI
     public Text endGamePopupScoreText;
-    public Text oddPointsText;
-    public Text politePointsText;
+    public Text personalityPointsText;
     public Text creatorText; // For displaying the game creator's information
+    public Text GameEndingText; //The text telling you which ending you got.
     public GameObject popupPanel;
 
     public void SerializeJson() //Save game data
@@ -68,11 +68,11 @@ public class GameController : MonoBehaviour
             Debug.LogError($"Could not read file!");
         }
     }
-    public void ShowEndGamePopup(int score, int oddPoints, int politePoints)
+    public void ShowEndGamePopup(int score, int oddPoints, int politePoints, string endingText)
     {
         endGamePopupScoreText.text = "Game over you scored: " + score + " points.";
-        oddPointsText.text = "Your personality was " + oddPoints + " Odd.";
-        politePointsText.text = "Your personality was " + politePoints + " Polite.";
+        personalityPointsText.text = "Your personality was " + oddPoints + " Odd." + " And " + politePoints + " Polite.";
+        GameEndingText.text = endingText;
         creatorText.text = "Game by Killer Kat, if you liked this check out my other projects at cyberkatcafe.com";
         persistentData.hasCompletedFirstLoop = true;
         persistentData.NumberOfTimeLoops += 1;

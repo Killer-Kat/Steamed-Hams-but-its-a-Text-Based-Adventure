@@ -6,7 +6,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 {
     public GameController controller;
 
-   public DialogueObject IntroDobj;
+    public DialogueObject IntroDobj;
     public DialogueObject ChalmersEntersKitchenDobjWindow; //dobj to use for CEK scene if window is open
     public DialogueObject ChalmersEntersKitchenDobjNoWindow;
     public int chalmersEnterKitchenCountdown; //Counter for having chalmers enter the kitchen before lunch
@@ -15,7 +15,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public bool isKitchenOnfire = false;
     public bool isHouseOnFire = false;
     public int ovenKitchenFireCountdown; //may need to adjust this //Its the fire countdown do do dee do, do de de do 
-    public int kitchenFireSpreadCountdown; 
+    public int kitchenFireSpreadCountdown;
     public int burningHouseDeathCountdown; //tracks the amount of cupcakes you baked for the sugar princess, just kidding does what you think it does.
     public bool triggerPostLunchFire = false; //In order to not break things, we are going to not trigger the first fire scene while the lunch scene happpens, if this bool is true we want to trigger that scene directly after the lunch scene.
 
@@ -48,13 +48,15 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public DialogueObject LunchComboMealDobj;
     public DialogueObject LunchSteamedHamsDobj;
     public DialogueObject LunchHamburgersDobj;
+    public DialogueObject LunchPerfectRoastDobj;
+    public DialogueObject LunchSteamedClamsDobj;
     public DialogueObject LunchRibwichDobj;
     public DialogueObject LunchHerringDobj;
     public DialogueObject LunchAppleDobj;
     public DialogueObject LunchWineGlassDobj;
     public DialogueObject LunchBucketDobj;
-  
-    
+
+
 
     public bool isSteamedHams = false; //Has the player told chalmers that they were having "steamed clams" for dinner
     public bool didChalmersEat = false; //Used to change the final dialogue based on player action.
@@ -75,30 +77,30 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         {
             ovenKitchenFireCountdown -= 1;
         }
-        if(ovenKitchenFireCountdown == 0)
+        if (ovenKitchenFireCountdown == 0)
         {
             KitchenOnFire();
         }
-        if(isKitchenOnfire == true)
+        if (isKitchenOnfire == true)
         {
             kitchenFireSpreadCountdown -= 1;
         }
-        if(kitchenFireSpreadCountdown == 0)
+        if (kitchenFireSpreadCountdown == 0)
         {
             HouseFire();
         }
-        if(isHouseOnFire == true)
+        if (isHouseOnFire == true)
         {
             burningHouseDeathCountdown -= 1;
         }
-        if(burningHouseDeathCountdown == 0)
+        if (burningHouseDeathCountdown == 0)
         {
-            BurningEnding();
+            EndingManager("burningDeath");
         }
-        if(skipChalmersEntersKitchen == false)
+        if (skipChalmersEntersKitchen == false)
         {
             chalmersEnterKitchenCountdown -= 1;
-            if(chalmersEnterKitchenCountdown == 0)
+            if (chalmersEnterKitchenCountdown == 0)
             {
                 ChalmersEntersKitchen();
                 skipChalmersEntersKitchen = true;
@@ -109,7 +111,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public void KitchenOnFire()
     {
         isKitchenOnfire = true;
-        if(controller.roomNavigation.currentRoom.rooomName == "Kitchen" || controller.roomNavigation.currentRoom.rooomName == "Dining Room")
+        if (controller.roomNavigation.currentRoom.rooomName == "Kitchen" || controller.roomNavigation.currentRoom.rooomName == "Dining Room")
         {
             if (triggerPostLunchFire == false)
             {
@@ -179,7 +181,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             controller.LogStringWithReturn("Chalmers: But I'm happy to say YOU'RE FIRED!");
         }
 
-        controller.ShowEndGamePopup(controller.score,controller.oddPoints,controller.politePoints);
+        //controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints);
     }
 
     public void LunchMealLogic()
@@ -192,7 +194,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         }
         for (int i = 0; i < table.contents.Count; i++)
         {
-            if(table.contents[i].isGrossFood == true)
+            if (table.contents[i].isGrossFood == true)
             {
                 isGrossFoodOnTable = true;
             }
@@ -209,7 +211,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(IceBucket);
                 table.contents.RemoveAt(i);
                 return;
-            } else if(table.contents[i].noun == "bucket" && wineGlassesUsed == true)  //still need to move the bucket off the table so the fire triggers, but dont want chalmers to scold the player for not having wine glasses.
+            }
+            else if (table.contents[i].noun == "bucket" && wineGlassesUsed == true)  //still need to move the bucket off the table so the fire triggers, but dont want chalmers to scold the player for not having wine glasses.
             {
                 controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(IceBucket);
                 table.contents.RemoveAt(i);
@@ -223,7 +226,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 didChalmersEat = true;
                 table.contents.RemoveAt(i);
                 return;
-            }else if(table.contents[i].noun == "hamburgers")
+            }
+            else if (table.contents[i].noun == "hamburgers")
             {
                 controller.updateScore(5);
                 controller.dialogueController.UnpackFromDialogueObject(LunchHamburgersDobj);
@@ -251,7 +255,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.updateScore(-1);
                 controller.UpdateOddPoints(5);
                 controller.UpdatePolitePoints(-5);
-                    didChalmersEat = true;
+                didChalmersEat = true;
                 controller.dialogueController.UnpackFromDialogueObject(LunchRoastDobj); //I am going to make a note here that I changed order that the dialogue controller unpacks dialogue objects so it runs the HAMS commands last so that I could get this to work right. Honestly it was driving me crazy, but thankfully I had my programmer socks on and was able to realize that I made the entire thing so I could just change it to work how I wanted. They really do make you better at coding! :3
                 table.contents.RemoveAt(i);
                 return;
@@ -270,7 +274,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 table.contents.RemoveAt(i);
                 return;
             }
-            
+
         }
         if (triggerPostLunchFire == true)//this one should be last as if true it will put us in the post lunch fire scene.
         {
@@ -287,13 +291,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         isHouseOnFire = true;
         controller.dialogueController.StartDialogue(HouseFireDobj, "Mother");
     }
-    public void BurningEnding()
-    {
-        controller.LogStringWithReturn("Your house has burnt down killing everyone inside.");
-        controller.LogStringWithReturn("You are dead.");
-        controller.displayText.color = Color.red;
-        controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints);
-    }
+ 
     public void TakeInputFromDialogue(string command)//Take command strings from dialogue objects and use them to trigger events elsewhere in the code.
     {
         switch (command)
@@ -304,7 +302,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             case "nintendo":
                 chalmers.description = "Your boss, the Super Nintendo is here you had better be sure to impress him after your clearly just forget his name...";
                 //chalmers.name = "Super Nintendo Chalmers"; //CUrrently Breaks the talk command and I cannot be bothered to fix it atm
- /** Everything you say to me puts me one step closer to the edge and I'm about to **/break; //Sorry had to, it gets stuck in my head everytime I use switch statements.
+                /** Everything you say to me puts me one step closer to the edge and I'm about to **/
+                break; //Sorry had to, it gets stuck in my head everytime I use switch statements.
             case "givecombomeal":
                 controller.playerInventory.Add(combomeal);
                 jermey.currentDialogue = krustyburgerbreak;
@@ -319,7 +318,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 jermey.currentDialogue = krustyburgerbreak;
                 break;
             case "endgame":
-                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints);
+                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints,"error");
                 break;
             case "steamedhams":
                 isSteamedHams = true;
@@ -342,13 +341,14 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 {
                     for (int i = 0; i < controller.playerInventory.Count; i++)
                     {
-                        if(controller.playerInventory[i].noun == "combo meal")
+                        if (controller.playerInventory[i].noun == "combo meal")
                         {
                             controller.playerInventory.RemoveAt(i);//should remove the combo meal from the players inventory.
                             if (isSteamedHams == true)
                             {
                                 controller.playerInventory.Add(steamedHams);
-                            }else
+                            }
+                            else
                             {
                                 controller.playerInventory.Add(hamburgers);
                             }
@@ -358,7 +358,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                     }
                     for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++) //Is the player DROPING the combo meal on the kitchen floor and then trying to use it an edge case? yes. Is it the first thing my hacker brain thought of when I made the previous loop? Also yes.
                     {
-                        if(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun == "combo meal")
+                        if (controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun == "combo meal")
                         {
                             controller.roomNavigation.currentRoom.InteractableObjectsInRoom.RemoveAt(i);//should remove the combo meal from the rooms inventory.
                             if (isSteamedHams == true)
@@ -373,7 +373,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                             return;
                         }
                     }
-                    
+
                 }
                 else
                 {
@@ -384,7 +384,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.LogStringWithReturn("You open the can and for a split second feel the presence of a live studio audience as the sound of laughter escapes the steel container.");
                 for (int i = 0; i < controller.playerInventory.Count; i++)
                 {
-                    if(controller.playerInventory[i].noun == "canned laughter")
+                    if (controller.playerInventory[i].noun == "canned laughter")
                     {
                         controller.playerInventory.RemoveAt(i);
                     }
@@ -392,9 +392,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.updateScore(2);
                 break;
             case "bucket":
-                if(controller.roomNavigation.currentRoom.rooomName == "Kitchen")
+                if (controller.roomNavigation.currentRoom.rooomName == "Kitchen")
                 {
-                    if(isKitchenOnfire == true)
+                    if (isKitchenOnfire == true)
                     {
                         for (int i = 0; i < controller.playerInventory.Count; i++)
                         {
@@ -406,7 +406,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                         isKitchenOnfire = false;
                         controller.updateScore(4);
                         controller.LogStringWithReturn("You dump the bucket out and extinguish the fire!");
-                        if(isHouseOnFire == true)
+                        if (isHouseOnFire == true)
                         {
                             controller.updateScore(-2);
                             controller.LogStringWithReturn("It's too bad the rest of your house is on fire, because it relights the kitchen fire! If only you had done something sooner!");
@@ -415,36 +415,39 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                         else { Kitchen.description = "A small burnt formerly teal colored kitchen, almost everything in the room is scorched or has burnt away."; }
                     }
                     else { controller.LogStringWithReturn("The bucket is already full of ice, so you arent sure what you would use it for at the moment."); }
-                } else { controller.LogStringWithReturn("Try as you might you cant seem to think of a use for a bucket full of ice right now."); }
+                }
+                else { controller.LogStringWithReturn("Try as you might you cant seem to think of a use for a bucket full of ice right now."); }
                 break;
             case "phone": // In the final version I want to have a UI phone where you can dial numbers, maybe even some secret numbers. But thats a lot of work and not in scope right now
                 controller.LogStringWithReturn("Cyberkat Cafe, Killer Kat speaking. Oh you are stuck in a text based adventure game? Have you tried using the Hint verb?, maybe it will help you. *click*");
                 break;
             case "tv":
                 isTVon = !isTVon;
-                
 
-                if(isTVon == true && isTvFixed == false)
+
+                if (isTVon == true && isTvFixed == false)
                 {
                     tv.examineDescription = "A small square purple colored CRT TV, it's missing an antenna. It's currently just showing static yet something about it seems rather odd...";
                     controller.LogStringWithReturn("The TV crackles to life, but its just showing static.");
-                } else if (isTVon == false && isTvFixed == false)
+                }
+                else if (isTVon == false && isTvFixed == false)
                 {
                     tv.examineDescription = "A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...";
                     controller.LogStringWithReturn("The TV shuts off with a flash, leaving nothing but a black screen.");
-                }else if (isTVon == true && isTvFixed == true)
+                }
+                else if (isTVon == true && isTvFixed == true)
                 {
                     tv.examineDescription = "A small square purple colored CRT TV, you replaced it's antenna. It's currently just showing static yet something about it seems rather odd it almost resembles some kind of head.";
                     controller.LogStringWithReturn("The TV crackles to life, but its just showing static despite the antenna.");
-                    
+
                 }
-                else if(isTVon == false && isTvFixed == true)
+                else if (isTVon == false && isTvFixed == true)
                 {
                     tv.examineDescription = "A small square purple colored CRT TV, you replaced it's antenna. It's currently off yet something about it seems rather odd it almost resembles some kind of head.";
                     controller.LogStringWithReturn("The TV shuts off with a flash, leaving nothing but a black screen.");
                     tvSecretCounter += 1;
                 }
-                if(tvSecretCounter == 5)
+                if (tvSecretCounter == 5)
                 {
                     controller.LogStringWithReturn("Suddely the TV starts playing a strange video.");
                     controller.LogStringWithReturn("Odd voice: Sometimes you're just steaming some hams when you stumble across something in the most unexpected of places, so today we're looking at the 5 most unexplained secrets in the Steamed Hams Text Based Adventure.");
@@ -454,7 +457,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 }
                 break;
             case "hanger":
-                if(controller.roomNavigation.currentRoom.rooomName == "Living Room")
+                if (controller.roomNavigation.currentRoom.rooomName == "Living Room")
                 {
                     isTvFixed = true;
                     for (int i = 0; i < controller.playerInventory.Count; i++)
@@ -479,7 +482,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 else { controller.LogStringWithReturn("You dont use the hanger, an odd thought pops into your head that you might need it for something else."); }
                 break;
             case "oven":
-                if(isOvenOn == true) { controller.LogStringWithReturn("You turned the oven off."); oven.examineDescription = "A cheap white oven with a 4 burner stove and a broken timer. It is currently off."; } else { controller.LogStringWithReturn("You turned the oven on."); oven.examineDescription = "A cheap white oven with a 4 burner stove and a broken timer. It is currently on.";}
+                if (isOvenOn == true) { controller.LogStringWithReturn("You turned the oven off."); oven.examineDescription = "A cheap white oven with a 4 burner stove and a broken timer. It is currently off."; } else { controller.LogStringWithReturn("You turned the oven on."); oven.examineDescription = "A cheap white oven with a 4 burner stove and a broken timer. It is currently on."; }
                 isOvenOn = !isOvenOn;
                 break;
             case "window":
@@ -488,5 +491,18 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 break; //Please refrain from breaking the window
         }
     }
-
+    public void EndingManager(string endingKey)
+    {
+        switch (endingKey)
+        {
+            default:
+                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Error ending: There is a bug in the games code that caused the ending script to select an invalid ending. Seymour quits his job and becomes a computer programer, only to find his days are now consumed fixing bugs and reading documentation.");
+                break;
+            case "burningDeath":
+                controller.displayText.color = Color.red;
+                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Burning Death ending: You and everyone else inside your house perish in the flaming inferno, if only you had put out the fire!");
+                controller.persistentData.hasBurningDeathEnding = true; controller.persistentData.hasDied = true;
+                break;
+        }
+    }
 }

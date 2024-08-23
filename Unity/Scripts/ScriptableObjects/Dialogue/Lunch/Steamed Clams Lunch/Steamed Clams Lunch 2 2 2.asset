@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
+  m_Name: Steamed Clams Lunch 2 2 2
+  m_EditorClassIdentifier: 
+  IsEndOfDialogue: 0
+  NpcDialogue: Of course you have had lunch before, Seymour you are aware people
+    eat lunch every day? I fail to see how you eating a roast yesterday changes anything.
+  scoreToGive: -4
+  weirdPoints: 4
+  politePoints: 0
+  HAMScommand: 
+  option1: No, this exact thing just happened. You were just here, we had roast for
+    lunch.
+  option2: NA
+  option3: NA
+  option4: NA
+  NextDialogue1: {fileID: 0}
+  NextDialogue2: {fileID: 0}
+  NextDialogue3: {fileID: 0}
+  NextDialogue4: {fileID: 0}

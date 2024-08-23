@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
+  m_Name: Steamed Clams Lunch 2 2
+  m_EditorClassIdentifier: 
+  IsEndOfDialogue: 0
+  NpcDialogue: Seymour, what are you on about? These are freshly cooked, still steaming.
+    I'm sure you're just misremembering.
+  scoreToGive: -2
+  weirdPoints: 4
+  politePoints: 0
+  HAMScommand: 
+  option1: I'm sure you're right, lets move on.
+  option2: No, this has happened before. Last time there was a roast.
+  option3: Kiss me you old fool!
+  option4: NA
+  NextDialogue1: {fileID: 11400000, guid: af31ffe4e30c4414a995713e3a555422, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: 88cee637666b7b64e941caf759274a7f, type: 2}
+  NextDialogue3: {fileID: 0}
+  NextDialogue4: {fileID: 0}

@@ -37,7 +37,7 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                 controller.HAMS.chalmersGoodbye();
                 break;
             case "endgame":
-                controller.ShowEndGamePopup(controller.score,controller.oddPoints,controller.politePoints);
+                controller.ShowEndGamePopup(controller.score,controller.oddPoints,controller.politePoints,"error");
                 break;
             case "kitchenfire":
                 controller.HAMS.KitchenOnFire();

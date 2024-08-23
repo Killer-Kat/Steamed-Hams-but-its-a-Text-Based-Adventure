@@ -10,6 +10,9 @@ public class PersistentData
 
     public bool hasDied { get; set; } = false; //spoooooky I know 
 
+    //Endings
+    public bool hasBurningDeathEnding = false;
+
     //Settings
 
     //Stats

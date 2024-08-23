@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
+  m_Name: Steamed Clams Lunch Start
+  m_EditorClassIdentifier: 
+  IsEndOfDialogue: 0
+  NpcDialogue: Ah Steamed Clams, quite the impressive dish you made here Seymour.
+  scoreToGive: 0
+  weirdPoints: 0
+  politePoints: 0
+  HAMScommand: 
+  option1: Only the best for you sir.
+  option2: I didn't make these.
+  option3: NA
+  option4: NA
+  NextDialogue1: {fileID: 11400000, guid: 9e754b98a9a50b14c95d6678d580dc15, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: 4dbcec468915e694a8f3099f548fc79e, type: 2}
+  NextDialogue3: {fileID: 0}
+  NextDialogue4: {fileID: 0}

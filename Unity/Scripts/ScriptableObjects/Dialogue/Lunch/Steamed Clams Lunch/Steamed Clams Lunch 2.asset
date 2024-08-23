@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f366698c5a7090843a1efbcfa00d1652, type: 3}
+  m_Name: Steamed Clams Lunch 2
+  m_EditorClassIdentifier: 
+  IsEndOfDialogue: 0
+  NpcDialogue: 'What do you mean, you didn''t make these? '
+  scoreToGive: -2
+  weirdPoints: 3
+  politePoints: 0
+  HAMScommand: 
+  option1: I uh, er I mispoke. I cooked them of course but they came from the ocean.
+  option2: I have no idea where these came from, I had a roast in the oven not 10
+    minutes ago.
+  option3: 
+  option4: 
+  NextDialogue1: {fileID: 11400000, guid: 84d43d0e865755347b63f030b758343d, type: 2}
+  NextDialogue2: {fileID: 0}
+  NextDialogue3: {fileID: 0}
+  NextDialogue4: {fileID: 0}
