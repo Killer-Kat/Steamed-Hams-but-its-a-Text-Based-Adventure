@@ -9,30 +9,44 @@ public class Place : InputAction //put items in containers. place x in y
     // Start is called before the first frame update, not RespondToInput though, thats called when there is input from the text box.
     public override void RespondToInput(GameController controller, string[] separatedInputWords)
     {
-        if (Array.Find(separatedInputWords, element => element == "in") == "in")
+        bool isPrepositionFound = false;
+        string preposition = "";
+
+        for (int i = 0; i < separatedInputWords.Length; i++)
+        {
+            if (separatedInputWords[i] == "in" || separatedInputWords[i] == "on")
+            {
+                isPrepositionFound = true;
+                preposition = separatedInputWords[i];
+                break;
+            }
+        }
+
+        if (isPrepositionFound)
         {
             string itemToPlace = "";
             string containerToFill = "";
-            int x = Array.IndexOf(separatedInputWords, "in");
-            Debug.Log("in found at index " + x);
-            if (x > 2)
+            int prepositionIndex = Array.IndexOf(separatedInputWords, preposition);
+
+            if (prepositionIndex > 2)
             {
-                for (int i = 1; i < x; i++)
+                for (int i = 1; i < prepositionIndex; i++)
                 {
                     itemToPlace = itemToPlace + " " + separatedInputWords[i];
                 }
                 itemToPlace = itemToPlace.Substring(1);
                 Debug.Log(itemToPlace);
-
             }
             else
             {
                 itemToPlace = separatedInputWords[1];
             }
-            for (int i = x + 1; i < separatedInputWords.Length; i++)
+
+            for (int i = prepositionIndex + 1; i < separatedInputWords.Length; i++)
             {
                 containerToFill = containerToFill + " " + separatedInputWords[i];
             }
+            
             containerToFill = containerToFill.Substring(1);
             //Debug.Log(containerToLoot); 
             for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++)
