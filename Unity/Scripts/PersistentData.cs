@@ -16,6 +16,7 @@ public class PersistentData
     public bool hasInsanityEnding = false;
     public bool hasSpeedrunEnding = false;
     public bool hasFiredEnding = false;
+    public bool hasBackroomsEnding = false;
 
     //Settings
 

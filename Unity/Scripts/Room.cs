@@ -7,7 +7,7 @@ public class Room : ScriptableObject
 {
     [TextArea]
     public string description;
-    public string rooomName;
+    public string rooomName; // >_< Three o's but if I fix it I have to go into the editor and reset all the room names. Not going to happen.
     public List<Exit> exits;
 
     public List<Exit> exitItializationList;//Making a list of exits that should be in the room at game start, so we can change the exits durring the game.

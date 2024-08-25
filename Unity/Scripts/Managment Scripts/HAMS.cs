@@ -18,6 +18,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public int kitchenFireSpreadCountdown;
     public int burningHouseDeathCountdown; //tracks the amount of cupcakes you baked for the sugar princess, just kidding does what you think it does.
     public bool triggerPostLunchFire = false; //In order to not break things, we are going to not trigger the first fire scene while the lunch scene happpens, if this bool is true we want to trigger that scene directly after the lunch scene.
+    public int lostInTheBackroomsCountdown = 6; //countdown of how long you can stay in the backrooms before you get the backrooms ending.
 
     public InteractableObject tv;
     public bool isTVon = false;
@@ -104,6 +105,14 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             {
                 ChalmersEntersKitchen();
                 skipChalmersEntersKitchen = true;
+            }
+        }
+        if (controller.roomNavigation.currentRoom.rooomName == "Backrooms")
+        {
+            lostInTheBackroomsCountdown -= 1;
+            if(lostInTheBackroomsCountdown == 0)
+            {
+                EndingManager("backrooms");
             }
         }
 
@@ -498,7 +507,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             case "z-remover":
                 controller.secretNumber = 26;
                 controller.LogStringWithReturn("You try to use the Z-Remover, however the letter remover finds no z in anything in the surrounding area.");
-                controller.veryVerboseStatsText.text =  "Interesting, your Z-Remover has set the Secret Number to : " + controller.secretNumber;
+                controller.veryVerboseStatsText.text =  "Interesting, your Z-Remover has set the Secret Number to : " + controller.secretNumber; //This gets overwritten because it happens before the game updates the secret number via the usual method. 
                 break;
         }
     }
@@ -527,6 +536,10 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             case "fired":
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Fired ending: You have lost your job aftering a frankly disastrous lunch. How are you going to recover from this?");
                 controller.persistentData.hasFiredEnding = true;
+                break;
+            case "backrooms":
+                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Backrooms ending: After being lost in the Backrooms for days, you eventually succumb to hunger. Right before you closed your eyes for the last time, you could have sworn you saw something moving in the darkness.");
+                controller.persistentData.hasBackroomsEnding = true; controller.persistentData.hasDied = true;
                 break;
         }
     }

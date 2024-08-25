@@ -24,6 +24,8 @@ public class GameController : MonoBehaviour
     public Image moonPhaseImage;
     public Text moonPhaseText;
 
+    public Room BackroomsRoom;
+
     [HideInInspector] public RoomNavigation roomNavigation;
     [HideInInspector] public List<string> interactionDescriptionsInRoom = new List<string>();
     List<string> actionLog = new List<string>();

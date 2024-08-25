@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "TextAdventure/InputActions/Debug")]
 public class DebugCommand : InputAction //Cant name it debug becuase unity already has a debug script in this namespace and it will override it.
 {
+    
     public override void RespondToInput(GameController controller, string[] separatedInputWords)
     {
         string x = separatedInputWords[1]; //This throws an out of range error if there is no second word. I tried to handle the exceptions and it did not work, so just don't do that.
@@ -80,6 +81,12 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
             case "xray":
                 controller.showContainerContentsInRoomDesc = !controller.showContainerContentsInRoomDesc;
                 controller.LogStringWithReturn(controller.showContainerContentsInRoomDesc ? "All containers now showing contents regardless of verbose status." : "All containers no longer showing contents regardless of verbose status.");
+                break;
+            case "backrooms":
+                controller.roomNavigation.currentRoom = controller.BackroomsRoom;
+                controller.LogStringWithReturn("With a flash of light you find yourself teleported to " + controller.roomNavigation.currentRoom.rooomName);
+                controller.DisplayRoomText();
+                controller.verboseSkip = true;
                 break;
         }
         

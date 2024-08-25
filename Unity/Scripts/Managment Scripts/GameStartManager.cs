@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameStartManager : MonoBehaviour
 {
     public GameController controller;
-    [SerializeField]
-    private List<Room> masterRoomList; //List of all the rooms
+    [SerializeField]// maybe change this back to private if something breaks. 
+    public List<Room> masterRoomList; //List of all the rooms
     //Due to the way unity scriptable objects work they are won't be reset when we start the game again. This script fixes that.
     [SerializeField]
     private List<InteractableObject> masterContainerList; //This is not the most optimal way to handle this I am sure.
