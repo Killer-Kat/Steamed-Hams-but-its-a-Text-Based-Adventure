@@ -19,6 +19,9 @@ MonoBehaviour:
     table cloth.
   useAction: Default
   isContainer: 1
+  showContainerContents: 1
+  isGrossFood: 0
   contentsItializationList:
   - {fileID: 11400000, guid: b4055c7a862bfd7499ea8c2d79faae2c, type: 2}
-  contents: []
+  contents:
+  - {fileID: 11400000, guid: b4055c7a862bfd7499ea8c2d79faae2c, type: 2}

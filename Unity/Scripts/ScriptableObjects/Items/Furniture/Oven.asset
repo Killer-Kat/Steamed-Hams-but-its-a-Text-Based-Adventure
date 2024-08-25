@@ -19,7 +19,9 @@ MonoBehaviour:
     It is currently on.
   useAction: oven
   isContainer: 1
+  showContainerContents: 1
+  isGrossFood: 0
   contentsItializationList:
   - {fileID: 11400000, guid: 458ced290d1833d4199d4eda70d02bcd, type: 2}
   contents:
-  - {fileID: 11400000, guid: 458ced290d1833d4199d4eda70d02bcd, type: 2}
+  - {fileID: 11400000, guid: 7b6d37e08d0e5d24899f04822717af79, type: 2}

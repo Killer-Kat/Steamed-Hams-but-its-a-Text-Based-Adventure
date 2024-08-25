@@ -74,7 +74,12 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                 controller.LogStringWithReturn("Reset game progress.");
                 break;
             case "moon":
-                //Call change moon phase method from game start script
+                controller.gameStartManager.SetMoonPhase();
+                controller.LogStringWithReturn("You feel the slightest shift in gravity, odd.");
+                break;
+            case "xray":
+                controller.showContainerContentsInRoomDesc = !controller.showContainerContentsInRoomDesc;
+                controller.LogStringWithReturn(controller.showContainerContentsInRoomDesc ? "All containers now showing contents regardless of verbose status." : "All containers no longer showing contents regardless of verbose status.");
                 break;
         }
         

@@ -7,6 +7,7 @@ using System;
 
 public class GameController : MonoBehaviour
 {
+    public GameStartManager gameStartManager; //currently the only use for this to be linked here is so that DebugCommand can reference it to set moon phases. *shrug*
     public Text displayText;
     public InputAction[] inputActions;
     public Text ScoreText;
