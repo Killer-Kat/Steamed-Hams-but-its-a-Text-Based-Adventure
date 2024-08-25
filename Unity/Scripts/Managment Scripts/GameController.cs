@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
 
     public TextInput textInput; //idk why I am linking everything here, mostly to keep everything in one place instead of having a dozen references in different scirpts.
 
+    public bool showContainerContentsInRoomDesc; //Can be used to show contents of containers in rooms when verbose mode is off.
     public bool isVerbose = false; //For verbose mode to be implemented later
     public bool isVeryVerbose = false; //IDEA!!! extremely verbose mode easter egg that includes a ton of mostly useless data, like internal stats, "moon phase", random stuff like that sort of like the undertale dating game
     public bool verboseSkip = false;

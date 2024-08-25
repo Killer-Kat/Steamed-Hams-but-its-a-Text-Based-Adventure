@@ -18,6 +18,8 @@ public class InteractableObject : ScriptableObject
     [SerializeField]
     public bool isContainer;
     [SerializeField]
+    public bool showContainerContents; //show container contents in room when verbose mode is off (for example things on a table you should be able to just see)
+    [SerializeField]
     public bool isGrossFood; //Is the object a gross food that will trigger extra lines when added to table at lunch or if eaten (when eat command is added)
 
     public List<InteractableObject> contentsItializationList; //List of objects that should be in the container at start of game, I know this bloats the class but because of how unity works we have to have this.

@@ -22,13 +22,13 @@ public class Place : InputAction //put items in containers. place x in y
             }
         }
 
-        if (isPrepositionFound)
+        if (isPrepositionFound) //has to be, since we need to know where to place the item. Need to add an else that will tell the player the correct usage.
         {
             string itemToPlace = "";
             string containerToFill = "";
             int prepositionIndex = Array.IndexOf(separatedInputWords, preposition);
 
-            if (prepositionIndex > 2)
+            if (prepositionIndex > 2) //check if the item to place is multiple words long
             {
                 for (int i = 1; i < prepositionIndex; i++)
                 {

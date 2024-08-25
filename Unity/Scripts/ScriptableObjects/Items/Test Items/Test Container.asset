@@ -18,6 +18,8 @@ MonoBehaviour:
   examineDescription: A test container, mostly used for testing inventory systems.
   useAction: Default
   isContainer: 1
+  showContainerContents: 1
+  isGrossFood: 0
   contentsItializationList:
   - {fileID: 11400000, guid: 8bafecb09b1f186448264da515b48b92, type: 2}
   contents:
