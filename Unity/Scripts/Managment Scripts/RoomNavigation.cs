@@ -19,6 +19,13 @@ public class RoomNavigation : MonoBehaviour
 
     public void UnpackExitsInRoom()
     {
+        exitDictionary.Clear(); // Clear the dictionary to prevent duplicate entries
+        if (exitDictionary.ContainsKey(currentRoom.exits[0].keyString))
+        {
+            Debug.LogWarning("Exit with key '" + currentRoom.exits[0].keyString + "' already exists in the dictionary.");
+            return;
+        }
+
         for (int i = 0; i < currentRoom.exits.Count; i++)
         {
             exitDictionary.Add(currentRoom.exits[i].keyString, currentRoom.exits[i].valueRoom);

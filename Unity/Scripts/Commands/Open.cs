@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Open : InputAction
 {
-    string combinedInputWords;
+    
     public override void RespondToInput(GameController controller, string[] separatedInputWords)
     {
         if (separatedInputWords.Length <= 1)
         {
-            //Throw error
+            controller.LogStringWithReturn("Error, To use this command you need to say what you want to open.");
         }
         else if (separatedInputWords.Length == 2)
         {
@@ -35,7 +35,14 @@ public class Open : InputAction
             {
                 if (separatedInputWords[1].ToLower() == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
                 {
-                    controller.HAMS.UseActionTree(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].useAction);
+                    if (controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].canBeOpened == true)
+                    {
+                        controller.HAMS.UseActionTree(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].useAction);
+                    }
+                    else if (controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].isContainer == true)
+                    {
+                        peekAtContents(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i]);
+                    }
 
                     return;
                 }
@@ -73,18 +80,36 @@ public class Open : InputAction
             }
             controller.LogStringWithReturn(itemToFind + " not found.");
         }
-
-    }
-
-    public void peekAtContents(InteractableObject container)
-    {
-        string contentsText = "You peek inside the " + container.noun + "and see ";
-
-        for (int j = 0; j < container.contents.Count; j++)
+         void peekAtContents(InteractableObject container)
         {
-            contentsText += "," + container.contents[j].noun.ToLower();
+            string contentsText = "You peek inside the " + container.noun + " and see ";
+
+            if (container.contents.Count > 0)
+            {
+                Debug.Log($"container.contents.Count: {container.contents.Count}");
+                for (int j = 0; j < container.contents.Count; j++)
+                {
+                    if (j != 0)
+                    {
+                        contentsText += ", " + container.contents[j].noun.ToLower();
+                    }
+                    else
+                    {
+                        contentsText += container.contents[j].noun.ToLower();
+                    }
+                }
+            }
+            else
+            {
+                contentsText += "It's empty.";
+            }
+            controller.LogStringWithReturn(contentsText);
+
         }
+
     }
+
+    
 }
 
    
