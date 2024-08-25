@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 313dec31ad5f98349a997e81ebb530ee, type: 3}
-  m_Name: XYZZY
+  m_Script: {fileID: 11500000, guid: d047a524aefa2fe489daefcc8d5682d7, type: 3}
+  m_Name: Examine
   m_EditorClassIdentifier: 
-  Keyword: xyzzy
+  Keyword: examine

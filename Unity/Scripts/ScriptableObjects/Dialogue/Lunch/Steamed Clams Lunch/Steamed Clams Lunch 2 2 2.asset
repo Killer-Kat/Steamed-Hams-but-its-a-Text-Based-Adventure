@@ -24,7 +24,7 @@ MonoBehaviour:
   option2: NA
   option3: NA
   option4: NA
-  NextDialogue1: {fileID: 0}
+  NextDialogue1: {fileID: 11400000, guid: 2bd69d180f271c14f96cdb6b67832c99, type: 2}
   NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}
   NextDialogue4: {fileID: 0}

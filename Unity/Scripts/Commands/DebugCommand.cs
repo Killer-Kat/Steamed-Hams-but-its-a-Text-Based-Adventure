@@ -84,7 +84,7 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                 break;
             case "backrooms":
                 controller.roomNavigation.currentRoom = controller.BackroomsRoom;
-                controller.LogStringWithReturn("With a flash of light you find yourself teleported to " + controller.roomNavigation.currentRoom.rooomName);
+                controller.LogStringWithReturn("With a flash of light you find yourself teleported to the " + controller.roomNavigation.currentRoom.rooomName);
                 controller.DisplayRoomText();
                 controller.verboseSkip = true;
                 break;

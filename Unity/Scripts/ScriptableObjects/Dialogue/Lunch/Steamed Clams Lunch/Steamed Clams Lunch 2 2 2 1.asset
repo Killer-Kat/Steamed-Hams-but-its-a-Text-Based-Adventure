@@ -18,11 +18,11 @@ MonoBehaviour:
   weirdPoints: 6
   politePoints: 0
   HAMScommand: 
-  option1: 
-  option2: 
-  option3: 
-  option4: 
-  NextDialogue1: {fileID: 0}
+  option1: What? no I'm ok. Lets change the subject.
+  option2: NA
+  option3: NA
+  option4: NA
+  NextDialogue1: {fileID: 11400000, guid: 73f43b3a5f40f2b47935055b77204041, type: 2}
   NextDialogue2: {fileID: 0}
   NextDialogue3: {fileID: 0}
   NextDialogue4: {fileID: 0}

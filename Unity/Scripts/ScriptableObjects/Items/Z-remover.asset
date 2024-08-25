@@ -21,7 +21,7 @@ MonoBehaviour:
     and often fails against large items. On the other hand, it has a wide range of
     action: it can be set to any letter you choose, at least it could be if the knob
     was not broken.'
-  useAction: Default
+  useAction: z-remover
   isContainer: 0
   showContainerContents: 0
   isGrossFood: 0
