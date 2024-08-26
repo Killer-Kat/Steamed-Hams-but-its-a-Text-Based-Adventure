@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
-  m_Name: Window
+  m_Name: Silhouettes
   m_EditorClassIdentifier: 
-  noun: window
+  noun: silhouettes
   canTake: 0
-  description: A small window lights the room.
-  examineDescription: A large closed window that overlooks the Krustyburger, if you
-    were into fitness this would be a good place to strech your calves.
-  useAction: window
+  description: The wall to adjacent the staircase is dedicated almost entirely to
+    silhouettes of your and your mother.
+  examineDescription: Silhouettes of you and your mother, you try to make a new one
+    at least once a week.
+  useAction: Default
   isContainer: 0
   showContainerContents: 0
   isGrossFood: 0
-  canBeOpened: 1
+  canBeOpened: 0
   contentsItializationList: []
   contents: []

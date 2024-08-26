@@ -22,10 +22,16 @@ MonoBehaviour:
   - keyString: east
     exitDescription: Your dining room is to the east.
     valueRoom: {fileID: 11400000, guid: c5d919e02611d6c4f92a5dc4b2eb22db, type: 2}
+  - keyString: west
+    exitDescription: To the west there is a stairwell going up.
+    valueRoom: {fileID: 11400000}
   objectItializationList:
   - {fileID: 11400000, guid: 89dc2c992c0c45a47b7f685e0bf0a14f, type: 2}
   - {fileID: 11400000, guid: 93a27d285b58506478a075a5220ac5a6, type: 2}
   - {fileID: 11400000, guid: 2804a028d77483b46b8082fdb1504233, type: 2}
-  InteractableObjectsInRoom: []
+  InteractableObjectsInRoom:
+  - {fileID: 11400000, guid: 89dc2c992c0c45a47b7f685e0bf0a14f, type: 2}
+  - {fileID: 11400000, guid: 93a27d285b58506478a075a5220ac5a6, type: 2}
+  - {fileID: 11400000, guid: 2804a028d77483b46b8082fdb1504233, type: 2}
   peopleItializationList: []
   peopleInRoom: []
