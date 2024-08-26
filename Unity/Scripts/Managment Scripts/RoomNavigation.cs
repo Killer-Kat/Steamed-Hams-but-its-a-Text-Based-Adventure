@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RoomNavigation : MonoBehaviour
 {
+    //In the editor whatever room you have set at the current room at the start of the game is where you will start the game.
     public Room currentRoom; //Sorry we don't offer private rooms here.
 
 
@@ -20,11 +21,11 @@ public class RoomNavigation : MonoBehaviour
     public void UnpackExitsInRoom()
     {
         exitDictionary.Clear(); // Clear the dictionary to prevent duplicate entries
-        if (exitDictionary.ContainsKey(currentRoom.exits[0].keyString))
+        /**if (exitDictionary.ContainsKey(currentRoom.exits[0].keyString))
         {
             Debug.LogWarning("Exit with key '" + currentRoom.exits[0].keyString + "' already exists in the dictionary.");
             return;
-        }
+        }**/
 
         for (int i = 0; i < currentRoom.exits.Count; i++)
         {

@@ -71,6 +71,13 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                 controller.persistentData.hasCompletedFirstLoop = false;
                 controller.persistentData.NumberOfTimeLoops = 0;
                 controller.persistentData.hasDied = false;
+                //Reset endings
+                controller.persistentData.hasBurningDeathEnding = false;
+                controller.persistentData.hasChalmersLeavesEnding = false;
+                controller.persistentData.hasInsanityEnding = false;
+                controller.persistentData.hasSpeedrunEnding = false;
+                controller.persistentData.hasFiredEnding = false;
+                controller.persistentData.hasBackroomsEnding = false;
                 controller.SerializeJson();
                 controller.LogStringWithReturn("Reset game progress.");
                 break;

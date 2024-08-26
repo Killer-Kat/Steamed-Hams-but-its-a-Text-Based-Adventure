@@ -45,6 +45,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e56db03282337554e9c8bcbe6a8b2c1c, type: 2}
   - {fileID: 11400000, guid: c22aa4c3a63cb0449864b3158aa459dd, type: 2}
   - {fileID: 11400000, guid: 1c8ee9fa0db218a4c99e6007717682db, type: 2}
+  - {fileID: 11400000, guid: 09a56533df11a89489cddafd142f5da2, type: 2}
   InteractableObjectsInRoom:
   - {fileID: 11400000, guid: 00d74d83ca108e74dbabe5c8e5f29eb3, type: 2}
   - {fileID: 11400000, guid: 0ef485a3261528841b209574fa57dc9d, type: 2}

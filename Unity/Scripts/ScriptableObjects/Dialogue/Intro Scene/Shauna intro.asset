@@ -18,7 +18,7 @@ MonoBehaviour:
   scoreToGive: 0
   weirdPoints: 0
   politePoints: -2
-  HAMScommand: 
+  HAMScommand: introcomplete
   option1: NA
   option2: NA
   option3: NA

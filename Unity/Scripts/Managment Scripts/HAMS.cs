@@ -7,6 +7,10 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public GameController controller;
 
     public DialogueObject IntroDobj;
+    public bool isIntroComplete = false;
+    public int chalmersIntroCountdown = 10;//how many turns chalmers will wait before leaving if skinner does not open the door.
+    public Room DiningRoom;
+
     public DialogueObject ChalmersEntersKitchenDobjWindow; //dobj to use for CEK scene if window is open
     public DialogueObject ChalmersEntersKitchenDobjNoWindow;
     public int chalmersEnterKitchenCountdown; //Counter for having chalmers enter the kitchen before lunch
@@ -71,6 +75,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public void IntroScene()
     {
         controller.dialogueController.StartDialogue(IntroDobj, "Chalmers");
+        DiningRoom.peopleInRoom.Add(chalmers);
     }
     public void Tick()//used for the countdowns.
     {
@@ -114,6 +119,22 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             {
                 EndingManager("backrooms");
             }
+        }
+        if (isIntroComplete == false)
+        {
+            chalmersIntroCountdown -= 1;
+            if(chalmersIntroCountdown == 0)
+            {
+                EndingManager("closeddoor");
+            }else if (chalmersIntroCountdown == 9)
+            {
+                controller.LogStringWithReturn("You hear a Knock at your front door. You should: Open Front Door");
+            }
+            else
+            {
+                controller.LogStringWithReturn("You hear a Knock at your front door.");
+            }
+            
         }
 
     }
@@ -309,8 +330,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 Debug.LogError("Invalid HAMS command entered");
                 break;
             case "nintendo":
-                chalmers.description = "Your boss, the Super Nintendo is here you had better be sure to impress him after your clearly just forget his name...";
+                chalmers.description = "Your boss, the Super Nintendo is here you had better be sure to impress him after you clearly just forget his name...";
                 //chalmers.name = "Super Nintendo Chalmers"; //CUrrently Breaks the talk command and I cannot be bothered to fix it atm
+                isIntroComplete = true;
                 /** Everything you say to me puts me one step closer to the edge and I'm about to **/
                 break; //Sorry had to, it gets stuck in my head everytime I use switch statements.
             case "givecombomeal":
@@ -340,6 +362,12 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 break;
             case "fired":
                 EndingManager("fired");
+                break;
+            case "steamedHamsTrophy":
+                controller.persistentData.hasSteamedHamsTrophy = true;
+                break;
+            case "introcomplete":
+                isIntroComplete = true;
                 break;
         }
 
@@ -506,9 +534,32 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 isWindowOpen = !isWindowOpen;
                 break; //Please refrain from breaking the window
             case "z-remover":
+                controller.persistentData.hasZRemoverTrophy = true;
                 controller.secretNumber = 26;
                 controller.LogStringWithReturn("You try to use the Z-Remover, however the letter remover finds no z in anything in the surrounding area.");
                 controller.veryVerboseStatsText.text =  "Interesting, your Z-Remover has set the Secret Number to : " + controller.secretNumber; //This gets overwritten because it happens before the game updates the secret number via the usual method. 
+                break;
+            case "guide":
+                controller.persistentData.hasHitchHikersGuideTrophy = true;
+                controller.LogStringWithReturn("You try to press the butons in vain but they are stuck together, however you can read the current entry Earth: Mostly Harmless.");
+                break;
+            case "frontdoor":
+                if(isIntroComplete == false)
+                {
+                    IntroScene();
+                }
+                else
+                {
+                    controller.LogStringWithReturn("You diligently open the front door, only to be greated by a vast expanse of empty air.");
+                    for (int i = 0; i < controller.roomNavigation.currentRoom.peopleInRoom.Count; i++)
+                    {
+                        if(controller.roomNavigation.currentRoom.peopleInRoom[i].name == "Chalmers")
+                        {
+                            controller.UpdateOddPoints(1);
+                            controller.LogStringWithReturn("*Chalmers notices you opening and closing the front door for no apparent reason.*");
+                        }
+                    }
+                }
                 break;
         }
     }
@@ -522,7 +573,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             case "burningDeath":
                 controller.displayText.color = Color.red;
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Burning Death ending: You and everyone else inside your house perish in the flaming inferno, if only you had put out the fire!");
-                controller.persistentData.hasBurningDeathEnding = true; controller.persistentData.hasDied = true;
+                controller.persistentData.hasBurningDeathEnding = true; controller.persistentData.hasDied = true; controller.persistentData.numberOfDeaths += 1;
                 break;
             case "chalmersLeaves":
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Chalmers Leaves ending: Chalmers is disgusted by your antics and leaves early. You should really be ashamed of yourself, acting like that.");
@@ -540,7 +591,11 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 break;
             case "backrooms":
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Backrooms ending: After being lost in the Backrooms for days, you eventually succumb to hunger. Right before you closed your eyes for the last time, you could have sworn you saw something moving in the darkness.");
-                controller.persistentData.hasBackroomsEnding = true; controller.persistentData.hasDied = true;
+                controller.persistentData.hasBackroomsEnding = true; controller.persistentData.hasDied = true; controller.persistentData.numberOfDeaths += 1;
+                break;
+            case "closeddoor":
+                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Closed Door ending: After getting no response after knocking repeatedly chalmers gives up and assumes skinner is not home, he procedes to the Krusty Burger next door to get lunch.");
+                controller.persistentData.hasClosedDoorEnding = true;
                 break;
         }
     }

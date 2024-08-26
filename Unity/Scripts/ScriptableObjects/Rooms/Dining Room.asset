@@ -37,9 +37,10 @@ MonoBehaviour:
     valueRoom: {fileID: 11400000, guid: 88cf63840c9da4740ae4a6eaff1ce7c6, type: 2}
   objectItializationList:
   - {fileID: 11400000, guid: 3b9ecfa28a3d22d40b7e3e50f84afabc, type: 2}
+  - {fileID: 11400000, guid: 7edb0291afc8c1d4aa3a302c396db44a, type: 2}
   InteractableObjectsInRoom:
   - {fileID: 11400000, guid: 3b9ecfa28a3d22d40b7e3e50f84afabc, type: 2}
-  peopleItializationList:
-  - {fileID: 11400000, guid: 8214a041b6345e349948e46550d5b5ee, type: 2}
+  - {fileID: 11400000, guid: 7edb0291afc8c1d4aa3a302c396db44a, type: 2}
+  peopleItializationList: []
   peopleInRoom:
   - {fileID: 11400000, guid: 8214a041b6345e349948e46550d5b5ee, type: 2}

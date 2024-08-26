@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chalmers
   m_EditorClassIdentifier: 
   name: Chalmers
-  description: Your boss, the Superintendent you had better be sure to impress him
-    after your latest blunder with the "Minimalist" classroom layouts.
+  description: Your boss, the Superintendent is here, you had better be sure to impress
+    him after your latest blunder with the "Minimalist" classroom layouts.
   intialDialogue: {fileID: 11400000, guid: 318f7d692f12361408511860835683ef, type: 2}
   currentDialogue: {fileID: 11400000, guid: 318f7d692f12361408511860835683ef, type: 2}

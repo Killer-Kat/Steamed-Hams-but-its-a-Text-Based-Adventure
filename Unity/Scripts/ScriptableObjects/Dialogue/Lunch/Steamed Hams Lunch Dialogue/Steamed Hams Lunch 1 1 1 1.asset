@@ -17,7 +17,7 @@ MonoBehaviour:
   scoreToGive: 2
   weirdPoints: 0
   politePoints: 0
-  HAMScommand: 
+  HAMScommand: steamedHamsTrophy
   option1: Continue
   option2: NA
   option3: NA
