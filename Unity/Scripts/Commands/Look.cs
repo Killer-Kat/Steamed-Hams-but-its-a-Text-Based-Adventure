@@ -6,10 +6,13 @@ public class Look : InputAction
 {
     public override void RespondToInput(GameController controller, string[] separatedInputWords)
     {
-        if (separatedInputWords.Length <= 1)
+        string[] fillerWords = { "at", "the", "to", "on", "in" }; //Words we want to not try to include in multi word nouns
+        if (separatedInputWords.Length <= 1) //Just looking shows the room.
         {
             controller.DisplayRoomText();
-        } else if (separatedInputWords.Length == 2)
+        }
+        
+        else if (separatedInputWords.Length == 2)// two words, one of them is look so the other one must be the item.
         {
             //Debug.Log("Looking for: " + separatedInputWords[1]);
             for (int i = 0; i < controller.playerInventory.Count; i++)
@@ -48,14 +51,30 @@ public class Look : InputAction
                 }
             }
             
-        }else //Item to look at is multiple words long
+        }
+        
+        else //Item to look at is multiple words long
+
         {
             string itemToFind = "";
+
             for (int i = 1; i < separatedInputWords.Length; i++)
             {
-                itemToFind = itemToFind + " " + separatedInputWords[i];
+                string w = separatedInputWords[i].ToLower();
+
+                // Only ~~good Boys~~ words that are not in the filter list get added.
+                if (System.Array.IndexOf(fillerWords, w) == -1)
+                {
+                    itemToFind = itemToFind + " " + w;
+                }
             }
-            itemToFind = itemToFind.Substring(1);
+
+            // Remove the first space if we added it .-.
+            if (itemToFind.Length > 0)
+            {
+                itemToFind = itemToFind.Substring(1);
+            }
+
             //Debug.Log("Look searching for: " + itemToFind);
             for (int i = 0; i < controller.playerInventory.Count; i++) //look in the player inv first
             {
