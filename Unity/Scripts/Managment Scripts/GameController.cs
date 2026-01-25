@@ -158,7 +158,7 @@ public class GameController : MonoBehaviour
         secretNumber = UnityEngine.Random.Range(0, 100);
         //HAMS.Tick(); //For some reason I had this here? I moved it to Textinput InputComplete() so that its only triggered once for each command parsed. 
     }
-    // Update is called once per frame
+    
     public void updateScore(int x)
     {
         score = score + x;

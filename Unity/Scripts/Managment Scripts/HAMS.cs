@@ -215,7 +215,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         {
             controller.LogStringWithReturn("Chalmers: But I'm happy to say YOU'RE FIRED!");
         }
-
+        controller.DisplayLoggedText();
         //controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints);
     }
 
@@ -310,7 +310,10 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             }
             else if (table.contents[i].noun == "steamed clams")
             {
+                controller.updateScore(2);
+                controller.UpdatePolitePoints(2);
                 controller.dialogueController.UnpackFromDialogueObject(LunchSteamedClamsDobj);
+                didChalmersEat = true;
                 table.contents.RemoveAt(i);
 
             }
