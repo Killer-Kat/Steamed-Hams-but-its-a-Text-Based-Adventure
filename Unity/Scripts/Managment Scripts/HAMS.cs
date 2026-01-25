@@ -289,6 +289,14 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.dialogueController.UnpackFromDialogueObject(LunchRoastDobj); //I am going to make a note here that I changed order that the dialogue controller unpacks dialogue objects so it runs the HAMS commands last so that I could get this to work right. Honestly it was driving me crazy, but thankfully I had my programmer socks on and was able to realize that I made the entire thing so I could just change it to work how I wanted. They really do make you better at coding! :3
                 table.contents.RemoveAt(i);
                 return;
+            }else if (table.contents[i].noun == "perfect roast")
+            {
+                controller.updateScore(2);
+                controller.UpdatePolitePoints(2);
+                didChalmersEat = true;
+                controller.dialogueController.UnpackFromDialogueObject(LunchPerfectRoastDobj); //Sadly I do not have any cute femboy/trans girl clothes on right now because its single digit temps outside and I am wearing layers on layers since my house does not have heating. 
+                table.contents.RemoveAt(i);
+                return;
             }
             else if (table.contents[i].noun == "pickled herring")
             {
