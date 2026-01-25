@@ -20,11 +20,17 @@ MonoBehaviour:
     exitDescription: You feel a draft from the stairwell at the western end of the
       hall.
     valueRoom: {fileID: 11400000, guid: c273a08114ed0474ca4e1efb08abbbaf, type: 2}
+  - keyString: south
+    exitDescription: To the south is your bedroom just where you left it.
+    valueRoom: {fileID: 11400000, guid: f070b1a3497f2a844ad202d9a73019d0, type: 2}
   exitItializationList:
   - keyString: west
     exitDescription: You feel a draft from the stairwell at the western end of the
       hall.
     valueRoom: {fileID: 11400000, guid: c273a08114ed0474ca4e1efb08abbbaf, type: 2}
+  - keyString: south
+    exitDescription: To the south is your bedroom just where you left it.
+    valueRoom: {fileID: 11400000, guid: f070b1a3497f2a844ad202d9a73019d0, type: 2}
   objectItializationList: []
   InteractableObjectsInRoom: []
   peopleItializationList: []

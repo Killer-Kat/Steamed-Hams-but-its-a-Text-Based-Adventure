@@ -175,7 +175,7 @@ public class GameStartManager : MonoBehaviour
     {
         if (controller.persistentData.hasCompletedFirstLoop == true)
         {
-            int randomIndex = UnityEngine.Random.Range(0,1);
+            int randomIndex = UnityEngine.Random.Range(0,2);
             Stairwell.exits.Add(Hallways[randomIndex]);
         } else
         {

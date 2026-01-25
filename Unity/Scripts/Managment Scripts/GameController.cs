@@ -47,6 +47,9 @@ public class GameController : MonoBehaviour
     public int oddPoints;
     public int politePoints;
 
+    public int hunger; //how full are you 1-100 
+    public int health; //The percentage of your bank account that would be left if you got medical attention (find a good way to put that joke in the game, its freaking gold) (because in america medical bills are expensive)
+
     public int secretNumber; //For use in easter eggs and also very verbose mode
     //Stuff for endgame UI
     public Text endGamePopupScoreText;

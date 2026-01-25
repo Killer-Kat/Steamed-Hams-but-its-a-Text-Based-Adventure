@@ -8,8 +8,10 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 
     public DialogueObject IntroDobj;
     public bool isIntroComplete = false;
+    public DialogueObject PoliteGoodbyeDobj;
     public int chalmersIntroCountdown = 10;//how many turns chalmers will wait before leaving if skinner does not open the door.
     public Room DiningRoom;
+    public Room Porch;
 
     public DialogueObject ChalmersEntersKitchenDobjWindow; //dobj to use for CEK scene if window is open
     public DialogueObject ChalmersEntersKitchenDobjNoWindow;
@@ -39,11 +41,13 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public InteractableObject ribwich;
     public DialogueObject krustyburgerbreak;
 
+    public Room Bedroom;
     public Room Kitchen;
     public Exit KrustyBurgerExit;
     public DialogueObject KitchenFireDobj;
     public InteractableObject window;
     public bool isWindowOpen = false;
+    public bool isBDWindowOpen = false;
     public InteractableObject oven;
     public bool isOvenOn = true;
 
@@ -254,6 +258,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.updateScore(5);
                 controller.dialogueController.UnpackFromDialogueObject(LunchSteamedHamsDobj);
                 didChalmersEat = true;
+            
                 table.contents.RemoveAt(i);
                 return;
             }
@@ -322,6 +327,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             Kitchen.description = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!";
             Debug.Log("post lunch fire triggered");
         }
+        chalmers.currentDialogue = PoliteGoodbyeDobj;
         //Note to self, add a catch here that moves us onto the post lunch scene 
     }
     public void HouseFire()
@@ -358,6 +364,11 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 break;
             case "endgame":
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints,"error");
+                break;
+            case "plgoodbye":
+                Porch.peopleInRoom.Add(chalmers);
+                DiningRoom.peopleInRoom.Clear(); //dont write code like this, if there were another charater in the dining room this would also clear them.
+                controller.roomNavigation.AttemptToChangeRooms("south"); //also dont write code like this, jesus
                 break;
             case "steamedhams":
                 isSteamedHams = true;
@@ -541,10 +552,15 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 else { controller.LogStringWithReturn("Its a bit heavy but you manage to open the window. The smell of fast food grease wafts in on the breeeze."); window.examineDescription = "A large open window, fast food grease permeates the air in your kitchen."; Kitchen.exits.Add(KrustyBurgerExit); }
                 isWindowOpen = !isWindowOpen;
                 break; //Please refrain from breaking the window
+            case "bdwindow":
+                if (isBDWindowOpen == true) { controller.LogStringWithReturn("You close the window with a satisfying thud!"); window.examineDescription = "Your faithful bedroom window sits there closed iluminating the room, despite having both curtains and blinds."; controller.ResetRoomExits(Bedroom); } 
+                else { controller.LogStringWithReturn("Its a bit stuck but you manage to open the window. The smell of fresh cut grass and burger grease wafts in on the breeeze."); window.examineDescription = "Your faithful bedroom window is sitting there wide open, if you were into fitness this would be a terrible place to strech your calves"; Bedroom.exits.Add(KrustyBurgerExit); }
+                isBDWindowOpen = !isBDWindowOpen;
+                break; //Please refrain from breaking this window as well
             case "z-remover":
                 controller.persistentData.hasZRemoverTrophy = true;
                 controller.secretNumber = 26;
-                controller.LogStringWithReturn("You try to use the Z-Remover, however the letter remover finds no z in anything in the surrounding area.");
+                controller.LogStringWithReturn("You try to use the Z-Remover, however the letter remover finds no z's to remove from anything in the surrounding area.");
                 controller.veryVerboseStatsText.text =  "Interesting, your Z-Remover has set the Secret Number to : " + controller.secretNumber; //This gets overwritten because it happens before the game updates the secret number via the usual method. 
                 break;
             case "guide":
@@ -568,6 +584,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                         }
                     }
                 }
+                break;
+            case "bed":
+                controller.LogStringWithReturn("You decide to lay down on your bed and nap for a breif moment... for some reason.");
                 break;
         }
     }
