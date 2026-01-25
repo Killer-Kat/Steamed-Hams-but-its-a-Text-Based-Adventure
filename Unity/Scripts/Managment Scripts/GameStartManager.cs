@@ -17,6 +17,10 @@ public class GameStartManager : MonoBehaviour
     [SerializeField]
     private Room Kitchen;
     [SerializeField]
+    private Room Stairwell;
+    
+    
+    [SerializeField]
     private InteractableObject fridge;
     [SerializeField]
     private InteractableObject oven;
@@ -31,6 +35,8 @@ public class GameStartManager : MonoBehaviour
     private InteractableObject tv;
     [SerializeField]
     private InteractableObject portrait;
+    [SerializeField]
+    Exit[] Hallways;
 
     string[] moonPhases = { "New Moon", "Waxing Crescent", "First Quarter", "Waxing Gibbous", "Full Moon", "Waning Gibbous", "Third Quarter", "Waning Crescent"};
     void Awake()
@@ -81,7 +87,9 @@ public class GameStartManager : MonoBehaviour
     {
         UpdatePortrait();
         SetOvenContents();
-        
+        SetAlternateRooms();
+
+
     }
     public void SetOvenContents() {
         if (controller.persistentData.hasCompletedFirstLoop == true)
@@ -160,6 +168,18 @@ public class GameStartManager : MonoBehaviour
                 portrait.examineDescription = "It's a life sized portrait of someone. It's hard to tell who its a portrait of as there are 17 tally marks obscuring it.";
                 break;
 
+        }
+    }
+
+    public void SetAlternateRooms() //alternate rooms unlock once you beat the game.
+    {
+        if (controller.persistentData.hasCompletedFirstLoop == true)
+        {
+            int randomIndex = UnityEngine.Random.Range(0,1);
+            Stairwell.exits.Add(Hallways[randomIndex]);
+        } else
+        {
+            Stairwell.exits.Add(Hallways[0]);
         }
     }
     public void SetMoonPhase()

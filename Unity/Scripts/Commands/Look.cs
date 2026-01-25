@@ -6,7 +6,7 @@ public class Look : InputAction
 {
     public override void RespondToInput(GameController controller, string[] separatedInputWords)
     {
-        string[] fillerWords = { "at", "the", "to", "on", "in" }; //Words we want to not try to include in multi word nouns
+        string[] fillerWords = { "at", "the", "to", "on", "in", "my" }; //Words we want to not try to include in multi word nouns
         if (separatedInputWords.Length <= 1) //Just looking shows the room.
         {
             controller.DisplayRoomText();

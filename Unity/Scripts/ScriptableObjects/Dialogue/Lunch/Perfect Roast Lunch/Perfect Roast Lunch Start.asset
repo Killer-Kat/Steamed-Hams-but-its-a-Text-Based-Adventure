@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: Perfect Roast Lunch Start
   m_EditorClassIdentifier: 
   IsEndOfDialogue: 0
-  NpcDialogue: Seymour
+  NpcDialogue: 'Ah, Seymour this roast looks amazing, I did not know you were such
+    a good cook. '
   scoreToGive: 2
   weirdPoints: 0
   politePoints: 1
   HAMScommand: 
-  option1: 
-  option2: 
-  option3: 
-  option4: 
-  NextDialogue1: {fileID: 0}
-  NextDialogue2: {fileID: 0}
+  option1: Thank you Superintendent, I put a lot of thought into this lunch.
+  option2: Oh me? Its just something I threw together.
+  option3: NA
+  option4: NA
+  NextDialogue1: {fileID: 11400000, guid: 786d75dcc9d9d7047b8c096519fd8230, type: 2}
+  NextDialogue2: {fileID: 11400000, guid: ffb6cdfc77160644daede36ff6eb723f, type: 2}
   NextDialogue3: {fileID: 0}
   NextDialogue4: {fileID: 0}

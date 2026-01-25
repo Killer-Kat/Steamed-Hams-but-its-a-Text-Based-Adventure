@@ -15,14 +15,17 @@ MonoBehaviour:
   description: A carpeted stairwell, the walls are adorned with floral wallpaper
     and the wooden boards below creak as you walk.
   rooomName: Stairwell
-  exits:
+  exits: []
+  exitItializationList:
   - keyString: east
-    exitDescription: Your living room is directly to the east.
+    exitDescription: You catch a faint whiff of damp carpet whafting in from your
+      Living Room to the East.
     valueRoom: {fileID: 11400000, guid: 703390efa81e76a4daccad1e9fb19b1c, type: 2}
-  exitItializationList: []
   objectItializationList:
   - {fileID: 11400000, guid: e6b3c6314b2fa604c8227511624f1972, type: 2}
   - {fileID: 11400000, guid: e56db03282337554e9c8bcbe6a8b2c1c, type: 2}
-  InteractableObjectsInRoom: []
+  InteractableObjectsInRoom:
+  - {fileID: 11400000, guid: e6b3c6314b2fa604c8227511624f1972, type: 2}
+  - {fileID: 11400000, guid: e56db03282337554e9c8bcbe6a8b2c1c, type: 2}
   peopleItializationList: []
   peopleInRoom: []
