@@ -25,6 +25,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public int burningHouseDeathCountdown; //tracks the amount of cupcakes you baked for the sugar princess, just kidding does what you think it does.
     public bool triggerPostLunchFire = false; //In order to not break things, we are going to not trigger the first fire scene while the lunch scene happpens, if this bool is true we want to trigger that scene directly after the lunch scene.
     public int lostInTheBackroomsCountdown = 6; //countdown of how long you can stay in the backrooms before you get the backrooms ending.
+    public bool triggerPostLunchGoodbye = false;
 
     public InteractableObject tv;
     public bool isTVon = false;
@@ -226,6 +227,10 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             triggerPostLunchFire = true;
             isOvenOn = false;
         }
+        if (triggerPostLunchFire == false && table.contents.Count == 0)
+        {
+            triggerPostLunchGoodbye = true; //I need to implement logic so that its not just lunch then goodbye but this will work for now
+        }
         for (int i = 0; i < table.contents.Count; i++)
         {
             if (table.contents[i].isGrossFood == true)
@@ -258,7 +263,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.updateScore(5);
                 controller.dialogueController.UnpackFromDialogueObject(LunchSteamedHamsDobj);
                 didChalmersEat = true;
-            
+
                 table.contents.RemoveAt(i);
                 return;
             }
@@ -294,7 +299,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.dialogueController.UnpackFromDialogueObject(LunchRoastDobj); //I am going to make a note here that I changed order that the dialogue controller unpacks dialogue objects so it runs the HAMS commands last so that I could get this to work right. Honestly it was driving me crazy, but thankfully I had my programmer socks on and was able to realize that I made the entire thing so I could just change it to work how I wanted. They really do make you better at coding! :3
                 table.contents.RemoveAt(i);
                 return;
-            }else if (table.contents[i].noun == "perfect roast")
+            } else if (table.contents[i].noun == "perfect roast")
             {
                 controller.updateScore(2);
                 controller.UpdatePolitePoints(2);
@@ -302,6 +307,12 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.dialogueController.UnpackFromDialogueObject(LunchPerfectRoastDobj); //Sadly I do not have any cute femboy/trans girl clothes on right now because its single digit temps outside and I am wearing layers on layers since my house does not have heating. 
                 table.contents.RemoveAt(i);
                 return;
+            }
+            else if (table.contents[i].noun == "steamed clams")
+            {
+                controller.dialogueController.UnpackFromDialogueObject(LunchSteamedClamsDobj);
+                table.contents.RemoveAt(i);
+
             }
             else if (table.contents[i].noun == "pickled herring")
             {
@@ -326,8 +337,12 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             isKitchenOnfire = true;
             Kitchen.description = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!";
             Debug.Log("post lunch fire triggered");
+        }else if (triggerPostLunchGoodbye == true)
+        {
+            controller.dialogueController.UnpackFromDialogueObject(PoliteGoodbyeDobj);
+            Debug.Log("post lunch goodbye triggered");
         }
-        chalmers.currentDialogue = PoliteGoodbyeDobj;
+        
         //Note to self, add a catch here that moves us onto the post lunch scene 
     }
     public void HouseFire()
@@ -369,6 +384,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 Porch.peopleInRoom.Add(chalmers);
                 DiningRoom.peopleInRoom.Clear(); //dont write code like this, if there were another charater in the dining room this would also clear them.
                 controller.roomNavigation.AttemptToChangeRooms("south"); //also dont write code like this, jesus
+                chalmersGoodbye();
                 break;
             case "steamedhams":
                 isSteamedHams = true;
