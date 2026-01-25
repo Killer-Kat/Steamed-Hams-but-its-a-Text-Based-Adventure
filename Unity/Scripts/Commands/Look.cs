@@ -11,14 +11,14 @@ public class Look : InputAction
         {
             controller.DisplayRoomText();
         }
-        
+
         else if (separatedInputWords.Length == 2)// two words, one of them is look so the other one must be the item.
         {
             //Debug.Log("Looking for: " + separatedInputWords[1]);
             for (int i = 0; i < controller.playerInventory.Count; i++)
             {
                 //Debug.Log("Look command finds: " + controller.playerInventory[i].noun); 
-                if(separatedInputWords[1].ToLower() == controller.playerInventory[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
+                if (separatedInputWords[1].ToLower() == controller.playerInventory[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
                 {
                     controller.LogStringWithReturn(controller.playerInventory[i].examineDescription);
                     if (controller.playerInventory[i].isContainer == true)
@@ -50,9 +50,11 @@ public class Look : InputAction
                     return;
                 }
             }
-            
+            GetShortNameList(controller, separatedInputWords[1].ToLower());
+            controller.LogStringWithReturn("Could not find: " + separatedInputWords[1]);
+
         }
-        
+
         else //Item to look at is multiple words long
 
         {
@@ -79,7 +81,8 @@ public class Look : InputAction
             for (int i = 0; i < controller.playerInventory.Count; i++) //look in the player inv first
             {
                 //Debug.Log("Look command finds: " + controller.playerInventory[i].noun); 
-                if (itemToFind.ToLower() == controller.playerInventory[i].noun.ToLower()){//remember to keep everything lowercase!
+                if (itemToFind.ToLower() == controller.playerInventory[i].noun.ToLower())
+                {//remember to keep everything lowercase!
                     controller.LogStringWithReturn(controller.playerInventory[i].examineDescription);
                     if (controller.playerInventory[i].isContainer == true)
                     {
@@ -97,7 +100,7 @@ public class Look : InputAction
                 if (itemToFind.ToLower() == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
                 {
                     controller.LogStringWithReturn(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].examineDescription);
-                    if(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].isContainer == true)
+                    if (controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].isContainer == true)
                     {
                         string contentsText = "It contains :";
                         for (int j = 0; j < controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents.Count; j++)
@@ -108,6 +111,20 @@ public class Look : InputAction
                     }
                     return;
                 }
+            }
+        }
+        void LogItem(InteractableObject item) //this is we can skip a lot of repeated code, still need to implement
+        {
+            controller.LogStringWithReturn(item.examineDescription);
+
+            if (item.isContainer)
+            {
+                string contentsText = "It contains :";
+                for (int j = 0; j < item.contents.Count; j++)
+                {
+                    contentsText += " " + item.contents[j].noun.ToLower();
+                }
+                controller.LogStringWithReturn(contentsText);
             }
         }
     }
