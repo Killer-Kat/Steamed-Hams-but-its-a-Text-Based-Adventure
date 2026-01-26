@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
   m_Name: Krusty Burger Toilet
   m_EditorClassIdentifier: 
-  noun: 'krusty burger toilet  '
+  noun: krusty burger toilet
   canTake: 0
   description: 'Unsuprisingly there is a toilet here.
 

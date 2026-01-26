@@ -18,8 +18,9 @@ public class GameStartManager : MonoBehaviour
     private Room Kitchen;
     [SerializeField]
     private Room Stairwell;
-    
-    
+
+    [SerializeField]
+    private InteractableObject toilet;
     [SerializeField]
     private InteractableObject fridge;
     [SerializeField]
@@ -78,6 +79,9 @@ public class GameStartManager : MonoBehaviour
         tv.examineDescription = "A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...";
         Kitchen.description = "A small square teal colored kitchen with a window overlooking a nearby fast food resturant. Its obvious whover lives here is not a very good cook.";
         oven.examineDescription = "A cheap white oven with a 4 burner stove and a broken timer. It is currently on.";
+        toilet.description = "Unsuprisingly there is a toilet here.";
+        toilet.examineDescription = "A grimy public toilet, you can see a bit of rusty metal stuck in the bottom, if you were brave you could reach in and take it.";
+
 
         SetMoonPhase();
 

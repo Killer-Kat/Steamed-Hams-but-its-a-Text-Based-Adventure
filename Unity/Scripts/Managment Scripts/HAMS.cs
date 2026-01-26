@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 {
     public GameController controller;
@@ -40,7 +40,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     bool isTvFixed = false;
 
     public InteractableObject table;
-    public bool isGrossFoodOnTable = false; //If true there should be alt lines for if chalmers did or did not eat anything durring lunch
+    [SerializeField]
+    public DialogueObject LunchGrossFoodDobj;
 
     public Person chalmers;
     public Person jermey;
@@ -259,108 +260,154 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         {
             triggerPostLunchGoodbye = true; //I need to implement logic so that its not just lunch then goodbye but this will work for now
         }
-        for (int i = 0; i < table.contents.Count; i++)
+
+        // Pre-scan table for context so bucket/wine glass logic is no longer order-dependent
+        bool hasWineGlasses = false;
+        bool hasBucket = false;
+        bool hasGrossFood = false;
+
+        int foodCount = 0;
+
+        for (int scan = 0; scan < table.contents.Count; scan++)
         {
-            if (table.contents[i].isGrossFood == true)
-            {
-                isGrossFoodOnTable = true;
-            }
-            if (table.contents[i].noun == "wine glasses")
-            {
-                controller.dialogueController.UnpackFromDialogueObject(LunchWineGlassDobj);
-                table.contents.RemoveAt(i);
-                wineGlassesUsed = true;
-                return;
-            }
-            else if (table.contents[i].noun == "bucket" && wineGlassesUsed == false && table.contents.Count == 1) //Issue, the bucket is always at the first index of the table contents so it always triggers the no wine glasses condition even when the wine glasses are present as it finds the bucket first. Bandaid fix add a check that there is only 1 item on the table, obviously this will break if the player puts a non food item on the table since it won't be removed by the script. But I can fix that edge case later
-            {
-                controller.dialogueController.UnpackFromDialogueObject(LunchBucketDobj);
-                controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(IceBucket);
-                table.contents.RemoveAt(i);
-                return;
-            }
-            else if (table.contents[i].noun == "bucket" && wineGlassesUsed == true)  //still need to move the bucket off the table so the fire triggers, but dont want chalmers to scold the player for not having wine glasses.
-            {
-                controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(IceBucket);
-                table.contents.RemoveAt(i);
-                LunchMealLogic();//Since this does not trigger any dialogue which would run the LunchMealLogic() method again we have to call it here.
-                return;
-            }
-            else if (table.contents[i].noun == "steamed hams")
+            if (table.contents[scan].noun == "wine glasses") hasWineGlasses = true;
+            if (table.contents[scan].noun == "bucket") hasBucket = true;
+            if (table.contents[scan].isGrossFood == true) hasGrossFood = true;
+
+            // Count food items
+            if (table.contents[scan].canBeEaten == true)
+                foodCount++;
+        }
+        
+        // If there is gross food on the table you get scolded.
+        if (hasGrossFood == true)
+        {
+            controller.dialogueController.UnpackFromDialogueObject(LunchGrossFoodDobj);
+            controller.updateScore(-2); // optional penalty
+            // Remove all gross food so the logic doesn't loop forever
+            for (int g = table.contents.Count - 1; g >= 0; g--) 
+            { if (table.contents[g].isGrossFood == true) table.contents.RemoveAt(g); }
+        }
+
+
+        // Dictionary for food logic (keeps your comments and structure intact)
+        Dictionary<string, Action> foodActions = new Dictionary<string, Action>
+    {
+        {
+            "steamed hams", () =>
             {
                 controller.updateScore(5);
                 controller.dialogueController.UnpackFromDialogueObject(LunchSteamedHamsDobj);
                 didChalmersEat = true;
-
-                table.contents.RemoveAt(i);
-                return;
             }
-            else if (table.contents[i].noun == "hamburgers")
+        },
+        {
+            "hamburgers", () =>
             {
                 controller.updateScore(5);
                 controller.dialogueController.UnpackFromDialogueObject(LunchHamburgersDobj);
                 didChalmersEat = true;
-                table.contents.RemoveAt(i);
-                return;
             }
-            else if (table.contents[i].noun == "combo meal")
+        },
+        {
+            "combo meal", () =>
             {
                 controller.dialogueController.UnpackFromDialogueObject(LunchComboMealDobj);
                 didChalmersEat = true;
-                table.contents.RemoveAt(i);
-                return;
             }
-            else if (table.contents[i].noun == "ribwich")
+        },
+        {
+            "ribwich", () =>
             {
                 controller.updateScore(1);
                 controller.dialogueController.UnpackFromDialogueObject(LunchRibwichDobj);
-                table.contents.RemoveAt(i);
-                return;
                 //Not going to have this count as chalmers eating, since you have the option to eat it yourself and I don't want to program that edge case right now.
             }
-            else if (table.contents[i].noun == "burnt roast")
+        },
+        {
+            "burnt roast", () =>
             {
                 controller.updateScore(-1);
                 controller.UpdateOddPoints(5);
                 controller.UpdatePolitePoints(-5);
                 didChalmersEat = true;
                 controller.dialogueController.UnpackFromDialogueObject(LunchRoastDobj); //I am going to make a note here that I changed order that the dialogue controller unpacks dialogue objects so it runs the HAMS commands last so that I could get this to work right. Honestly it was driving me crazy, but thankfully I had my programmer socks on and was able to realize that I made the entire thing so I could just change it to work how I wanted. They really do make you better at coding! :3
-                table.contents.RemoveAt(i);
-                return;
-            } else if (table.contents[i].noun == "perfect roast")
+            }
+        },
+        {
+            "perfect roast", () =>
             {
                 controller.updateScore(2);
                 controller.UpdatePolitePoints(2);
                 didChalmersEat = true;
                 controller.dialogueController.UnpackFromDialogueObject(LunchPerfectRoastDobj); //Sadly I do not have any cute femboy/trans girl clothes on right now because its single digit temps outside and I am wearing layers on layers since my house does not have heating. 
-                table.contents.RemoveAt(i);
-                return;
             }
-            else if (table.contents[i].noun == "steamed clams")
+        },
+        {
+            "steamed clams", () =>
             {
                 controller.updateScore(2);
                 controller.UpdatePolitePoints(2);
                 controller.dialogueController.UnpackFromDialogueObject(LunchSteamedClamsDobj);
                 didChalmersEat = true;
-                table.contents.RemoveAt(i);
-
             }
-            else if (table.contents[i].noun == "pickled herring")
+        },
+        {
+            "pickled herring", () =>
             {
                 controller.dialogueController.UnpackFromDialogueObject(LunchHerringDobj);
-                table.contents.RemoveAt(i);
-                return;
             }
-            else if (table.contents[i].noun == "apple")
+        },
+        {
+            "apple", () =>
             {
                 controller.updateScore(1);
                 controller.dialogueController.UnpackFromDialogueObject(LunchAppleDobj);
                 didChalmersEat = true;
-                table.contents.RemoveAt(i);
-                return;
+            }
+        }
+    };
+
+        // We will remove items AFTER the loop to avoid mutating the list while iterating
+        InteractableObject itemToRemove = null;
+
+        for (int i = 0; i < table.contents.Count; i++)
+        {
+            
+            if (table.contents[i].noun == "wine glasses")
+            {
+                controller.dialogueController.UnpackFromDialogueObject(LunchWineGlassDobj);
+                wineGlassesUsed = true;
+                itemToRemove = table.contents[i];
+                break;
+            }
+            else if (table.contents[i].noun == "bucket" && wineGlassesUsed == false && hasWineGlasses == false) //fixed logic: now checks actual presence of wine glasses, not index order
+            {
+                controller.dialogueController.UnpackFromDialogueObject(LunchBucketDobj);
+                controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(IceBucket);
+                itemToRemove = table.contents[i];
+                break;
+            }
+            else if (table.contents[i].noun == "bucket" && (wineGlassesUsed == true || hasWineGlasses == true))  //still need to move the bucket off the table so the fire triggers, but dont want chalmers to scold the player for not having wine glasses.
+            {
+                controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(IceBucket);
+                itemToRemove = table.contents[i];
+                break;
             }
 
+            // Food logic via dictionary
+            if (foodActions.ContainsKey(table.contents[i].noun))
+            {
+                foodActions[table.contents[i].noun].Invoke();
+                itemToRemove = table.contents[i];
+                break;
+            }
         }
+
+        // Remove processed item safely
+        if (itemToRemove != null)
+            table.contents.Remove(itemToRemove);
+
         if (triggerPostLunchFire == true)//this one should be last as if true it will put us in the post lunch fire scene.
         {
             //KitchenOnFire();
@@ -368,14 +415,16 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             isKitchenOnfire = true;
             Kitchen.description = "A small square teal colored kitchen, its somewhat hard to make out any other details due to the fact that it is currently on fire!";
             Debug.Log("post lunch fire triggered");
-        }else if (triggerPostLunchGoodbye == true)
+        }
+        else if (triggerPostLunchGoodbye == true)
         {
             controller.dialogueController.UnpackFromDialogueObject(PoliteGoodbyeDobj);
             Debug.Log("post lunch goodbye triggered");
         }
-        
+
         //Note to self, add a catch here that moves us onto the post lunch scene 
     }
+
     public void HouseFire()
     {
         isHouseOnFire = true;

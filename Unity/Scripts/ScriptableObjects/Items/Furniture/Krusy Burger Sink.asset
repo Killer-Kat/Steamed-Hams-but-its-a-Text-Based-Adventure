@@ -16,7 +16,7 @@ MonoBehaviour:
   canTake: 0
   description: Below the mirror sits a small sink covered in bits of wet paper towels.
   examineDescription: 'On closer inspection you realize that it is in fact, a sink. '
-  useAction: Default
+  useAction: sink
   isContainer: 0
   showContainerContents: 0
   isGrossFood: 0
