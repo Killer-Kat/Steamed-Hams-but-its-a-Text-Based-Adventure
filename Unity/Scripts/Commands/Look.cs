@@ -6,7 +6,7 @@ public class Look : InputAction
 {
     public override void RespondToInput(GameController controller, string[] separatedInputWords)
     {
-        string[] fillerWords = { "at", "the", "to", "on", "in", "my", "for", "Cromulent", "Embiggen" }; //Words we want to not try to include in multi word nouns
+        string[] fillerWords = { "at", "the", "to", "on", "in", "my", "for", "cromulent", "embiggen" }; //Words we want to not try to include in multi word nouns
         if (separatedInputWords.Length <= 1) //Just looking shows the room.
         {
             controller.DisplayRoomText();
@@ -14,27 +14,8 @@ public class Look : InputAction
 
         else if (separatedInputWords.Length == 2)// two words, one of them is look so the other one must be the item.
         {
-            //Debug.Log("Looking for: " + separatedInputWords[1]);
-            for (int i = 0; i < controller.playerInventory.Count; i++)
-            {
-                //Debug.Log("Look command finds: " + controller.playerInventory[i].noun); 
-                if (separatedInputWords[1].ToLower() == controller.playerInventory[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
-                {
-                    LogItem(controller.playerInventory[i]);
-                    return;
-                }
-            }
-            for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++)
-            {
-                if (separatedInputWords[1].ToLower() == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
-                {
-                    LogItem(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i]);
-                    return;
-                }
-            }
-            GetShortNameList(controller, separatedInputWords[1].ToLower());
-            controller.LogStringWithReturn("Could not find: " + separatedInputWords[1]);
 
+            CheckSingleWord(separatedInputWords[1].ToLower());
         }
 
         else //Item to look at is multiple words long
@@ -66,6 +47,7 @@ public class Look : InputAction
                 if (itemToFind.ToLower() == controller.playerInventory[i].noun.ToLower())
                 { 
                     LogItem(controller.playerInventory[i]);
+                    return;
                     
                 }
             }
@@ -77,6 +59,13 @@ public class Look : InputAction
                     return;
                 }
             }
+            //CheckSingleWord(itemToFind.ToLower());
+            if (!CheckSingleWord(itemToFind.ToLower()))
+            {
+                controller.LogStringWithReturn("Could not find: " + itemToFind.ToLower());
+            }
+
+            //controller.LogStringWithReturn("Could not find: " + itemToFind.ToLower());
         }
         void LogItem(InteractableObject item) //this is so we can skip a lot of repeated code, still need to implement
         {
@@ -91,6 +80,34 @@ public class Look : InputAction
                 }
                 controller.LogStringWithReturn(contentsText);
             }
+        }
+        bool CheckSingleWord(string word)
+        {
+            //Debug.Log("Looking for: " + separatedInputWords[1]);
+            for (int i = 0; i < controller.playerInventory.Count; i++)
+            {
+                //Debug.Log("Look command finds: " + controller.playerInventory[i].noun); 
+                if (word == controller.playerInventory[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
+                {
+                    LogItem(controller.playerInventory[i]);
+                    return true;
+                }
+            }
+            for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++)
+            {
+                if (word == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
+                {
+                    LogItem(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i]);
+                    return true;
+                }
+            }
+            var SNitem = GetShortNameList(controller, word);
+            if (SNitem != null)
+            {
+                LogItem(SNitem);
+                return true;
+            }
+            return false; // Not found
         }
     }
 }
