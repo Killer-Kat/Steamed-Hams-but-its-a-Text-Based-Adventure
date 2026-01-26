@@ -20,6 +20,22 @@ public class Take : InputAction
         // Normalize everything so we don't lose our minds over casing.
         NormalizeInputWords(separatedInputWords);
 
+        // Player wants to Hoover up everything in sight
+        if (separatedInputWords[1] == "all" || separatedInputWords[1] == "everything")
+        {
+            // "take all from X"
+            if (Array.Find(separatedInputWords, element => element == "from") == "from")
+            {
+                TakeAllFromContainer(controller, separatedInputWords);
+                return;
+            }
+
+            // "take all"
+            TakeAllInRoom(controller);
+            return;
+        }
+
+
         // Because typing this chain 40 times is a cry for help.
         var roomObjects = controller.roomNavigation.currentRoom.InteractableObjectsInRoom;
 
@@ -204,4 +220,85 @@ public class Take : InputAction
         // If we got here, the thing they want does not exist. Tragic.
         controller.LogStringWithReturn(combinedInputWords + " not found.");
     }
+
+    void TakeAllInRoom(GameController controller)
+    {
+        var roomObjects = controller.roomNavigation.currentRoom.InteractableObjectsInRoom;
+
+        // Collect all the lootable goodies
+        List<InteractableObject> toTake = new List<InteractableObject>();
+
+        foreach (var obj in roomObjects)
+        {
+            //This way you don't take the furniture.
+            if (obj.canTake)
+                toTake.Add(obj);
+        }
+
+        if (toTake.Count == 0)
+        {
+            controller.LogStringWithReturn("There is nothing here worth taking.");
+            return;
+        }
+
+        foreach (var obj in toTake)
+        {
+            controller.playerInventory.Add(obj);
+            roomObjects.Remove(obj);
+        }
+
+        controller.LogStringWithReturn("You grab everything that isn't nailed down.");
+    }
+
+
+    void TakeAllFromContainer(GameController controller, string[] separatedInputWords)
+    {
+        int fromIndex = Array.IndexOf(separatedInputWords, "from");
+        string containerName = string.Join(" ", separatedInputWords[(fromIndex + 1)..]);
+
+        var roomObjects = controller.roomNavigation.currentRoom.InteractableObjectsInRoom;
+
+        // Try full name first
+        InteractableObject container = roomObjects.Find(o => o.name.ToLower() == containerName);
+
+        // Try alias if needed
+        if (container == null)
+        {
+            var alias = GetShortNameList(controller, containerName);
+            if (alias != null && roomObjects.Contains(alias))
+                container = alias;
+        }
+
+        if (container == null)
+        {
+            controller.LogStringWithReturn("Container " + containerName + " not found.");
+            return;
+        }
+
+        if (!container.isContainer)
+        {
+            controller.LogStringWithReturn(container.noun + " is not a container, no matter how hard you want it to be.");
+            return;
+        }
+
+        if (container.contents.Count == 0)
+        {
+            controller.LogStringWithReturn("The " + container.noun + " is empty. Sad.");
+            return;
+        }
+
+        // Everything inside is takeable by design, so just scoop it up
+        List<InteractableObject> toTake = new List<InteractableObject>(container.contents);
+
+        foreach (var item in toTake)
+        {
+            controller.playerInventory.Add(item);
+            container.contents.Remove(item);
+        }
+
+        controller.LogStringWithReturn("You take everything from the " + container.noun + ".");
+    }
+
+
+
 }
