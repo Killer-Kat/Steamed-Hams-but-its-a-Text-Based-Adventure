@@ -17,14 +17,17 @@ MonoBehaviour:
     not what it looks like cake the white tile walls and colorful bathroom stalls
     of this filthy restroom. '
   rooomName: Krusty Burger Bathroom
-  exits:
+  exits: []
+  exitItializationList:
   - keyString: south
-    exitDescription: Behind you to the south lies a much cleaner, yet still dirty
-      destination)
+    exitDescription: Behind you to the south lies somewhere thankfully cleaner, and
+      yet still dirty.
     valueRoom: {fileID: 11400000, guid: 23e8792f2d6ee664caa3cd76dd137313, type: 2}
-  exitItializationList: []
   objectItializationList:
   - {fileID: 11400000, guid: 3a206679ec750bb418078871b4d5133e, type: 2}
-  InteractableObjectsInRoom: []
+  - {fileID: 11400000, guid: 3c864626a21846b429bcb51dcd702c3e, type: 2}
+  - {fileID: 11400000, guid: fa90047f0a1c0dc47b62166e7eadb6f0, type: 2}
+  InteractableObjectsInRoom:
+  - {fileID: 11400000, guid: 3a206679ec750bb418078871b4d5133e, type: 2}
   peopleItializationList: []
   peopleInRoom: []

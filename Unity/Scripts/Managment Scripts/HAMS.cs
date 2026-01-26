@@ -96,6 +96,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public void ResetPoison()
     {
         isPoisoned = false;
+        controller.displayText.color = Color.white;
         poisonCountdown = 10;
         controller.LogStringWithReturn("You are no longer poisoned.");
         controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(vomit);
@@ -141,6 +142,10 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             if(controller.health >= 10)
             {
                 controller.UpdateHealth(-5);
+            }
+            if (poisonCountdown == 1) 
+            {
+                EndingManager("poisonDeath");
             }
         }
         if (controller.roomNavigation.currentRoom.rooomName == "Backrooms")
@@ -765,6 +770,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.UpdateHunger(10);
                 controller.UpdateHealth(-5);
                 isPoisoned = true;
+                controller.displayText.color = Color.green;
                 break;
             case "pickled herring":
                 controller.LogStringWithReturn("You eat the " + eatingkey + ", and then remeber why you had left it in the fridge so long. Gross.");
@@ -777,6 +783,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.UpdateHunger(10);
                 controller.UpdateOddPoints(10);
                 isPoisoned = true;
+                controller.displayText.color = Color.green;
                 break;
             case "rusty key":
                 controller.LogStringWithReturn("You eat the " + eatingkey + ", you found in a toilet. That certainly was *a* choice. You have been poisoned.");
@@ -784,6 +791,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.UpdateHunger(10);
                 controller.UpdateHealth(-25);
                 isPoisoned = true;
+                controller.displayText.color = Color.green;
                 break;
         }
     }
@@ -800,7 +808,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.persistentData.hasBurningDeathEnding = true; controller.persistentData.hasDied = true; controller.persistentData.numberOfDeaths += 1;
                 break;
             case "poisonDeath":
-                controller.displayText.color = Color.green;
+                
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Poisoned Death ending: You ate poison and died, I hope you are happy with youself, who will look after your mother now?");
                 controller.persistentData.hasPoisonedEnding = true; controller.persistentData.hasDied = true; controller.persistentData.numberOfDeaths += 1;
                 break;

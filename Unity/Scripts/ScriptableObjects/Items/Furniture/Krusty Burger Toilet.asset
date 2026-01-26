@@ -19,7 +19,7 @@ MonoBehaviour:
 '
   examineDescription: 'I wanna make it so there is some item stuck in it and you
     use it to get the item out and then the game is like aww dude gross why '
-  useAction: Default
+  useAction: kbtoilet
   isContainer: 0
   showContainerContents: 0
   isGrossFood: 0

@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511d92f88e074df46a6c816753d2b1eb, type: 3}
   m_Name: vomit
   m_EditorClassIdentifier: 
-  noun: name
+  noun: vomit
   canTake: 0
-  description: Description in room
-  examineDescription: The description returned when using examine
+  description: There is a puddle of vomit on the floor here, and who's fault is that?
+  examineDescription: 'The fact that you are trying to examine your own fresh vomit
+    raises unkind questions about your current mental state. '
   useAction: Default
   isContainer: 0
   showContainerContents: 0
   isGrossFood: 0
-  canBeEaten: 0
+  canBeEaten: 1
   canBeOpened: 0
   contentsItializationList: []
   contents: []
