@@ -6,7 +6,7 @@ public class Look : InputAction
 {
     public override void RespondToInput(GameController controller, string[] separatedInputWords)
     {
-        string[] fillerWords = { "at", "the", "to", "on", "in", "my" }; //Words we want to not try to include in multi word nouns
+        string[] fillerWords = { "at", "the", "to", "on", "in", "my", "for", "Cromulent", "Embiggen" }; //Words we want to not try to include in multi word nouns
         if (separatedInputWords.Length <= 1) //Just looking shows the room.
         {
             controller.DisplayRoomText();
@@ -20,16 +20,7 @@ public class Look : InputAction
                 //Debug.Log("Look command finds: " + controller.playerInventory[i].noun); 
                 if (separatedInputWords[1].ToLower() == controller.playerInventory[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
                 {
-                    controller.LogStringWithReturn(controller.playerInventory[i].examineDescription);
-                    if (controller.playerInventory[i].isContainer == true)
-                    {
-                        string contentsText = "It contains :";
-                        for (int j = 0; j < controller.playerInventory[i].contents.Count; j++)
-                        {
-                            contentsText = contentsText + " " + controller.playerInventory[i].contents[j].noun.ToLower();
-                        }
-                        controller.LogStringWithReturn(contentsText);
-                    }
+                    LogItem(controller.playerInventory[i]);
                     return;
                 }
             }
@@ -37,16 +28,7 @@ public class Look : InputAction
             {
                 if (separatedInputWords[1].ToLower() == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
                 {
-                    controller.LogStringWithReturn(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].examineDescription);
-                    if (controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].isContainer == true)
-                    {
-                        string contentsText = "It contains :";
-                        for (int j = 0; j < controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents.Count; j++)
-                        {
-                            contentsText = contentsText + " " + controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents[j].noun.ToLower();
-                        }
-                        controller.LogStringWithReturn(contentsText);
-                    }
+                    LogItem(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i]);
                     return;
                 }
             }
@@ -82,38 +64,21 @@ public class Look : InputAction
             {
                 //Debug.Log("Look command finds: " + controller.playerInventory[i].noun); 
                 if (itemToFind.ToLower() == controller.playerInventory[i].noun.ToLower())
-                {//remember to keep everything lowercase!
-                    controller.LogStringWithReturn(controller.playerInventory[i].examineDescription);
-                    if (controller.playerInventory[i].isContainer == true)
-                    {
-                        string contentsText = "It contains :";
-                        for (int j = 0; j < controller.playerInventory[i].contents.Count; j++)
-                        {
-                            contentsText = contentsText + " " + controller.playerInventory[i].contents[j].noun.ToLower();
-                        }
-                        controller.LogStringWithReturn(contentsText);
-                    }
+                { 
+                    LogItem(controller.playerInventory[i]);
+                    
                 }
             }
             for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++)//Then check the room
             {
                 if (itemToFind.ToLower() == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
                 {
-                    controller.LogStringWithReturn(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].examineDescription);
-                    if (controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].isContainer == true)
-                    {
-                        string contentsText = "It contains :";
-                        for (int j = 0; j < controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents.Count; j++)
-                        {
-                            contentsText = contentsText + " " + controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].contents[j].noun.ToLower();
-                        }
-                        controller.LogStringWithReturn(contentsText);
-                    }
+                    LogItem(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i]);
                     return;
                 }
             }
         }
-        void LogItem(InteractableObject item) //this is we can skip a lot of repeated code, still need to implement
+        void LogItem(InteractableObject item) //this is so we can skip a lot of repeated code, still need to implement
         {
             controller.LogStringWithReturn(item.examineDescription);
 
