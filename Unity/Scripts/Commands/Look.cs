@@ -15,7 +15,11 @@ public class Look : InputAction
         else if (separatedInputWords.Length == 2)// two words, one of them is look so the other one must be the item.
         {
 
-            CheckSingleWord(separatedInputWords[1].ToLower());
+            //CheckSingleWord(separatedInputWords[1].ToLower());
+            if (!CheckSingleWord(separatedInputWords[1].ToLower()))
+            {
+                controller.LogStringWithReturn("Could not find: " + separatedInputWords[1].ToLower());
+            }
         }
 
         else //Item to look at is multiple words long
