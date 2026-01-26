@@ -177,14 +177,37 @@ public class GameController : MonoBehaviour
     {
         health += x;
         if (health > 100) health = 100; if (health < 0) health = 0;
-    }public void UpdateHunger(int x)
+    }
+    public void UpdateHunger(int amount)
     {
-        hunger += x;
-        if (hunger > 100) hunger = 100; if (hunger < 0) hunger = 0;
-        if(hunger == 100)
+        int previousHunger = hunger;
+
+        hunger += amount;
+
+        // Clamp
+        if (hunger > 100) hunger = 100;
+        if (hunger < 0) hunger = 0;
+
+        // If the player was already full and tries to eat more
+        if (previousHunger == 100 && amount > 0)
+        {
+            LogStringWithReturn("You try to cram in more food, but your stomach violently rejects it as you throw up everywhere. What a mess.");
+         
+
+            // thats one way to clear poison
+            HAMS.ResetPoison();
+
+            // all that food is no longer inside you
+            hunger -= 40;
+            if (hunger < 0) hunger = 0;
+
+            return;
+        }
+        if (hunger == 100)
         {
             LogStringWithReturn("You are so full you could legally be classified as a strategic food reserve.");
-        }else if (hunger >= 80)
+        }
+        else if (hunger >= 80)
         {
             LogStringWithReturn("You are comfortably full.");
         }
@@ -201,6 +224,7 @@ public class GameController : MonoBehaviour
             LogStringWithReturn("You are *very* hungry.");
         }
     }
+
     public void ToggleVeryVerboseMode()
     {
         isVeryVerbose = !isVeryVerbose;

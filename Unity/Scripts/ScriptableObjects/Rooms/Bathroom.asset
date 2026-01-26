@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e337ffa52414f544beec87c76310aa4, type: 3}
   m_Name: Bathroom
   m_EditorClassIdentifier: 
-  description: 
-  rooomName: 
+  description: your bathroom, idk write later
+  rooomName: Bathroom
   exits: []
   exitItializationList: []
   objectItializationList: []

@@ -26,6 +26,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public int burningHouseDeathCountdown; //tracks the amount of cupcakes you baked for the sugar princess, just kidding does what you think it does.
     public bool triggerPostLunchFire = false; //In order to not break things, we are going to not trigger the first fire scene while the lunch scene happpens, if this bool is true we want to trigger that scene directly after the lunch scene.
     public int lostInTheBackroomsCountdown = 6; //countdown of how long you can stay in the backrooms before you get the backrooms ending.
+    public int poisonCountdown = 10; //countdown of how long you have until you die from eating posion.
+    public bool isPoisoned = false;
+    public InteractableObject vomit;
     public bool triggerPostLunchGoodbye = false;
 
     public InteractableObject tv;
@@ -85,6 +88,14 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
         DiningRoom.peopleInRoom.Add(chalmers);
         didChalmersEnterHouse = true;
     }
+
+    public void ResetPoison()
+    {
+        isPoisoned = false;
+        poisonCountdown = 10;
+        controller.LogStringWithReturn("You are no longer poisoned.");
+        controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Add(vomit);
+    }
     public void Tick()//used for the countdowns.
     {
         if (oven.contents.Count != 0 && isOvenOn == true)
@@ -118,6 +129,14 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             {
                 ChalmersEntersKitchen();
                 skipChalmersEntersKitchen = true;
+            }
+        }
+        if (isPoisoned)
+        {
+            poisonCountdown -= 1;
+            if(controller.health >= 10)
+            {
+                controller.UpdateHealth(-5);
             }
         }
         if (controller.roomNavigation.currentRoom.rooomName == "Backrooms")
@@ -634,11 +653,59 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.UpdateHunger(25);
                 controller.UpdateHealth(-5);
                 break;
+            case "perfect roast":
+                controller.LogStringWithReturn("You eat the " + eatingkey + ", I guess you will need to find something else to serve to chalmers.");
+                controller.updateScore(-5);
+                controller.UpdateHunger(25);
+                break;            
+            case "steamed clams":
+                controller.LogStringWithReturn("You eat the " + eatingkey + ", and they are perfectly steamed, I guess you will need to find something else to serve to chalmers.");
+                controller.updateScore(-5);
+                controller.UpdateHunger(25);
+                break;
+            case "hamburgers":
+                controller.LogStringWithReturn("You eat the " + eatingkey + ", and you feel a momentary sadness as you wonder what in your life has lead you to sneak away from lunch to buy several peoples worth of fast food and then eat it all by yourself on your finest serving platter.");
+                controller.updateScore(-5);
+                controller.UpdateHunger(25);
+                controller.UpdateHealth(-5);
+                break;            
+            case "combo meal":
+                controller.LogStringWithReturn("You eat the " + eatingkey + ", and you feel a momentary sadness as you wonder what in your life has lead you to sneak away from lunch to buy several peoples worth of fast food and then eat it all by yourself.");
+                controller.updateScore(-5);
+                controller.UpdateHunger(25);
+                controller.UpdateHealth(-5);
+                break;            
+            case "steamed hams":
+                controller.LogStringWithReturn("You eat the " + eatingkey + ", and you for a moment consider if you should stop the lies, man up and come clean about your mistakes. Then you remember you are a coward and now need to find something else to serve for lunch.");
+                controller.updateScore(-5);
+                controller.UpdateHunger(25);
+                controller.UpdateHealth(-5);
+                break;
+
             case "ribwich":
                 controller.LogStringWithReturn("You eat the " + eatingkey + ", its as delicous as it is unhealthy.");
                 controller.updateScore(2);
                 controller.UpdateHunger(15);
                 controller.UpdateHealth(-10);
+                break;
+            case "milk":
+                controller.LogStringWithReturn("The " + eatingkey + ", is so old its formed into a nearly solid mass which you foolishly force down your gullet. Right after as if in protest to this atrocity your guts start to hurt. You have been poisoned.");
+                controller.updateScore(-10);
+                controller.UpdateHunger(10);
+                controller.UpdateHealth(-5);
+                isPoisoned = true;
+                break;
+            case "pickled herring":
+                controller.LogStringWithReturn("You eat the " + eatingkey + ", and then remeber why you had left it in the fridge so long. Gross.");
+                controller.updateScore(-5);
+                controller.UpdateHunger(10);
+                break;
+            case "vomit":
+                controller.LogStringWithReturn("What the hell is wrong with you? are you a dog!? You for some unknown reason eat your " + eatingkey + ", before getting a crash course in why not to do this as your body protests. You have been poisoned... Idiot.");
+                controller.updateScore(-20);
+                controller.UpdateHunger(10);
+                controller.UpdateOddPoints(10);
+                isPoisoned = true;
                 break;
         }
     }
@@ -653,6 +720,11 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.displayText.color = Color.red;
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Burning Death ending: You and everyone else inside your house perish in the flaming inferno, if only you had put out the fire!");
                 controller.persistentData.hasBurningDeathEnding = true; controller.persistentData.hasDied = true; controller.persistentData.numberOfDeaths += 1;
+                break;
+            case "poisonDeath":
+                controller.displayText.color = Color.green;
+                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Poisoned Death ending: You ate poison and died, I hope you are happy with youself, who will look after your mother now?");
+                controller.persistentData.hasPoisonedEnding = true; controller.persistentData.hasDied = true; controller.persistentData.numberOfDeaths += 1;
                 break;
             case "chalmersLeaves":
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Chalmers Leaves ending: Chalmers is disgusted by your antics and leaves early. You should really be ashamed of yourself, acting like that.");
