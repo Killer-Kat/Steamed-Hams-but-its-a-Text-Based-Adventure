@@ -31,6 +31,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public InteractableObject vomit;
     public bool triggerPostLunchGoodbye = false;
 
+    public bool toiletHasKey = true;
+    public InteractableObject KrustyBurgerToilet;
+    public InteractableObject rustyKey;
     public InteractableObject tv;
     public bool isTVon = false;
     public int tvSecretCounter = 0;
@@ -632,6 +635,25 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             case "bed":
                 controller.LogStringWithReturn("You decide to lay down on your bed and nap for a breif moment... for some reason.");
                 break;
+            case "sink":
+                controller.LogStringWithReturn("You splash some cold water on your face and remind yourself to breathe. You will get through this.");
+                break;            
+            case "kbtoilet":
+                if (toiletHasKey)
+                {
+                    controller.LogStringWithReturn("You reach into the grimy toilet and pull out... a rusty key. Hope it was worth it.");
+                    controller.updateScore(5);
+                    controller.UpdateHealth(-5);
+                    toiletHasKey = false;
+                    controller.playerInventory.Add(rustyKey);
+                    KrustyBurgerToilet.examineDescription = "Further examination reveals nothing worthwhile.";
+                    KrustyBurgerToilet.description = "Unsuprisingly there is a toilet here, surprisingly you just stuck your hand down it.";
+                }
+                else
+                {
+                    controller.LogStringWithReturn("You consider reaching back into the grimy toilet, and then resolutely decide not to and instead simply flush it.");
+                }
+                break;
         }
     }
 
@@ -705,6 +727,13 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.updateScore(-20);
                 controller.UpdateHunger(10);
                 controller.UpdateOddPoints(10);
+                isPoisoned = true;
+                break;
+            case "rusty key":
+                controller.LogStringWithReturn("You eat the " + eatingkey + ", you found in a toilet. That certainly was *a* choice. You have been poisoned.");
+                controller.updateScore(-10);
+                controller.UpdateHunger(10);
+                controller.UpdateHealth(-25);
                 isPoisoned = true;
                 break;
         }
