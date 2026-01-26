@@ -13,6 +13,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public Room DiningRoom;
     public Room Porch;
 
+    public bool didChalmersEnterHouse = false; //so we don't start the CEK scene if he is outside + I want to add a thing later where you exit via window and meet him on the porch
     public DialogueObject ChalmersEntersKitchenDobjWindow; //dobj to use for CEK scene if window is open
     public DialogueObject ChalmersEntersKitchenDobjNoWindow;
     public int chalmersEnterKitchenCountdown; //Counter for having chalmers enter the kitchen before lunch
@@ -81,6 +82,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     {
         controller.dialogueController.StartDialogue(IntroDobj, "Chalmers");
         DiningRoom.peopleInRoom.Add(chalmers);
+        didChalmersEnterHouse = true;
     }
     public void Tick()//used for the countdowns.
     {
@@ -162,13 +164,16 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 
     public void ChalmersEntersKitchen()
     {
-        if (controller.roomNavigation.currentRoom.rooomName == "Kitchen" && isWindowOpen == false)
+        if (didChalmersEnterHouse == true)
         {
-            controller.dialogueController.StartDialogue(ChalmersEntersKitchenDobjNoWindow, "Chalmers");
-        }
-        else if (controller.roomNavigation.currentRoom.rooomName == "Kitchen" && isWindowOpen == true)
-        {
-            controller.dialogueController.StartDialogue(ChalmersEntersKitchenDobjWindow, "Chalmers");
+            if (controller.roomNavigation.currentRoom.rooomName == "Kitchen" && isWindowOpen == false)
+            {
+                controller.dialogueController.StartDialogue(ChalmersEntersKitchenDobjNoWindow, "Chalmers");
+            }
+            else if (controller.roomNavigation.currentRoom.rooomName == "Kitchen" && isWindowOpen == true)
+            {
+                controller.dialogueController.StartDialogue(ChalmersEntersKitchenDobjWindow, "Chalmers");
+            }
         }
     }
     public void chalmersGoodbye()
