@@ -19,5 +19,9 @@ MonoBehaviour:
     seafood.
   useAction: Default
   isContainer: 0
+  showContainerContents: 0
+  isGrossFood: 0
+  canBeEaten: 0
+  canBeOpened: 0
   contentsItializationList: []
   contents: []

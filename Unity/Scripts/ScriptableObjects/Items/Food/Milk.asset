@@ -21,7 +21,9 @@ MonoBehaviour:
     to that.
   useAction: Default
   isContainer: 0
+  showContainerContents: 0
   isGrossFood: 1
+  canBeEaten: 1
+  canBeOpened: 0
   contentsItializationList: []
-  contents:
-  - {fileID: 0}
+  contents: []

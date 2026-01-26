@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e337ffa52414f544beec87c76310aa4, type: 3}
+  m_Name: Krusty Burger Bathroom
+  m_EditorClassIdentifier: 
+  description: 'Your shoes stick to the floor as you enter, if you thought the rest
+    of the building was dirty you had not seen anything yet, grease, grime and hopefully
+    not what it looks like cake the white tile walls and colorful bathroom stalls
+    of this filthy restroom. '
+  rooomName: Krusty Burger Bathroom
+  exits:
+  - keyString: south
+    exitDescription: Behind you to the south lies a much cleaner, yet still dirty
+      destination)
+    valueRoom: {fileID: 11400000, guid: 23e8792f2d6ee664caa3cd76dd137313, type: 2}
+  exitItializationList: []
+  objectItializationList:
+  - {fileID: 11400000, guid: 3a206679ec750bb418078871b4d5133e, type: 2}
+  InteractableObjectsInRoom: []
+  peopleItializationList: []
+  peopleInRoom: []

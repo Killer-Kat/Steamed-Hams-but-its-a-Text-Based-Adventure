@@ -48,6 +48,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public Exit KrustyBurgerExit;
     public DialogueObject KitchenFireDobj;
     public InteractableObject window;
+    public InteractableObject bdwindow;
     public bool isWindowOpen = false;
     public bool isBDWindowOpen = false;
     public InteractableObject oven;
@@ -577,8 +578,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 isWindowOpen = !isWindowOpen;
                 break; //Please refrain from breaking the window
             case "bdwindow":
-                if (isBDWindowOpen == true) { controller.LogStringWithReturn("You close the window with a satisfying thud!"); window.examineDescription = "Your faithful bedroom window sits there closed iluminating the room, despite having both curtains and blinds."; controller.ResetRoomExits(Bedroom); } 
-                else { controller.LogStringWithReturn("Its a bit stuck but you manage to open the window. The smell of fresh cut grass and burger grease wafts in on the breeeze."); window.examineDescription = "Your faithful bedroom window is sitting there wide open, if you were into fitness this would be a terrible place to strech your calves"; Bedroom.exits.Add(KrustyBurgerExit); }
+                if (isBDWindowOpen == true) { controller.LogStringWithReturn("You close the window with a satisfying thud!"); bdwindow.examineDescription = "Your faithful bedroom window sits there closed iluminating the room, despite having both curtains and blinds."; controller.ResetRoomExits(Bedroom); } 
+                else { controller.LogStringWithReturn("Its a bit stuck but you manage to open the window. The smell of fresh cut grass and burger grease wafts in on the breeeze."); bdwindow.examineDescription = "Your faithful bedroom window is sitting there wide open, if you were into fitness this would be a terrible place to strech your calves"; Bedroom.exits.Add(KrustyBurgerExit); }
                 isBDWindowOpen = !isBDWindowOpen;
                 break; //Please refrain from breaking this window as well
             case "z-remover":
@@ -611,6 +612,33 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 break;
             case "bed":
                 controller.LogStringWithReturn("You decide to lay down on your bed and nap for a breif moment... for some reason.");
+                break;
+        }
+    }
+
+    public void EatActionTree(string eatingkey)
+    {
+        switch (eatingkey)
+        {
+            default:
+                break;
+            case "apple":
+                controller.LogStringWithReturn("You eat the " + eatingkey + ", hopefully this will deter any doctors from approaching you.");
+                controller.updateScore(1);
+                controller.UpdateHunger(10);
+                controller.UpdateHealth(2);
+                break;
+            case "burnt roast":
+                controller.LogStringWithReturn("You eat the " + eatingkey + ", and you have no idea why, you aren't having lunch and its burnt to a crisp.");
+                controller.updateScore(-4);
+                controller.UpdateHunger(25);
+                controller.UpdateHealth(-5);
+                break;
+            case "ribwich":
+                controller.LogStringWithReturn("You eat the " + eatingkey + ", its as delicous as it is unhealthy.");
+                controller.updateScore(2);
+                controller.UpdateHunger(15);
+                controller.UpdateHealth(-10);
                 break;
         }
     }

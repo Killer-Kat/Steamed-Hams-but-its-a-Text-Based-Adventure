@@ -23,6 +23,9 @@ MonoBehaviour:
   - keyString: south
     exitDescription: The doors to the south lead back outside.
     valueRoom: {fileID: 11400000, guid: b4d1999a9da544548a81dc8a9c0ad1a3, type: 2}
+  - keyString: North
+    exitDescription: in front of you next to the counter is a small door to the bathroom.
+    valueRoom: {fileID: 11400000, guid: a793a626851601449b511fea3d705d18, type: 2}
   objectItializationList: []
   InteractableObjectsInRoom: []
   peopleItializationList:

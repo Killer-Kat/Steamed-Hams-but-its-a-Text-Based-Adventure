@@ -20,5 +20,9 @@ MonoBehaviour:
     a nice serving tray before having lunch.
   useAction: combomeal
   isContainer: 0
+  showContainerContents: 0
+  isGrossFood: 0
+  canBeEaten: 1
+  canBeOpened: 0
   contentsItializationList: []
   contents: []

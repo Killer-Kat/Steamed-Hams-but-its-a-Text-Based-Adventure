@@ -173,7 +173,35 @@ public class GameController : MonoBehaviour
     {
         politePoints = politePoints + x;
     }
-  public void ToggleVeryVerboseMode()
+    public void UpdateHealth(int x)
+    {
+        health += x;
+        if (health > 100) health = 100; if (health < 0) health = 0;
+    }public void UpdateHunger(int x)
+    {
+        hunger += x;
+        if (hunger > 100) hunger = 100; if (hunger < 0) hunger = 0;
+        if(hunger == 100)
+        {
+            LogStringWithReturn("You are so full you could legally be classified as a strategic food reserve.");
+        }else if (hunger >= 80)
+        {
+            LogStringWithReturn("You are comfortably full.");
+        }
+        else if (hunger >= 60)
+        {
+            LogStringWithReturn("You could eat more, but you aren't hungry.");
+        }
+        else if (hunger >= 40)
+        {
+            LogStringWithReturn("You feel moderately hungry.");
+        }
+        else if (hunger >= 20)
+        {
+            LogStringWithReturn("You are *very* hungry.");
+        }
+    }
+    public void ToggleVeryVerboseMode()
     {
         isVeryVerbose = !isVeryVerbose;
         if(isVeryVerbose == true)

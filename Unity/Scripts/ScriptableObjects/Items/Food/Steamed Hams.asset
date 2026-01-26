@@ -20,5 +20,9 @@ MonoBehaviour:
     just fast food on a fancy platter but you're trying your best.
   useAction: Default
   isContainer: 0
+  showContainerContents: 0
+  isGrossFood: 0
+  canBeEaten: 1
+  canBeOpened: 0
   contentsItializationList: []
   contents: []

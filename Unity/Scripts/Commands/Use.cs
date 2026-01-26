@@ -4,70 +4,62 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "TextAdventure/InputActions/Use")]
 public class Use : InputAction
 {
-     
+
     //The use item tree containing the logic for all the different items is in the HAMS script
     public override void RespondToInput(GameController controller, string[] separatedInputWords)
     {
         if (separatedInputWords.Length <= 1)
         {
             //Throw error
+            controller.LogStringWithReturn("Use what?");
+            return;
         }
-        else if (separatedInputWords.Length == 2)
-        {
-            //Debug.Log("Looking for: " + separatedInputWords[1]);
-            for (int i = 0; i < controller.playerInventory.Count; i++)
-            {
-                //Debug.Log("Look command finds: " + controller.playerInventory[i].noun); 
-                if (separatedInputWords[1].ToLower() == controller.playerInventory[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
-                {
-                    controller.HAMS.UseActionTree(controller.playerInventory[i].useAction);
-                    
-                    return;
-                }
-            }
-            for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++)
-            {
-                if (separatedInputWords[1].ToLower() == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
-                {
-                    controller.HAMS.UseActionTree(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].useAction);
 
-                    return;
-                }
-            }
-            controller.LogStringWithReturn(separatedInputWords[1] + " not found.");
+        // Build item name (handles single or multi-word)
+        string itemToFind = string.Join(" ", separatedInputWords[1..]).ToLower();
 
-        }
-        else //Item to look at is multiple words long
+        //Debug.Log("Looking for: " + itemToFind);
+
+        // -----------------------------
+        // First: look in player inventory
+        // -----------------------------
+        for (int i = 0; i < controller.playerInventory.Count; i++)
         {
-            string itemToFind = "";
-            for (int i = 1; i < separatedInputWords.Length; i++)
+            if (itemToFind == controller.playerInventory[i].noun.ToLower())
             {
-                itemToFind = itemToFind + " " + separatedInputWords[i];
+                controller.HAMS.UseActionTree(controller.playerInventory[i].useAction);
+                return;
             }
-            itemToFind = itemToFind.Substring(1);
-            //Debug.Log("use searching for: " + itemToFind);
-            for (int i = 0; i < controller.playerInventory.Count; i++) //look in the player inv first
-            {
-                //Debug.Log("use command finds: " + controller.playerInventory[i].noun); 
-                if (itemToFind.ToLower() == controller.playerInventory[i].noun.ToLower())
-                {//remember to keep everything lowercase!
-                   
-                    controller.HAMS.UseActionTree(controller.playerInventory[i].useAction);
-                    return;
-                }
-            }
-            for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++)//Then check the room
-            {
-                if (itemToFind.ToLower() == controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].noun.ToLower())//noun is a lowercase name used via the parser. .name will give its unity engine name which we do not want
-                {
-                    controller.HAMS.UseActionTree(controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i].useAction);
-                    
-                    return;
-                }
-            }
-            controller.LogStringWithReturn(itemToFind + " not found.");
         }
-        
+
+        // -----------------------------
+        // Second: look in the room
+        // -----------------------------
+        for (int i = 0; i < controller.roomNavigation.currentRoom.InteractableObjectsInRoom.Count; i++)
+        {
+            InteractableObject roomObject = controller.roomNavigation.currentRoom.InteractableObjectsInRoom[i];
+
+            if (itemToFind == roomObject.noun.ToLower())
+            {
+                controller.HAMS.UseActionTree(roomObject.useAction);
+                return;
+            }
+        }
+
+        // -----------------------------
+        // Alias fallback (inventory + room)
+        // -----------------------------
+        InteractableObject aliasObject = GetShortNameList(controller, itemToFind);
+
+        if (aliasObject != null)
+        {
+            controller.HAMS.UseActionTree(aliasObject.useAction);
+            return;
+        }
+
+        // -----------------------------
+        // Nothing found
+        // -----------------------------
+        controller.LogStringWithReturn(itemToFind + " not found.");
     }
-    
 }

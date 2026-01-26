@@ -19,5 +19,9 @@ MonoBehaviour:
     lettuce!" you question if its a good idea to eat this.
   useAction: Default
   isContainer: 0
+  showContainerContents: 0
+  isGrossFood: 0
+  canBeEaten: 1
+  canBeOpened: 0
   contentsItializationList: []
   contents: []
