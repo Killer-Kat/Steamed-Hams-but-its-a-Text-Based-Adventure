@@ -9,6 +9,16 @@ public class TextInput : MonoBehaviour
 
     private GameController controller;
 
+    [SerializeField]
+    private List<string> blankQuips = new List<string>()
+    {
+        "You stare into the void. It stares back.",
+        "Silence... Is that your next move?",
+        "You say nothing. The room waits.",
+        "No words came out. Very dramatic.",
+        "Placeholder? I hardly know er!"
+    };
+
     private void Awake()
     {
         controller = GetComponent<GameController>();
@@ -16,6 +26,20 @@ public class TextInput : MonoBehaviour
     }
     void AcceptStringInput(string userInput)
     {
+        // If the input is empty or only whitespace, reply with a quip
+        if (string.IsNullOrWhiteSpace(userInput))
+        {
+            string quip;
+            if (blankQuips != null && blankQuips.Count > 0)
+                quip = blankQuips[Random.Range(0, blankQuips.Count)];
+            else
+                quip = "You say nothing.";
+
+            controller.LogStringWithReturn(quip);
+            InputComplete();
+            return;
+        }
+
         userInput = userInput.ToLower();
         controller.LogStringWithReturn(userInput);
 
