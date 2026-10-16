@@ -76,6 +76,7 @@ public class GameStartManager : MonoBehaviour
 
         chalmers.description = chalmersIntDesc;
         chalmers.name = "Chalmers";
+        chalmers.currentDialogue = controller.HAMS.AltIntoDobj;
         tv.examineDescription = "A small square purple colored CRT TV, it's missing an antenna. It's currently off yet something about it seems rather odd...";
         Kitchen.description = "A small square teal colored kitchen with a window overlooking a nearby fast food resturant. Its obvious whover lives here is not a very good cook.";
         oven.examineDescription = "A cheap white oven with a 4 burner stove and a broken timer. It is currently on.";

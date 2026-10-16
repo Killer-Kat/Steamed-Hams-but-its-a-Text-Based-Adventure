@@ -29,7 +29,10 @@ public class DebugCommand : InputAction //Cant name it debug becuase unity alrea
                 controller.dialogueController.UnpackFromDialogueObject(controller.dialogueController.dialogueTree.testDialogue2);
                 break;
             case "intro":
-                controller.HAMS.IntroScene();
+                controller.HAMS.IntroScene(false);
+                break;
+            case "altintro":
+                controller.HAMS.IntroScene(true);
                 break;
             case "refreshrm":
                 controller.DisplayRoomText();

@@ -7,6 +7,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public GameController controller;
 
     public DialogueObject IntroDobj;
+    public DialogueObject AltIntoDobj;
     public bool isIntroComplete = false;
     public DialogueObject PoliteGoodbyeDobj;
     public int chalmersIntroCountdown = 10;//how many turns chalmers will wait before leaving if skinner does not open the door.
@@ -63,6 +64,8 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
 
     public DialogueObject HouseFireDobj;
 
+    public DialogueObject LunchStartDobj;
+
     public DialogueObject LunchRoastDobj;
     public DialogueObject LunchComboMealDobj;
     public DialogueObject LunchSteamedHamsDobj;
@@ -86,11 +89,17 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     public InteractableObject IceBucket;
     // Start is called before the first frame update
 
-    public void IntroScene()
+    public void IntroScene(bool altIntroSwitch)
     {
-        controller.dialogueController.StartDialogue(IntroDobj, "Chalmers");
+        if (!altIntroSwitch)
+        {
+            controller.dialogueController.StartDialogue(IntroDobj, "Chalmers");
+        }
+        else { isIntroComplete = true; }
+        Porch.peopleInRoom.Clear();
         DiningRoom.peopleInRoom.Add(chalmers);
         didChalmersEnterHouse = true;
+        chalmers.currentDialogue = LunchStartDobj;
     }
 
     public void ResetPoison()
@@ -489,6 +498,9 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             case "introcomplete":
                 isIntroComplete = true;
                 break;
+            case "altintro":
+                IntroScene(true);
+                break;
         }
 
     }
@@ -671,7 +683,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
             case "frontdoor":
                 if(isIntroComplete == false)
                 {
-                    IntroScene();
+                    IntroScene(false);
                 }
                 else
                 {
