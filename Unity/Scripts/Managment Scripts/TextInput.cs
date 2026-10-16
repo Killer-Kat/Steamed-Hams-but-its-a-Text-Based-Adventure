@@ -36,7 +36,7 @@ public class TextInput : MonoBehaviour
     void AcceptStringInput(string userInput)
     {
         // If the input is empty or only whitespace, reply with a quip
-        if (string.IsNullOrWhiteSpace(userInput))
+        if (string.IsNullOrWhiteSpace(userInput) && controller.blankInputs < 20)
         {
             string quip;
             if (blankQuips != null && blankQuips.Count > 0)
@@ -47,6 +47,31 @@ public class TextInput : MonoBehaviour
             controller.LogStringWithReturn(quip);
             InputComplete();
             controller.blankInputs += 1;
+            return;
+        }
+        else if (controller.blankInputs ==20)
+        {
+            controller.LogStringWithReturn("Seymour? Hello? Are you still there?");
+            InputComplete();
+            controller.blankInputs += 1;
+            return;
+        } else if (controller.blankInputs == 21)
+        {
+            controller.LogStringWithReturn("Oh dear Seymour..? Please stop this.");
+            InputComplete();
+            controller.blankInputs += 1;
+            return;
+        }
+        else if (controller.blankInputs == 22) //Wow thats a lot of else if statements what are you yandreedev? Shut up... I can write poorly optimized code if I want to.
+        {
+            controller.LogStringWithReturn("Seymour? Player? Look this is your last warning, don't do that again...");
+            InputComplete();
+            controller.blankInputs += 1;
+            return;
+        }
+        else if (controller.blankInputs == 23) 
+        {
+            controller.HAMS.EndingManager("paralyzed");
             return;
         }
 
@@ -66,6 +91,7 @@ public class TextInput : MonoBehaviour
         }
 
         InputComplete();
+        controller.blankInputs = 0;
     }
 
     void InputComplete()

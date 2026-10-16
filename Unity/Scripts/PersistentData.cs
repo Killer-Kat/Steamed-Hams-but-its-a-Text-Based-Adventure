@@ -34,6 +34,7 @@ public class PersistentData
     public bool hasFiredEnding = false;
     public bool hasBackroomsEnding = false;
     public bool hasClosedDoorEnding = false;
+    public bool hasParalyzedEnding = false;
 
     //Settings
 

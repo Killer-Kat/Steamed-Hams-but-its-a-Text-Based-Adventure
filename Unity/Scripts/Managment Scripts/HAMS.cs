@@ -834,6 +834,10 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
                 controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Closed Door ending: After getting no response after knocking repeatedly chalmers gives up and assumes skinner is not home, he procedes to the Krusty Burger next door to get lunch.");
                 controller.persistentData.hasClosedDoorEnding = true;
                 break;
+            case "paralyzed":
+                controller.ShowEndGamePopup(controller.score, controller.oddPoints, controller.politePoints, "You got the Paralyzed ending: You stare unresponsive ahead, time starts to lose all meaning, Later you are brought to Springfield Hospitial, As you are listening to the doctors someone absentmindedly unlpugs your life support so they can use the outlet.");
+                controller.persistentData.hasParalyzedEnding = true; controller.persistentData.numberOfDeaths += 1;
+                break;
         }
     }
 }
