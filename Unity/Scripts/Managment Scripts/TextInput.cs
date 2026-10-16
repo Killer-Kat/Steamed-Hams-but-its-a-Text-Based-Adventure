@@ -12,11 +12,20 @@ public class TextInput : MonoBehaviour
     [SerializeField]
     private List<string> blankQuips = new List<string>()
     {
-        "You stare into the void. It stares back.",
-        "Silence... Is that your next move?",
-        "You say nothing. The room waits.",
-        "No words came out. Very dramatic.",
-        "Placeholder? I hardly know er!"
+        "You push the Enter key very dramatically.",
+        "You mean to speak, to move. But nothing comes out, you are paralyzed for a breif moment.",
+        "You observe a solemn moment of silence.",
+        "You forget to type any words into the parser, whoops!",
+        "Parser? I hardly know er!",
+        "You think about doing something, but then decide not to.",
+        "You pause, everything looks different, for a breif moment it almost seems like you are in some kind of retro computer game. But no that's rediculous, and you reutrn to your senses.",
+        "Oh? Sorry did you say something?",
+        "Hmm? Did you say something just now? Sorry I wasn't listening.",
+        "Huh? Thats odd... Must be the wind.",
+        "Sorry I cant hear you, you are going to have to speak up!",
+        "Did you just press the Enter key by accident? Please be careful this is serious.",
+        "And then I says, I says: Enter? I hardly even knew er! Oh, hello Seymour...",
+        "Hey was that a blank command? You better knock it off if you don't wanna get stuck like that!"
     };
 
     private void Awake()
@@ -33,10 +42,11 @@ public class TextInput : MonoBehaviour
             if (blankQuips != null && blankQuips.Count > 0)
                 quip = blankQuips[Random.Range(0, blankQuips.Count)];
             else
-                quip = "You say nothing.";
+                quip = "You say ERROR no quip found";
 
             controller.LogStringWithReturn(quip);
             InputComplete();
+            controller.blankInputs += 1;
             return;
         }
 
