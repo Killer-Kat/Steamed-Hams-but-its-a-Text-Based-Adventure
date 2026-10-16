@@ -797,6 +797,7 @@ public class HAMS : MonoBehaviour //H.A.M.S Hastly Asembled Management Script
     }
     public void EndingManager(string endingKey)
     {
+        controller.ClearTextbox();//Do not know why I was not already clearing the text box, not like you can read it at an ending anyway
         switch (endingKey)
         {
             default:

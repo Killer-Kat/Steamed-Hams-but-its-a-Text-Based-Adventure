@@ -85,6 +85,7 @@ public class GameController : MonoBehaviour
     }
     public void ShowEndGamePopup(int score, int oddPoints, int politePoints, string endingText)
     {
+        //ClearTextbox(); //Does not work here?
         endGamePopupScoreText.text = "Game over you scored: " + score + " points.";
         personalityPointsText.text = "Your personality was " + oddPoints + " Odd." + " And " + politePoints + " Polite.";
         GameEndingText.text = endingText;
@@ -128,6 +129,7 @@ public class GameController : MonoBehaviour
     {
         actionLog.Clear(); //Clears the entire list of actions, There is probably a good reason not to do this. However there is no current way to navigate the log list and I dont ever use it for anything.
         Debug.Log("Display text cleared");
+        DisplayLoggedText(); //this is needed, because when the end screen pops up it doesn't parse a command, which is why the debug command would clear the text but not the end screen.
     }
     public void DisplayRoomText()
     {
